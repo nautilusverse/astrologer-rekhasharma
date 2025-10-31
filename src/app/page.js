@@ -27,7 +27,7 @@ const InteractiveBackground = () => {
         {[...Array(20)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-2 h-2 bg-blue-400/30 rounded-full"
+            className="absolute w-2 h-2 bg-purple-400/30 rounded-full"
             initial={{
               x: Math.random() * window.innerWidth,
               y: Math.random() * window.innerHeight,
@@ -48,7 +48,7 @@ const InteractiveBackground = () => {
 
       {/* Moving Code Elements */}
       <motion.div 
-        className="absolute top-20 left-5 text-xs text-green-400/40 font-mono opacity-60"
+        className="absolute top-20 left-5 text-xs text-pink-400/40 font-mono opacity-60"
         animate={{ y: [0, -20, 0] }}
         transition={{ duration: 6, repeat: Infinity }}
       >
@@ -56,7 +56,7 @@ const InteractiveBackground = () => {
       </motion.div>
       
       <motion.div 
-        className="absolute top-40 right-10 text-xs text-blue-400/40 font-mono opacity-70"
+        className="absolute top-40 right-10 text-xs text-purple-400/40 font-mono opacity-70"
         animate={{ y: [0, 15, 0] }}
         transition={{ duration: 8, repeat: Infinity, delay: 2 }}
       >
@@ -65,13 +65,13 @@ const InteractiveBackground = () => {
       
       {/* Floating Tech Orbs */}
       <motion.div
-        className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-blue-500/5 via-transparent to-cyan-500/5 rounded-full blur-3xl"
+        className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-purple-500/5 via-transparent to-pink-500/5 rounded-full blur-3xl"
         animate={{ scale: [1, 1.2, 1] }}
         transition={{ duration: 8, repeat: Infinity }}
       />
       
       <motion.div
-        className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-purple-500/5 via-transparent to-cyan-500/5 rounded-full blur-3xl"
+        className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-purple-500/5 via-transparent to-pink-500/5 rounded-full blur-3xl"
         animate={{ scale: [1.2, 1, 1.2] }}
         transition={{ duration: 10, repeat: Infinity, delay: 3 }}
       />
@@ -124,15 +124,15 @@ const ModernHero = () => {
           <motion.div className="space-y-8" variants={itemVariants}>
             {/* Badge */}
             <motion.div 
-              className="inline-flex items-center space-x-3 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border border-blue-500/20 rounded-full px-6 py-3"
+              className="inline-flex items-center space-x-3 bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20 rounded-full px-6 py-3"
               whileHover={{ scale: 1.05 }}
             >
               <div className="flex space-x-1">
-                <span className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
-                <span className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse" style={{animationDelay: '0.2s'}}></span>
-                <span className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" style={{animationDelay: '0.4s'}}></span>
+                <span className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></span>
+                <span className="w-2 h-2 bg-pink-400 rounded-full animate-pulse" style={{animationDelay: '0.2s'}}></span>
+                <span className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" style={{animationDelay: '0.4s'}}></span>
               </div>
-              <span className="text-blue-400 text-sm font-semibold">Trusted by 50+ Industry Leaders</span>
+              <span className="text-purple-400 text-sm font-semibold">Trusted by 50+ Industry Leaders</span>
             </motion.div>
             
             {/* Main Heading */}
@@ -156,14 +156,14 @@ const ModernHero = () => {
                 </div>
                 <span className="text-white">That Drive</span>
                 <br />
-                <span className="text-blue-500">Real Business Growth</span>
+                <span className="text-purple-500">Real Business Growth</span>
               </motion.h1>
               
               <motion.p className="text-lg text-gray-300 leading-relaxed max-w-xl" variants={itemVariants}>
                 Nautilus Verse transforms businesses through cutting-edge digital solutions. 
-                We build <span className="text-blue-400 font-semibold">scalable web applications</span>, 
-                <span className="text-cyan-400 font-semibold"> engaging mobile experiences</span>, and 
-                <span className="text-blue-400 font-semibold"> data-driven marketing strategies</span> that deliver real results.
+                We build <span className="text-purple-400 font-semibold">scalable web applications</span>, 
+                <span className="text-pink-400 font-semibold"> engaging mobile experiences</span>, and 
+                <span className="text-purple-400 font-semibold"> data-driven marketing strategies</span> that deliver real results.
               </motion.p>
             </div>
 
@@ -180,7 +180,7 @@ const ModernHero = () => {
                   className="text-center"
                   whileHover={{ scale: 1.05 }}
                 >
-                  <div className="text-2xl font-black text-blue-400">{stat.number}</div>
+                  <div className="text-2xl font-black text-purple-400">{stat.number}</div>
                   <div className="text-gray-400 text-sm">{stat.label}</div>
                 </motion.div>
               ))}
@@ -189,14 +189,14 @@ const ModernHero = () => {
             {/* CTA Buttons */}
             <motion.div className="flex flex-col sm:flex-row gap-4" variants={itemVariants}>
               <motion.button 
-                className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-8 py-4 rounded-xl font-semibold hover:shadow-2xl hover:shadow-blue-500/25 transition-all duration-300"
+                className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-4 rounded-xl font-semibold hover:shadow-2xl hover:shadow-purple-500/25 transition-all duration-300"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
               >
                 Start Your Project 🚀
               </motion.button>
               <motion.button 
-                className="border border-gray-600 text-white px-8 py-4 rounded-xl font-semibold hover:border-blue-500 hover:bg-blue-500/5 transition-all duration-300"
+                className="border border-gray-600 text-white px-8 py-4 rounded-xl font-semibold hover:border-purple-500 hover:bg-purple-500/5 transition-all duration-300"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -223,11 +223,11 @@ const ModernHero = () => {
                 <div className="space-y-4">
                   <div className="flex space-x-4">
                     <div className="flex-1 bg-gray-700 rounded-lg h-4 animate-pulse"></div>
-                    <div className="w-16 bg-blue-500 rounded-lg h-4"></div>
+                    <div className="w-16 bg-purple-500 rounded-lg h-4"></div>
                   </div>
                   <div className="grid grid-cols-3 gap-4">
                     {[
-                      { emoji: "🚀", label: "Fast", color: "from-blue-500/20 to-cyan-500/20" },
+                      { emoji: "🚀", label: "Fast", color: "from-purple-500/20 to-pink-500/20" },
                       { emoji: "💎", label: "Secure", color: "from-green-500/20 to-emerald-500/20" },
                       { emoji: "📈", label: "Scalable", color: "from-purple-500/20 to-pink-500/20" }
                     ].map((item, idx) => (
@@ -246,12 +246,12 @@ const ModernHero = () => {
               
               {/* Floating Elements */}
               <motion.div
-                className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl rotate-12"
+                className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl rotate-12"
                 animate={{ y: [0, -20, 0], rotate: [12, 15, 12] }}
                 transition={{ duration: 4, repeat: Infinity }}
               />
               <motion.div
-                className="absolute -bottom-4 -left-4 w-20 h-20 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-2xl -rotate-12"
+                className="absolute -bottom-4 -left-4 w-20 h-20 bg-gradient-to-r from-purple-400 to-pink-400 rounded-2xl -rotate-12"
                 animate={{ y: [0, 15, 0], rotate: [-12, -15, -12] }}
                 transition={{ duration: 5, repeat: Infinity, delay: 2 }}
               />
@@ -276,7 +276,7 @@ const AboutSection = () => {
           transition={{ duration: 0.6 }}
         >
           <span className="text-white text-sm font-semibold mb-4 block uppercase tracking-wider">About Us</span>
-          <h2 className="text-blue-400 text-3xl lg:text-4xl font-black mb-4">
+          <h2 className="text-purple-400 text-3xl lg:text-4xl font-black mb-4">
             About Nautilus Verse
           </h2>
           <p className="text-gray-400 max-w-3xl mx-auto text-lg">
@@ -311,7 +311,7 @@ const AboutSection = () => {
                   className="text-center p-4 bg-gray-900/50 rounded-xl"
                   whileHover={{ scale: 1.05 }}
                 >
-                  <div className="text-blue-400 text-xl font-bold">{stat.number}</div>
+                  <div className="text-purple-400 text-xl font-bold">{stat.number}</div>
                   <div className="text-gray-400 text-sm">{stat.label}</div>
                 </motion.div>
               ))}
@@ -386,7 +386,7 @@ const ServicesSection = () => {
           transition={{ duration: 0.6 }}
         >
           <span className="text-white text-sm font-semibold mb-4 block uppercase tracking-wider">Our Expertise</span>
-          <h2 className="text-blue-400 text-3xl lg:text-4xl font-black mb-4">
+          <h2 className="text-purple-400 text-3xl lg:text-4xl font-black mb-4">
             Services We Offer
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto">
@@ -398,13 +398,13 @@ const ServicesSection = () => {
           {services.map((service, index) => (
             <motion.div 
               key={index}
-              className="group bg-gray-900/50 border border-gray-700 rounded-2xl p-6 hover:border-blue-500/50 transition-all duration-300 cursor-pointer"
+              className="group bg-gray-900/50 border border-gray-700 rounded-2xl p-6 hover:border-purple-500/50 transition-all duration-300 cursor-pointer"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               whileHover={{ y: -10 }}
             >
-              <div className="w-14 h-14 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-2xl flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform duration-300">
+              <div className="w-14 h-14 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-2xl flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform duration-300">
                 {service.icon}
               </div>
               <h3 className="text-white font-bold text-lg mb-3">{service.title}</h3>
@@ -432,42 +432,42 @@ const ProcessSection = () => {
       title: "Discovery & Strategy",
       description: "We analyze your business goals and create a comprehensive digital strategy",
       icon: "🔍",
-      color: "from-blue-500 to-cyan-500"
+      color: "from-purple-500 to-pink-500"
     },
     {
       step: "02",
       title: "Design & Prototyping",
       description: "Creating stunning visual designs and interactive prototypes",
       icon: "🎨",
-      color: "from-purple-500 to-pink-500"
+      color: "from-purple-600 to-pink-600"
     },
     {
       step: "03",
       title: "Development",
       description: "Building robust solutions with cutting-edge technologies",
       icon: "⚡",
-      color: "from-green-500 to-emerald-500"
+      color: "from-purple-500 to-pink-500"
     },
     {
       step: "04",
       title: "Testing & Quality",
       description: "Rigorous testing to ensure flawless performance",
       icon: "🧪",
-      color: "from-yellow-500 to-orange-500"
+      color: "from-purple-600 to-pink-600"
     },
     {
       step: "05",
       title: "Launch & Deployment",
       description: "Seamless deployment with comprehensive monitoring",
       icon: "🚀",
-      color: "from-red-500 to-pink-500"
+      color: "from-purple-500 to-pink-500"
     },
     {
       step: "06",
       title: "Growth & Optimization",
       description: "Continuous improvement and performance optimization",
       icon: "📈",
-      color: "from-indigo-500 to-purple-500"
+      color: "from-purple-600 to-pink-600"
     }
   ];
 
@@ -481,7 +481,7 @@ const ProcessSection = () => {
           transition={{ duration: 0.6 }}
         >
           <span className="text-white text-sm font-semibold mb-4 block uppercase tracking-wider">Our Process</span>
-          <h2 className="text-blue-400 text-3xl lg:text-4xl font-black mb-4">
+          <h2 className="text-purple-400 text-3xl lg:text-4xl font-black mb-4">
             How We Work
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto">
@@ -499,7 +499,7 @@ const ProcessSection = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
             >
               <motion.div 
-                className="bg-gray-900/50 border border-gray-700 rounded-2xl p-8 h-full group hover:border-blue-500/50 transition-all duration-300 relative overflow-hidden"
+                className="bg-gray-900/50 border border-gray-700 rounded-2xl p-8 h-full group hover:border-purple-500/50 transition-all duration-300 relative overflow-hidden"
                 whileHover={{ y: -10 }}
               >
                 {/* Background Gradient */}
@@ -550,7 +550,6 @@ const PortfolioSection = () => {
       duration: "8 Months",
       budget: "$120,000"
     }
-    // Add more projects as needed
   ];
 
   return (
@@ -563,7 +562,7 @@ const PortfolioSection = () => {
           transition={{ duration: 0.6 }}
         >
           <span className="text-white text-sm font-semibold mb-4 block uppercase tracking-wider">Our Portfolio</span>
-          <h2 className="text-blue-400 text-3xl lg:text-4xl font-black mb-4">
+          <h2 className="text-purple-400 text-3xl lg:text-4xl font-black mb-4">
             Success Stories
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto">
@@ -575,19 +574,19 @@ const PortfolioSection = () => {
           {portfolioProjects.map((project, index) => (
             <motion.div 
               key={index}
-              className="bg-gray-900/50 border border-gray-700 rounded-2xl p-6 hover:border-blue-500/50 transition-all duration-300 group cursor-pointer"
+              className="bg-gray-900/50 border border-gray-700 rounded-2xl p-6 hover:border-purple-500/50 transition-all duration-300 group cursor-pointer"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               whileHover={{ y: -10 }}
             >
               <div className="relative overflow-hidden rounded-xl mb-4">
-                <div className="w-full h-48 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-xl flex items-center justify-center text-4xl">
+                <div className="w-full h-48 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-xl flex items-center justify-center text-4xl">
                   {project.emoji}
                 </div>
                 <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center space-x-4">
                   <motion.button 
-                    className="bg-blue-500 text-white px-4 py-2 rounded-lg font-semibold"
+                    className="bg-purple-500 text-white px-4 py-2 rounded-lg font-semibold"
                     whileHover={{ scale: 1.05 }}
                   >
                     View Case Study
@@ -609,7 +608,7 @@ const PortfolioSection = () => {
               <p className="text-gray-400 text-sm mb-4 leading-relaxed">{project.description}</p>
               <div className="flex flex-wrap gap-2 mb-4">
                 {project.tech.map((tech, idx) => (
-                  <span key={idx} className="px-3 py-1 bg-blue-500/10 text-blue-400 rounded-lg text-xs border border-blue-500/20">
+                  <span key={idx} className="px-3 py-1 bg-purple-500/10 text-purple-400 rounded-lg text-xs border border-purple-500/20">
                     {tech}
                   </span>
                 ))}
@@ -629,7 +628,7 @@ const PortfolioSection = () => {
           transition={{ duration: 0.6 }}
         >
           <motion.button 
-            className="border border-gray-600 text-white px-8 py-4 rounded-xl font-semibold hover:border-blue-500 hover:bg-blue-500/5 transition-all duration-300"
+            className="border border-gray-600 text-white px-8 py-4 rounded-xl font-semibold hover:border-purple-500 hover:bg-purple-500/5 transition-all duration-300"
             whileHover={{ scale: 1.05, y: -2 }}
           >
             View All Case Studies →
@@ -679,7 +678,7 @@ const TestimonialsCarousel = () => {
           transition={{ duration: 0.6 }}
         >
           <span className="text-white text-sm font-semibold mb-4 block uppercase tracking-wider">Testimonials</span>
-          <h2 className="text-blue-400 text-3xl lg:text-4xl font-black mb-4">
+          <h2 className="text-purple-400 text-3xl lg:text-4xl font-black mb-4">
             What Clients Say
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto">
@@ -696,18 +695,18 @@ const TestimonialsCarousel = () => {
             {[...testimonials, ...testimonials].map((testimonial, index) => (
               <motion.div
                 key={`${testimonial.id}-${index}`}
-                className="flex-shrink-0 w-80 bg-gray-900/50 border border-gray-700 rounded-2xl p-6 hover:border-blue-500/50 transition-all duration-300"
+                className="flex-shrink-0 w-80 bg-gray-900/50 border border-gray-700 rounded-2xl p-6 hover:border-purple-500/50 transition-all duration-300"
                 whileHover={{ y: -5 }}
               >
                 <div className="text-yellow-400 text-lg mb-4">★★★★★</div>
                 <p className="text-gray-300 mb-6 leading-relaxed italic">"{testimonial.content}"</p>
                 <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-2xl flex items-center justify-center text-xl">
+                  <div className="w-12 h-12 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-2xl flex items-center justify-center text-xl">
                     {testimonial.avatar}
                   </div>
                   <div>
                     <div className="font-bold text-white">{testimonial.name}</div>
-                    <div className="text-blue-400 text-sm font-semibold">{testimonial.role}</div>
+                    <div className="text-purple-400 text-sm font-semibold">{testimonial.role}</div>
                     <div className="text-gray-400 text-xs">{testimonial.company}</div>
                   </div>
                 </div>
@@ -735,7 +734,7 @@ const CTASection = () => {
           transition={{ duration: 0.6 }}
         >
           <span className="text-white text-sm font-semibold mb-4 block uppercase tracking-wider">Get Started</span>
-          <h2 className="text-blue-400 text-4xl lg:text-5xl font-black mb-6">
+          <h2 className="text-purple-400 text-4xl lg:text-5xl font-black mb-6">
             Ready to Transform Your Business?
           </h2>
           <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
@@ -744,14 +743,14 @@ const CTASection = () => {
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <motion.button 
-              className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-8 py-4 rounded-xl font-semibold hover:shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 text-lg"
+              className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-4 rounded-xl font-semibold hover:shadow-2xl hover:shadow-purple-500/25 transition-all duration-300 text-lg"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
               Schedule Free Consultation
             </motion.button>
             <motion.button 
-              className="border border-gray-600 text-white px-8 py-4 rounded-xl font-semibold hover:border-blue-500 hover:bg-blue-500/5 transition-all duration-300 text-lg"
+              className="border border-gray-600 text-white px-8 py-4 rounded-xl font-semibold hover:border-purple-500 hover:bg-purple-500/5 transition-all duration-300 text-lg"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -776,14 +775,14 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div>
             <h3 className="text-2xl font-black text-white mb-6">
-              Nautilus<span className="text-blue-400">Verse</span>
+              Nautilus<span className="text-purple-400">Verse</span>
             </h3>
             <p className="text-gray-400 leading-relaxed mb-6">
               We craft digital experiences that transform businesses and drive measurable growth through innovation and excellence.
             </p>
             <div className="flex space-x-4">
               {["🚀", "💎", "⚡", "🎯"].map((emoji, index) => (
-                <div key={index} className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center text-sm hover:bg-blue-500/20 transition-colors duration-300 cursor-pointer">
+                <div key={index} className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center text-sm hover:bg-purple-500/20 transition-colors duration-300 cursor-pointer">
                   {emoji}
                 </div>
               ))}
@@ -809,7 +808,7 @@ const Footer = () => {
               <ul className="space-y-3">
                 {column.links.map((link, idx) => (
                   <li key={idx}>
-                    <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors duration-300 text-sm">
+                    <a href="#" className="text-gray-400 hover:text-purple-400 transition-colors duration-300 text-sm">
                       {link}
                     </a>
                   </li>
@@ -825,9 +824,9 @@ const Footer = () => {
               © {new Date().getFullYear()} Nautilus Verse. All rights reserved. Crafting digital excellence.
             </p>
             <div className="flex space-x-6">
-              <a href="#" className="text-gray-500 hover:text-blue-400 transition-colors duration-300 text-sm">Privacy Policy</a>
-              <a href="#" className="text-gray-500 hover:text-blue-400 transition-colors duration-300 text-sm">Terms of Service</a>
-              <a href="#" className="text-gray-500 hover:text-blue-400 transition-colors duration-300 text-sm">Cookies</a>
+              <a href="#" className="text-gray-500 hover:text-purple-400 transition-colors duration-300 text-sm">Privacy Policy</a>
+              <a href="#" className="text-gray-500 hover:text-purple-400 transition-colors duration-300 text-sm">Terms of Service</a>
+              <a href="#" className="text-gray-500 hover:text-purple-400 transition-colors duration-300 text-sm">Cookies</a>
             </div>
           </div>
         </div>
@@ -870,7 +869,7 @@ const CustomCursor = () => {
     >
       <motion.div 
         className={`w-2 h-2 bg-white rounded-full ${
-          isPointer ? 'scale-150 bg-blue-500' : ''
+          isPointer ? 'scale-150 bg-purple-500' : ''
         }`}
         animate={{
           scale: isPointer ? 1.5 : 1,
@@ -903,7 +902,7 @@ export default function Home() {
           transition={{ duration: 0.5 }}
         >
           <motion.div 
-            className="w-20 h-20 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center text-white font-black text-2xl mb-4 mx-auto"
+            className="w-20 h-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center text-white font-black text-2xl mb-4 mx-auto"
             animate={{ rotate: 360 }}
             transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
           >
@@ -930,14 +929,14 @@ export default function Home() {
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
           <div className="flex items-center space-x-3">
             <motion.div 
-              className="w-8 h-8 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center text-white font-black text-sm"
+              className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center text-white font-black text-sm"
               whileHover={{ rotate: 360 }}
               transition={{ duration: 0.5 }}
             >
               NV
             </motion.div>
             <h1 className="text-xl font-black text-white">
-              Nautilus<span className="text-blue-400">Verse</span>
+              Nautilus<span className="text-purple-400">Verse</span>
             </h1>
           </div>
           
@@ -947,7 +946,7 @@ export default function Home() {
                 key={link}
                 href={`#${link}`}
                 className={`text-sm font-semibold transition-all duration-300 ${
-                  activeSection === link ? 'text-blue-400' : 'text-gray-400 hover:text-white'
+                  activeSection === link ? 'text-purple-400' : 'text-gray-400 hover:text-white'
                 }`}
                 whileHover={{ y: -2 }}
               >
@@ -957,7 +956,7 @@ export default function Home() {
           </nav>
 
           <motion.button 
-            className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-6 py-2 rounded-lg text-sm font-semibold hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300"
+            className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-2 rounded-lg text-sm font-semibold hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300"
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
           >
