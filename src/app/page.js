@@ -4,17 +4,28 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import "./globals.css";
 
-// Interactive Background with moving particles
+// Interactive Background with improved particles
 const InteractiveBackground = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isMouseMoving, setIsMouseMoving] = useState(false);
   
   useEffect(() => {
+    let mouseMoveTimer;
     const handleMouseMove = (e) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
+      setIsMouseMoving(true);
+      
+      clearTimeout(mouseMoveTimer);
+      mouseMoveTimer = setTimeout(() => {
+        setIsMouseMoving(false);
+      }, 100);
     };
     
     window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      clearTimeout(mouseMoveTimer);
+    };
   }, []);
 
   return (
@@ -24,7 +35,7 @@ const InteractiveBackground = () => {
       
       {/* Interactive Particles */}
       <div className="absolute inset-0">
-        {[...Array(20)].map((_, i) => (
+        {[...Array(25)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-2 h-2 bg-purple-400/30 rounded-full"
@@ -32,15 +43,16 @@ const InteractiveBackground = () => {
               x: Math.random() * window.innerWidth,
               y: Math.random() * window.innerHeight,
             }}
-            animate={{
-              x: mousePosition.x + (Math.random() - 0.5) * 100,
-              y: mousePosition.y + (Math.random() - 0.5) * 100,
+            animate={isMouseMoving ? {
+              x: mousePosition.x + (Math.random() - 0.5) * 80,
+              y: mousePosition.y + (Math.random() - 0.5) * 80,
+            } : {
+              x: Math.random() * window.innerWidth,
+              y: Math.random() * window.innerHeight,
             }}
             transition={{
-              duration: 2,
-              repeat: Infinity,
-              repeatType: "reverse",
-              delay: i * 0.1,
+              duration: isMouseMoving ? 0.8 : 2,
+              ease: "easeOut"
             }}
           />
         ))}
@@ -80,6 +92,7 @@ const InteractiveBackground = () => {
 };
 
 // Modern Hero Section with Framer Motion
+
 const ModernHero = () => {
   const [currentWord, setCurrentWord] = useState(0);
   const words = ["Digital Experiences", "Web Applications", "Mobile Apps", "Brand Identities"];
@@ -91,184 +104,207 @@ const ModernHero = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        delayChildren: 0.3,
-        staggerChildren: 0.2
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1
-    }
-  };
-
   return (
-    <section id="home" className="min-h-screen bg-darker flex items-center px-6 lg:px-12 pt-20 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto w-full relative z-10">
-        <motion.div 
-          className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
+    <section id="home" className="min-h-screen flex items-center justify-center px-6 lg:px-12 relative">
+      <div className="max-w-4xl mx-auto w-full text-center">
+        <div className="space-y-12">
+          {/* Enhanced Badge */}
+          <motion.div 
+            className="inline-flex items-center space-x-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-6 py-3"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="flex space-x-1">
+              <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
+              <div className="w-2 h-2 bg-pink-500 rounded-full animate-pulse" style={{animationDelay: '0.2s'}}></div>
+              <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" style={{animationDelay: '0.4s'}}></div>
+            </div>
+            <span className="text-purple-300 text-sm font-medium">Innovating Since 2024</span>
+          </motion.div>
           
-          {/* Left Content */}
-          <motion.div className="space-y-8" variants={itemVariants}>
-            {/* Badge */}
+          {/* Main Content */}
+          <div className="space-y-8">
+            {/* Heading with Enhanced Animation */}
             <motion.div 
-              className="inline-flex items-center space-x-3 bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20 rounded-full px-6 py-3"
-              whileHover={{ scale: 1.05 }}
+              className="space-y-6"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7 }}
             >
-              <div className="flex space-x-1">
-                <span className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></span>
-                <span className="w-2 h-2 bg-pink-400 rounded-full animate-pulse" style={{animationDelay: '0.2s'}}></span>
-                <span className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" style={{animationDelay: '0.4s'}}></span>
-              </div>
-              <span className="text-purple-400 text-sm font-semibold">Trusted by 50+ Industry Leaders</span>
-            </motion.div>
-            
-            {/* Main Heading */}
-            <div className="space-y-6">
-              <motion.h1 className="text-4xl lg:text-6xl font-black leading-tight" variants={itemVariants}>
-                <span className="text-white">We Create</span>
+              <h1 className="text-5xl lg:text-6xl font-light text-white leading-tight">
+                We create
                 <br />
-                <div className="h-20 lg:h-24 overflow-hidden">
+                <div className="h-24 lg:h-28 flex items-center justify-center">
                   <AnimatePresence mode="wait">
-                    <motion.div
+                    <motion.span
                       key={currentWord}
-                      initial={{ y: 20, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      exit={{ y: -20, opacity: 0 }}
-                      transition={{ duration: 0.5 }}
-                      className="text-gradient text-4xl lg:text-6xl font-black"
+                      initial={{ 
+                        y: 50, 
+                        opacity: 0,
+                        scale: 0.8,
+                        filter: "blur(10px)"
+                      }}
+                      animate={{ 
+                        y: 0, 
+                        opacity: 1,
+                        scale: 1,
+                        filter: "blur(0px)"
+                      }}
+                      exit={{ 
+                        y: -50, 
+                        opacity: 0,
+                        scale: 1.2,
+                        filter: "blur(10px)"
+                      }}
+                      transition={{ 
+                        duration: 0.6,
+                        ease: "easeInOut"
+                      }}
+                      className="text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-5xl lg:text-6xl font-normal inline-block"
                     >
                       {words[currentWord]}
-                    </motion.div>
+                    </motion.span>
                   </AnimatePresence>
                 </div>
-                <span className="text-white">That Drive</span>
-                <br />
-                <span className="text-purple-500">Real Business Growth</span>
-              </motion.h1>
+                that drive impact
+              </h1>
               
-              <motion.p className="text-lg text-gray-300 leading-relaxed max-w-xl" variants={itemVariants}>
-                Nautilus Verse transforms businesses through cutting-edge digital solutions. 
-                We build <span className="text-purple-400 font-semibold">scalable web applications</span>, 
-                <span className="text-pink-400 font-semibold"> engaging mobile experiences</span>, and 
-                <span className="text-purple-400 font-semibold"> data-driven marketing strategies</span> that deliver real results.
-              </motion.p>
-            </div>
+              <p className="text-gray-300 text-xl leading-relaxed max-w-2xl mx-auto">
+                We transform your vision into powerful digital solutions that deliver 
+                measurable results and exceptional user experiences.
+              </p>
+            </motion.div>
 
-            {/* Stats */}
-            <motion.div className="flex flex-wrap gap-6" variants={itemVariants}>
+            {/* Features Grid */}
+            <motion.div 
+              className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-2xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.3 }}
+            >
               {[
-                { number: "150+", label: "Projects" },
-                { number: "$50M+", label: "Revenue" },
-                { number: "99.9%", label: "Uptime" },
-                { number: "2.5X", label: "Growth" }
-              ].map((stat, index) => (
+                {
+                  icon: "⚡",
+                  title: "Fast Delivery",
+                  description: "Quick turnaround without compromising quality"
+                },
+                {
+                  icon: "💎",
+                  title: "Premium Quality", 
+                  description: "Pixel-perfect designs and robust code"
+                },
+                {
+                  icon: "🚀",
+                  title: "Scalable Solutions",
+                  description: "Built to grow with your business"
+                }
+              ].map((feature, index) => (
                 <motion.div 
                   key={index} 
-                  className="text-center"
-                  whileHover={{ scale: 1.05 }}
+                  className="text-center p-6 bg-white/5 rounded-xl border border-white/10 hover:border-purple-500/30 transition-colors"
+                  whileHover={{ y: -5, scale: 1.02 }}
                 >
-                  <div className="text-2xl font-black text-purple-400">{stat.number}</div>
-                  <div className="text-gray-400 text-sm">{stat.label}</div>
+                  <div className="text-2xl mb-3">{feature.icon}</div>
+                  <h3 className="text-white font-semibold mb-2">{feature.title}</h3>
+                  <p className="text-gray-400 text-sm">{feature.description}</p>
                 </motion.div>
               ))}
             </motion.div>
 
-            {/* CTA Buttons */}
-            <motion.div className="flex flex-col sm:flex-row gap-4" variants={itemVariants}>
-              <motion.button 
-                className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-4 rounded-xl font-semibold hover:shadow-2xl hover:shadow-purple-500/25 transition-all duration-300"
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Start Your Project 🚀
-              </motion.button>
-              <motion.button 
-                className="border border-gray-600 text-white px-8 py-4 rounded-xl font-semibold hover:border-purple-500 hover:bg-purple-500/5 transition-all duration-300"
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                View Case Studies 📊
-              </motion.button>
-            </motion.div>
-          </motion.div>
-
-          {/* Right Content */}
-          <motion.div className="relative" variants={itemVariants}>
+            {/* Stats */}
             <motion.div 
-              className="relative z-10"
-              whileHover={{ y: -10 }}
-              transition={{ type: "spring", stiffness: 300 }}
+              className="flex justify-center gap-12 max-w-md mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.5 }}
             >
-              {/* Main Card */}
-              <div className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl p-8 border border-gray-700 shadow-2xl">
-                <div className="flex space-x-2 mb-6">
-                  <div className="w-3 h-3 bg-red-400 rounded-full"></div>
-                  <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
-                  <div className="w-3 h-3 bg-green-400 rounded-full"></div>
-                </div>
-                
-                <div className="space-y-4">
-                  <div className="flex space-x-4">
-                    <div className="flex-1 bg-gray-700 rounded-lg h-4 animate-pulse"></div>
-                    <div className="w-16 bg-purple-500 rounded-lg h-4"></div>
-                  </div>
-                  <div className="grid grid-cols-3 gap-4">
-                    {[
-                      { emoji: "🚀", label: "Fast", color: "from-purple-500/20 to-pink-500/20" },
-                      { emoji: "💎", label: "Secure", color: "from-green-500/20 to-emerald-500/20" },
-                      { emoji: "📈", label: "Scalable", color: "from-purple-500/20 to-pink-500/20" }
-                    ].map((item, idx) => (
-                      <motion.div
-                        key={idx}
-                        className={`bg-gradient-to-br ${item.color} rounded-xl p-4 text-center`}
-                        whileHover={{ scale: 1.1 }}
-                      >
-                        <div className="text-2xl mb-2">{item.emoji}</div>
-                        <div className="text-white text-sm font-semibold">{item.label}</div>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
-              </div>
+              {[
+                { number: "15+", label: "Projects" },
+                { number: "100%", label: "Success Rate" },
+                { number: "24/7", label: "Support" },
+                { number: "1-4", label: "Weeks Delivery" }
+              ].map((stat, index) => (
+                <motion.div 
+                  key={index} 
+                  className="text-center"
+                  whileHover={{ scale: 1.1 }}
+                >
+                  <div className="text-2xl font-bold text-purple-400">{stat.number}</div>
+                  <div className="text-gray-400 text-xs font-medium">{stat.label}</div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+
+          {/* Enhanced CTA Section */}
+          <motion.div 
+            className="space-y-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.7 }}
+          >
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <motion.button 
+                className="bg-purple-600 text-white px-10 py-4 rounded-lg font-semibold hover:bg-purple-700 transition-colors flex items-center justify-center space-x-2 relative overflow-hidden"
+                whileHover={{ scale: 1.02, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <span className="relative z-10">Start Your Project</span>
+                <motion.span
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                  className="relative z-10"
+                >
+                  🚀
+                </motion.span>
+                <motion.div 
+                  className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 opacity-0 hover:opacity-100 transition-opacity duration-300"
+                  whileHover={{ x: [0, 100, 0] }}
+                  transition={{ duration: 1 }}
+                />
+              </motion.button>
               
-              {/* Floating Elements */}
-              <motion.div
-                className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl rotate-12"
-                animate={{ y: [0, -20, 0], rotate: [12, 15, 12] }}
-                transition={{ duration: 4, repeat: Infinity }}
-              />
-              <motion.div
-                className="absolute -bottom-4 -left-4 w-20 h-20 bg-gradient-to-r from-purple-400 to-pink-400 rounded-2xl -rotate-12"
-                animate={{ y: [0, 15, 0], rotate: [-12, -15, -12] }}
-                transition={{ duration: 5, repeat: Infinity, delay: 2 }}
-              />
+              <motion.button 
+                className="border border-gray-600 text-white px-10 py-4 rounded-lg font-semibold hover:border-purple-500 hover:bg-purple-500/5 transition-colors flex items-center justify-center space-x-2"
+                whileHover={{ scale: 1.02, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <span>View Our Work</span>
+                <motion.span
+                  animate={{ rotate: [0, 360] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                >
+                  📁
+                </motion.span>
+              </motion.button>
+            </div>
+            
+            {/* Trust Badge */}
+            <motion.div 
+              className="text-gray-500 text-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.7, delay: 1 }}
+            >
+              Trusted by startups and established businesses worldwide
             </motion.div>
           </motion.div>
-
-        </motion.div>
+        </div>
       </div>
     </section>
   );
 };
 
-// About Nautilus Section
+// Updated About Section with same background
 const AboutSection = () => {
   return (
-    <section id="about" className="py-20 px-6 lg:px-12 bg-dark">
-      <div className="max-w-7xl mx-auto">
+    <section id="about" className="py-20 px-6 lg:px-12 bg-transparent relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-0 left-0 w-80 h-80 bg-pink-500/10 rounded-full blur-3xl"></div>
+      
+      <div className="max-w-7xl mx-auto relative z-10">
         <motion.div 
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
@@ -277,77 +313,371 @@ const AboutSection = () => {
         >
           <span className="text-white text-sm font-semibold mb-4 block uppercase tracking-wider">About Us</span>
           <h2 className="text-purple-400 text-3xl lg:text-4xl font-black mb-4">
-            About Nautilus Verse
+            Why Choose Nautilus Verse?
           </h2>
           <p className="text-gray-400 max-w-3xl mx-auto text-lg">
-            We are a passionate team of digital innovators committed to transforming businesses through technology and creativity.
+            We're not just developers - we're your strategic partners in digital transformation
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h3 className="text-white text-2xl font-bold mb-6">Our Story</h3>
-            <p className="text-gray-300 mb-6 leading-relaxed">
-              Founded in 2018, Nautilus Verse began as a small team of developers and designers with a shared vision: 
-              to create digital solutions that not only look beautiful but drive real business results.
-            </p>
-            <p className="text-gray-300 mb-6 leading-relaxed">
-              Today, we've grown into a full-service digital agency serving clients across the globe, 
-              from startups to Fortune 500 companies.
-            </p>
-            <div className="grid grid-cols-2 gap-6">
-              {[
-                { number: "5+", label: "Years Experience" },
-                { number: "50+", label: "Team Members" },
-                { number: "12+", label: "Industries Served" },
-                { number: "99%", label: "Client Satisfaction" }
-              ].map((stat, index) => (
-                <motion.div 
-                  key={index}
-                  className="text-center p-4 bg-gray-900/50 rounded-xl"
-                  whileHover={{ scale: 1.05 }}
-                >
-                  <div className="text-purple-400 text-xl font-bold">{stat.number}</div>
-                  <div className="text-gray-400 text-sm">{stat.label}</div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-
-          <motion.div
-            className="grid grid-cols-2 gap-4"
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            {[
-              { icon: "🎯", title: "Mission", desc: "Deliver exceptional digital experiences" },
-              { icon: "👁️", title: "Vision", desc: "Shape the future of digital innovation" },
-              { icon: "💎", title: "Values", desc: "Quality, integrity, and innovation" },
-              { icon: "🚀", title: "Approach", desc: "Data-driven and user-focused" }
-            ].map((item, index) => (
-              <motion.div
-                key={index}
-                className="bg-gray-900/50 p-6 rounded-2xl text-center"
-                whileHover={{ y: -5 }}
-              >
-                <div className="text-3xl mb-3">{item.icon}</div>
-                <h4 className="text-white font-semibold mb-2">{item.title}</h4>
-                <p className="text-gray-400 text-sm">{item.desc}</p>
-              </motion.div>
-            ))}
-          </motion.div>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {[
+            {
+              icon: "🚀",
+              title: "Innovation First",
+              description: "We stay ahead of the curve with cutting-edge technologies and modern development practices",
+              features: ["Latest Tech Stack", "Agile Methodology", "Continuous Innovation"]
+            },
+            {
+              icon: "💎",
+              title: "Quality Focused",
+              description: "Every project is crafted with precision, attention to detail, and commitment to excellence",
+              features: ["Pixel Perfect Design", "Robust Architecture", "Thorough Testing"]
+            },
+            {
+              icon: "⚡",
+              title: "Results Driven",
+              description: "We measure success by the tangible business results our solutions deliver",
+              features: ["Performance Metrics", "ROI Tracking", "Growth Analytics"]
+            }
+          ].map((item, index) => (
+            <motion.div
+              key={index}
+              className="bg-gray-900/50 border border-gray-700 rounded-2xl p-8 hover:border-purple-500/50 transition-all duration-300 group relative overflow-hidden backdrop-blur-sm"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
+              whileHover={{ y: -10 }}
+            >
+              {/* Background Gradient */}
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              
+              <div className="relative z-10">
+                <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center text-2xl mb-6">
+                  {item.icon}
+                </div>
+                <h3 className="text-white font-bold text-xl mb-4">{item.title}</h3>
+                <p className="text-gray-300 mb-6 leading-relaxed">{item.description}</p>
+                <div className="space-y-2">
+                  {item.features.map((feature, idx) => (
+                    <div key={idx} className="flex items-center space-x-2 text-sm text-gray-400">
+                      <div className="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                      <span>{feature}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
+
+        {/* Company Stats */}
+        <motion.div 
+          className="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-16"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          {[
+            { number: "2025", label: "Founded In", icon: "📅" },
+            { number: "15+", label: "Projects", icon: "🚀" },
+            { number: "100%", label: "Success Rate", icon: "🎯" },
+            { number: "24/7", label: "Support", icon: "⚡" }
+          ].map((stat, index) => (
+            <motion.div 
+              key={index}
+              className="text-center p-6 bg-gray-900/30 rounded-2xl border border-gray-700 backdrop-blur-sm"
+              whileHover={{ scale: 1.05 }}
+            >
+              <div className="text-2xl mb-2">{stat.icon}</div>
+              <div className="text-2xl font-black text-purple-400">{stat.number}</div>
+              <div className="text-gray-400 text-sm">{stat.label}</div>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );
 };
 
-// Services Section with updated headings
+// COMPLETELY NEW Process Section - Modern Workflow
+const ProcessSection = () => {
+  const [activeStep, setActiveStep] = useState(0);
+
+  const steps = [
+    {
+      number: "01",
+      title: "Discovery & Strategy",
+      description: "We dive deep into your business goals, target audience, and technical requirements to create a comprehensive strategy that aligns with your vision.",
+      icon: "🎯",
+      color: "from-purple-500 to-pink-500",
+      features: ["Business Analysis", "Market Research", "Strategy Planning", "Goal Setting"]
+    },
+    {
+      number: "02",
+      title: "Design & Prototyping",
+      description: "Creating stunning, user-centered designs and interactive prototypes that bring your vision to life with pixel-perfect precision.",
+      icon: "🎨",
+      color: "from-blue-500 to-cyan-500",
+      features: ["UI/UX Design", "Wireframing", "Prototype Testing", "Design System"]
+    },
+    {
+      number: "03",
+      title: "Development",
+      description: "Building robust, scalable solutions using cutting-edge technologies and best practices for optimal performance.",
+      icon: "💻",
+      color: "from-green-500 to-emerald-500",
+      features: ["Agile Development", "Code Reviews", "CI/CD Pipeline", "Quality Assurance"]
+    },
+    {
+      number: "04",
+      title: "Testing & Quality",
+      description: "Rigorous testing across all devices and scenarios to ensure flawless performance, security, and user experience.",
+      icon: "🧪",
+      color: "from-orange-500 to-red-500",
+      features: ["Unit Testing", "Performance Testing", "Security Audit", "User Acceptance"]
+    },
+    {
+      number: "05",
+      title: "Launch & Deployment",
+      description: "Seamless deployment with comprehensive monitoring, backup systems, and performance optimization.",
+      icon: "🚀",
+      color: "from-purple-500 to-indigo-500",
+      features: ["Production Deployment", "Performance Monitoring", "Backup Systems", "Go-Live Support"]
+    },
+    {
+      number: "06",
+      title: "Growth & Optimization",
+      description: "Continuous improvement, analytics, and optimization to drive ongoing success and business growth.",
+      icon: "📈",
+      color: "from-pink-500 to-rose-500",
+      features: ["Analytics", "User Feedback", "Regular Updates", "Performance Tuning"]
+    }
+  ];
+
+  return (
+    <section id="process" className="py-20 px-6 lg:px-12 bg-transparent relative overflow-hidden">
+      <div className="max-w-7xl mx-auto">
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <span className="text-white text-sm font-semibold mb-4 block uppercase tracking-wider">Our Process</span>
+          <h2 className="text-purple-400 text-3xl lg:text-4xl font-black mb-4">
+            How We Deliver Excellence
+          </h2>
+          <p className="text-gray-400 max-w-2xl mx-auto text-lg">
+            A streamlined 6-step process that transforms your vision into exceptional digital solutions
+          </p>
+        </motion.div>
+
+        {/* Interactive Process Visualization */}
+        <div className="relative">
+          {/* Progress Bar */}
+          <div className="relative mb-12">
+            <div className="flex justify-between items-center mb-4">
+              {steps.map((step, index) => (
+                <motion.button
+                  key={index}
+                  className={`flex flex-col items-center group cursor-pointer ${
+                    activeStep === index ? 'text-purple-400' : 'text-gray-500'
+                  }`}
+                  onClick={() => setActiveStep(index)}
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <motion.div
+                    className={`w-12 h-12 rounded-2xl flex items-center justify-center text-lg font-bold mb-2 ${
+                      activeStep === index 
+                        ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg' 
+                        : 'bg-gray-800 text-gray-400'
+                    }`}
+                    whileHover={{ scale: 1.1 }}
+                  >
+                    {step.number}
+                  </motion.div>
+                  <span className="text-xs font-medium hidden lg:block">{step.title.split(' ')[0]}</span>
+                </motion.button>
+              ))}
+            </div>
+            
+            {/* Progress Line */}
+            <div className="absolute top-6 left-0 right-0 h-1 bg-gray-700 -z-10">
+              <motion.div 
+                className="h-1 bg-gradient-to-r from-purple-500 to-pink-500"
+                initial={{ width: '16.66%' }}
+                animate={{ width: `${(activeStep + 1) * 16.66}%` }}
+                transition={{ duration: 0.5 }}
+              />
+            </div>
+          </div>
+
+          {/* Active Step Display */}
+          <motion.div 
+            key={activeStep}
+            className="bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-xl rounded-3xl p-8 border border-white/10 shadow-2xl mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+              {/* Step Content */}
+              <div className="space-y-6">
+                <div className="flex items-center space-x-4">
+                  <motion.div
+                    className={`w-16 h-16 bg-gradient-to-r ${steps[activeStep].color} rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg`}
+                    animate={{ rotate: [0, 5, -5, 0] }}
+                    transition={{ duration: 4, repeat: Infinity }}
+                  >
+                    {steps[activeStep].icon}
+                  </motion.div>
+                  <div>
+                    <h3 className="text-white font-bold text-2xl">{steps[activeStep].title}</h3>
+                    <p className="text-purple-400 text-sm">Step {steps[activeStep].number}</p>
+                  </div>
+                </div>
+
+                <p className="text-gray-300 text-lg leading-relaxed">
+                  {steps[activeStep].description}
+                </p>
+
+                <div className="grid grid-cols-2 gap-3">
+                  {steps[activeStep].features.map((feature, idx) => (
+                    <motion.div
+                      key={idx}
+                      className="flex items-center space-x-2 text-sm text-gray-400 bg-gray-800/50 rounded-xl px-4 py-3 backdrop-blur-sm"
+                      whileHover={{ x: 5, backgroundColor: "rgba(139, 92, 246, 0.2)" }}
+                    >
+                      <div className="w-2 h-2 bg-purple-500 rounded-full flex-shrink-0"></div>
+                      <span className="font-medium">{feature}</span>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Visual Representation */}
+              <div className="relative">
+                <motion.div
+                  className="w-full h-64 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-2xl border border-white/10 flex items-center justify-center"
+                  animate={{ 
+                    scale: [1, 1.02, 1],
+                    opacity: [0.8, 1, 0.8]
+                  }}
+                  transition={{ duration: 3, repeat: Infinity }}
+                >
+                  <div className="text-center">
+                    <motion.div
+                      className="text-6xl mb-4"
+                      animate={{ 
+                        rotate: [0, 10, -10, 0],
+                        scale: [1, 1.1, 1]
+                      }}
+                      transition={{ duration: 4, repeat: Infinity }}
+                    >
+                      {steps[activeStep].icon}
+                    </motion.div>
+                    <div className="text-white font-bold text-lg">{steps[activeStep].title}</div>
+                    <div className="text-purple-300 text-sm">In Progress</div>
+                  </div>
+                </motion.div>
+                
+                {/* Floating Elements */}
+                <motion.div
+                  className="absolute -top-3 -right-3 w-8 h-8 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-white text-xs shadow-lg"
+                  animate={{ 
+                    y: [0, -8, 0],
+                    rotate: [0, 180, 360]
+                  }}
+                  transition={{ duration: 4, repeat: Infinity }}
+                />
+                <motion.div
+                  className="absolute -bottom-3 -left-3 w-6 h-6 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center text-white text-xs shadow-lg"
+                  animate={{ 
+                    y: [0, 6, 0],
+                    rotate: [0, -180, -360]
+                  }}
+                  transition={{ duration: 5, repeat: Infinity, delay: 1 }}
+                />
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Step Navigation */}
+          <div className="flex justify-between items-center">
+            <motion.button
+              className="flex items-center space-x-2 text-gray-400 hover:text-white transition-colors disabled:opacity-30"
+              onClick={() => setActiveStep(prev => Math.max(0, prev - 1))}
+              disabled={activeStep === 0}
+              whileHover={{ x: -5 }}
+            >
+              <span>←</span>
+              <span>Previous</span>
+            </motion.button>
+
+            <div className="flex space-x-2">
+              {steps.map((_, index) => (
+                <button
+                  key={index}
+                  className={`w-3 h-3 rounded-full transition-all ${
+                    activeStep === index ? 'bg-purple-500' : 'bg-gray-600'
+                  }`}
+                  onClick={() => setActiveStep(index)}
+                />
+              ))}
+            </div>
+
+            <motion.button
+              className="flex items-center space-x-2 text-gray-400 hover:text-white transition-colors disabled:opacity-30"
+              onClick={() => setActiveStep(prev => Math.min(steps.length - 1, prev + 1))}
+              disabled={activeStep === steps.length - 1}
+              whileHover={{ x: 5 }}
+            >
+              <span>Next</span>
+              <span>→</span>
+            </motion.button>
+          </div>
+        </div>
+
+        {/* Process Summary */}
+        <motion.div 
+          className="mt-16 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-3xl p-8 border border-purple-500/20 backdrop-blur-lg"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          <div className="text-center">
+            <h3 className="text-white font-bold text-2xl mb-4">Why Our Process Works</h3>
+            <p className="text-gray-300 max-w-3xl mx-auto mb-8">
+              Our structured approach combines strategic thinking with technical excellence, 
+              ensuring every project delivers measurable results and exceptional user experiences.
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {[
+                { icon: "⚡", title: "Efficient", desc: "Streamlined workflow for faster delivery" },
+                { icon: "💎", title: "Quality", desc: "Rigorous testing and best practices" },
+                { icon: "🚀", title: "Results", desc: "Focus on business outcomes and ROI" }
+              ].map((item, index) => (
+                <motion.div
+                  key={index}
+                  className="bg-gray-800/30 rounded-2xl p-6 backdrop-blur-sm border border-gray-700/30"
+                  whileHover={{ scale: 1.05, y: -5 }}
+                >
+                  <div className="text-3xl mb-3">{item.icon}</div>
+                  <h4 className="text-white font-semibold text-lg mb-2">{item.title}</h4>
+                  <p className="text-gray-400 text-sm">{item.desc}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+// Services Section with transparent background
 const ServicesSection = () => {
   const services = [
     {
@@ -377,7 +707,7 @@ const ServicesSection = () => {
   ];
 
   return (
-    <section id="services" className="py-20 px-6 lg:px-12 bg-darker">
+    <section id="services" className="py-20 px-6 lg:px-12 bg-transparent">
       <div className="max-w-7xl mx-auto">
         <motion.div 
           className="text-center mb-16"
@@ -398,7 +728,7 @@ const ServicesSection = () => {
           {services.map((service, index) => (
             <motion.div 
               key={index}
-              className="group bg-gray-900/50 border border-gray-700 rounded-2xl p-6 hover:border-purple-500/50 transition-all duration-300 cursor-pointer"
+              className="group bg-gray-900/50 border border-gray-700 rounded-2xl p-6 hover:border-purple-500/50 transition-all duration-300 cursor-pointer backdrop-blur-sm"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -424,112 +754,9 @@ const ServicesSection = () => {
   );
 };
 
-// Enhanced Process Section with better design
-const ProcessSection = () => {
-  const processSteps = [
-    {
-      step: "01",
-      title: "Discovery & Strategy",
-      description: "We analyze your business goals and create a comprehensive digital strategy",
-      icon: "🔍",
-      color: "from-purple-500 to-pink-500"
-    },
-    {
-      step: "02",
-      title: "Design & Prototyping",
-      description: "Creating stunning visual designs and interactive prototypes",
-      icon: "🎨",
-      color: "from-purple-600 to-pink-600"
-    },
-    {
-      step: "03",
-      title: "Development",
-      description: "Building robust solutions with cutting-edge technologies",
-      icon: "⚡",
-      color: "from-purple-500 to-pink-500"
-    },
-    {
-      step: "04",
-      title: "Testing & Quality",
-      description: "Rigorous testing to ensure flawless performance",
-      icon: "🧪",
-      color: "from-purple-600 to-pink-600"
-    },
-    {
-      step: "05",
-      title: "Launch & Deployment",
-      description: "Seamless deployment with comprehensive monitoring",
-      icon: "🚀",
-      color: "from-purple-500 to-pink-500"
-    },
-    {
-      step: "06",
-      title: "Growth & Optimization",
-      description: "Continuous improvement and performance optimization",
-      icon: "📈",
-      color: "from-purple-600 to-pink-600"
-    }
-  ];
+// Rest of the components remain the same...
 
-  return (
-    <section id="process" className="py-20 px-6 lg:px-12 bg-dark">
-      <div className="max-w-6xl mx-auto">
-        <motion.div 
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <span className="text-white text-sm font-semibold mb-4 block uppercase tracking-wider">Our Process</span>
-          <h2 className="text-purple-400 text-3xl lg:text-4xl font-black mb-4">
-            How We Work
-          </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
-            A structured approach to ensure your project's success from concept to launch
-          </p>
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {processSteps.map((step, index) => (
-            <motion.div 
-              key={index}
-              className="relative"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-            >
-              <motion.div 
-                className="bg-gray-900/50 border border-gray-700 rounded-2xl p-8 h-full group hover:border-purple-500/50 transition-all duration-300 relative overflow-hidden"
-                whileHover={{ y: -10 }}
-              >
-                {/* Background Gradient */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${step.color} opacity-5 group-hover:opacity-10 transition-opacity duration-300`}></div>
-                
-                <div className="relative z-10">
-                  <div className="flex items-center justify-between mb-6">
-                    <div className={`w-14 h-14 bg-gradient-to-r ${step.color} rounded-2xl flex items-center justify-center text-white font-black text-lg`}>
-                      {step.step}
-                    </div>
-                    <div className="text-3xl">{step.icon}</div>
-                  </div>
-                  <h3 className="text-white font-bold text-xl mb-4">{step.title}</h3>
-                  <p className="text-gray-300 leading-relaxed">{step.description}</p>
-                </div>
-
-                {/* Connecting Line */}
-                {index < processSteps.length - 1 && (
-                  <div className="hidden lg:block absolute -right-4 top-1/2 w-8 h-0.5 bg-gray-600 transform translate-x-full"></div>
-                )}
-              </motion.div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
-// Portfolio Section
+// Portfolio Section with transparent background
 const PortfolioSection = () => {
   const portfolioProjects = [
     {
@@ -553,7 +780,7 @@ const PortfolioSection = () => {
   ];
 
   return (
-    <section id="work" className="py-20 px-6 lg:px-12 bg-darker">
+    <section id="work" className="py-20 px-6 lg:px-12 bg-transparent">
       <div className="max-w-7xl mx-auto">
         <motion.div 
           className="text-center mb-16"
@@ -574,7 +801,7 @@ const PortfolioSection = () => {
           {portfolioProjects.map((project, index) => (
             <motion.div 
               key={index}
-              className="bg-gray-900/50 border border-gray-700 rounded-2xl p-6 hover:border-purple-500/50 transition-all duration-300 group cursor-pointer"
+              className="bg-gray-900/50 border border-gray-700 rounded-2xl p-6 hover:border-purple-500/50 transition-all duration-300 group cursor-pointer backdrop-blur-sm"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -639,7 +866,7 @@ const PortfolioSection = () => {
   );
 };
 
-// Testimonials with Infinite Carousel
+// Testimonials with transparent background
 const TestimonialsCarousel = () => {
   const testimonials = [
     {
@@ -668,8 +895,10 @@ const TestimonialsCarousel = () => {
     }
   ];
 
+  const duplicatedTestimonials = [...testimonials, ...testimonials, ...testimonials, ...testimonials];
+
   return (
-    <section id="testimonials" className="py-20 px-6 lg:px-12 bg-dark relative overflow-hidden">
+    <section id="testimonials" className="py-20 px-6 lg:px-12 bg-transparent relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <motion.div 
           className="text-center mb-16"
@@ -688,14 +917,20 @@ const TestimonialsCarousel = () => {
 
         <div className="relative">
           <motion.div 
-            className="flex space-x-6"
-            animate={{ x: [0, -1000] }}
-            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+            className="flex"
+            animate={{ 
+              x: [0, -3840]
+            }}
+            transition={{ 
+              duration: 60, 
+              repeat: Infinity, 
+              ease: "linear",
+            }}
           >
-            {[...testimonials, ...testimonials].map((testimonial, index) => (
+            {duplicatedTestimonials.map((testimonial, index) => (
               <motion.div
                 key={`${testimonial.id}-${index}`}
-                className="flex-shrink-0 w-80 bg-gray-900/50 border border-gray-700 rounded-2xl p-6 hover:border-purple-500/50 transition-all duration-300"
+                className="flex-shrink-0 w-80 mx-3 bg-gray-900/50 border border-gray-700 rounded-2xl p-6 hover:border-purple-500/50 transition-all duration-300 backdrop-blur-sm"
                 whileHover={{ y: -5 }}
               >
                 <div className="text-yellow-400 text-lg mb-4">★★★★★</div>
@@ -715,18 +950,18 @@ const TestimonialsCarousel = () => {
           </motion.div>
 
           {/* Gradient Overlays */}
-          <div className="absolute left-0 top-0 w-20 h-full bg-gradient-to-r from-dark to-transparent z-10"></div>
-          <div className="absolute right-0 top-0 w-20 h-full bg-gradient-to-l from-dark to-transparent z-10"></div>
+          <div className="absolute left-0 top-0 w-32 h-full bg-gradient-to-r from-black to-transparent z-10"></div>
+          <div className="absolute right-0 top-0 w-32 h-full bg-gradient-to-l from-black to-transparent z-10"></div>
         </div>
       </div>
     </section>
   );
 };
 
-// CTA Section
+// CTA Section with transparent background
 const CTASection = () => {
   return (
-    <section id="contact" className="py-20 px-6 lg:px-12 bg-darker">
+    <section id="contact" className="py-20 px-6 lg:px-12 bg-transparent">
       <div className="max-w-4xl mx-auto text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -767,10 +1002,76 @@ const CTASection = () => {
   );
 };
 
+// Rest of the components (Header, Footer, Loader, CustomCursor) remain the same...
+
+// Updated Header Component
+const Header = () => {
+  const [activeSection, setActiveSection] = useState('home');
+
+  return (
+    <motion.header 
+      className="fixed top-0 w-full z-50 glass-dark border-b border-gray-800/50"
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.6 }}
+    >
+      <div className="container mx-auto px-6 py-4 flex justify-between items-center">
+        <div className="flex items-center space-x-3">
+          <motion.div 
+            className="text-2xl font-black text-white"
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.3 }}
+          >
+            Nautilus<span className="text-purple-400">Verse</span>
+          </motion.div>
+        </div>
+        
+        <nav className="hidden lg:flex space-x-8">
+          {[
+            { name: "Home", id: "home" },
+            { name: "About", id: "about" },
+            { name: "Services", id: "services" },
+            { name: "Work", id: "work" },
+            { name: "Process", id: "process" },
+            { name: "Testimonials", id: "testimonials" },
+            { name: "Contact", id: "contact" }
+          ].map((link) => (
+            <motion.a
+              key={link.id}
+              href={`#${link.id}`}
+              className={`text-sm font-semibold transition-all duration-300 relative ${
+                activeSection === link.id ? 'text-purple-400' : 'text-gray-400 hover:text-white'
+              }`}
+              whileHover={{ y: -2 }}
+              onClick={() => setActiveSection(link.id)}
+            >
+              {link.name}
+              {activeSection === link.id && (
+                <motion.div 
+                  className="absolute -bottom-2 left-0 w-full h-0.5 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"
+                  layoutId="activeSection"
+                />
+              )}
+            </motion.a>
+          ))}
+        </nav>
+
+        <motion.button 
+          className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-2 rounded-lg text-sm font-semibold hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300"
+          whileHover={{ scale: 1.05, y: -2 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          Get Started
+        </motion.button>
+      </div>
+    </motion.header>
+  );
+};
+
 // Original Detailed Footer
 const Footer = () => {
   return (
-    <footer className="bg-black border-t border-gray-800/50 py-16 px-6">
+    <footer className="bg-transparent border-t border-gray-800/50 py-16 px-6">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div>
@@ -879,92 +1180,77 @@ const CustomCursor = () => {
   );
 };
 
+// Updated Loader
+const Loader = () => {
+  return (
+    <motion.div 
+      className="fixed inset-0 bg-black flex items-center justify-center z-50"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <motion.div 
+        className="text-center"
+        initial={{ scale: 0.8, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        <motion.div
+          className="relative w-20 h-20 mx-auto mb-4"
+        >
+          <motion.div
+            className="absolute inset-0 border-4 border-purple-500/30 rounded-full"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+          />
+          <motion.div
+            className="absolute inset-2 border-4 border-transparent border-t-pink-500 rounded-full"
+            animate={{ rotate: -360 }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+          />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="text-white font-black text-lg">NV</span>
+          </div>
+        </motion.div>
+        <motion.div
+          className="text-white text-xl font-semibold"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+        >
+          Nautilus Verse
+        </motion.div>
+        <motion.div
+          className="text-purple-400 text-sm mt-2"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.8 }}
+        >
+          Loading awesome experience...
+        </motion.div>
+      </motion.div>
+    </motion.div>
+  );
+};
+
 export default function Home() {
-  const [activeSection, setActiveSection] = useState('home');
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 2000);
+    const timer = setTimeout(() => setIsLoading(false), 3000);
     return () => clearTimeout(timer);
   }, []);
 
   if (isLoading) {
-    return (
-      <motion.div 
-        className="fixed inset-0 bg-darker flex items-center justify-center z-50"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-      >
-        <motion.div 
-          className="text-center"
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          <motion.div 
-            className="w-20 h-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center text-white font-black text-2xl mb-4 mx-auto"
-            animate={{ rotate: 360 }}
-            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-          >
-            NV
-          </motion.div>
-          <div className="text-white text-xl font-semibold">Nautilus Verse</div>
-        </motion.div>
-      </motion.div>
-    );
+    return <Loader />;
   }
 
   return (
-    <main className="min-h-screen text-white w-full overflow-x-hidden bg-darker cursor-none">
+    <main className="min-h-screen text-white w-full overflow-x-hidden bg-black cursor-none">
       <InteractiveBackground />
       <CustomCursor />
       
-      {/* Header */}
-      <motion.header 
-        className="fixed top-0 w-full z-50 glass-dark border-b border-gray-800/50"
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-          <div className="flex items-center space-x-3">
-            <motion.div 
-              className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center text-white font-black text-sm"
-              whileHover={{ rotate: 360 }}
-              transition={{ duration: 0.5 }}
-            >
-              NV
-            </motion.div>
-            <h1 className="text-xl font-black text-white">
-              Nautilus<span className="text-purple-400">Verse</span>
-            </h1>
-          </div>
-          
-          <nav className="hidden lg:flex space-x-8">
-            {["home", "about", "services", "work", "process", "testimonials", "contact"].map((link) => (
-              <motion.a
-                key={link}
-                href={`#${link}`}
-                className={`text-sm font-semibold transition-all duration-300 ${
-                  activeSection === link ? 'text-purple-400' : 'text-gray-400 hover:text-white'
-                }`}
-                whileHover={{ y: -2 }}
-              >
-                {link}
-              </motion.a>
-            ))}
-          </nav>
-
-          <motion.button 
-            className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-2 rounded-lg text-sm font-semibold hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300"
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Get Started
-          </motion.button>
-        </div>
-      </motion.header>
-
+      <Header />
       <ModernHero />
       <AboutSection />
       <ServicesSection />
