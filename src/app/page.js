@@ -1273,11 +1273,11 @@ const Footer = () => {
             },
             {
               title: "Company",
-              links: ["About Us", "Our Process", "Case Studies", "Careers", "Blog", "Contact"]
+              links: ["About Us", "Our Process",  "Careers", "Blog", "Contact"]
             },
             {
               title: "Connect With Us",
-              links: ["LinkedIn", "Twitter", "GitHub", "Dribbble", "Instagram", "Behance"]
+              links: ["LinkedIn", "Twitter", "GitHub"]
             }
           ].map((column, index) => (
             <div key={index}>
@@ -1434,7 +1434,7 @@ export default function Home() {
       {/* <TestimonialsCarousel /> */}
       <CTASection />
       <Footer />
-      
+
     </main>
   );
 }
