@@ -1043,98 +1043,97 @@ const PortfolioSection = () => {
   );
 };
 
-// Testimonials with transparent background
-// Testimonials with transparent background - FIXED
-const TestimonialsCarousel = () => {
-  const testimonials = [
-    {
-      id: 1,
-      name: "Sarah Chen",
-      role: "CEO, TechInnovate Inc.",
-      content: "Nautilus Verse transformed our digital presence completely. Our revenue grew by 250% in just 6 months!",
-      avatar: "👩‍💼",
-      company: "TechInnovate Inc."
-    },
-    {
-      id: 2,
-      name: "Marcus Rodriguez",
-      role: "Marketing Director, Global Retail Co.",
-      content: "The attention to detail and strategic approach exceeded our expectations. Best investment we've made.",
-      avatar: "👨‍💼",
-      company: "Global Retail Co."
-    },
-    {
-      id: 3,
-      name: "Emily Watson",
-      role: "Founder, StartUp Ventures",
-      content: "From concept to launch, the team was exceptional. They understood our vision perfectly.",
-      avatar: "👩‍🎓",
-      company: "StartUp Ventures"
-    }
-  ];
 
-  const duplicatedTestimonials = [...testimonials, ...testimonials, ...testimonials, ...testimonials];
+// const TestimonialsCarousel = () => {
+//   const testimonials = [
+//     {
+//       id: 1,
+//       name: "Sarah Chen",
+//       role: "CEO, TechInnovate Inc.",
+//       content: "Nautilus Verse transformed our digital presence completely. Our revenue grew by 250% in just 6 months!",
+//       avatar: "👩‍💼",
+//       company: "TechInnovate Inc."
+//     },
+//     {
+//       id: 2,
+//       name: "Marcus Rodriguez",
+//       role: "Marketing Director, Global Retail Co.",
+//       content: "The attention to detail and strategic approach exceeded our expectations. Best investment we've made.",
+//       avatar: "👨‍💼",
+//       company: "Global Retail Co."
+//     },
+//     {
+//       id: 3,
+//       name: "Emily Watson",
+//       role: "Founder, StartUp Ventures",
+//       content: "From concept to launch, the team was exceptional. They understood our vision perfectly.",
+//       avatar: "👩‍🎓",
+//       company: "StartUp Ventures"
+//     }
+//   ];
 
-  return (
-    <section id="testimonials" className="py-20 px-6 lg:px-12 bg-transparent relative overflow-hidden">
-      <div className="max-w-7xl mx-auto">
-        <motion.div 
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <span className="text-white text-sm font-semibold mb-4 block uppercase tracking-wider">Testimonials</span>
-          <h2 className="text-purple-400 text-3xl lg:text-4xl font-black mb-4">
-            What Clients Say
-          </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
-            Don't just take our word for it. Here's what our clients have to say about their experience.
-          </p>
-        </motion.div>
+//   const duplicatedTestimonials = [...testimonials, ...testimonials, ...testimonials, ...testimonials];
 
-        <div className="relative">
-          <motion.div 
-            className="flex"
-            animate={{ 
-              x: [0, -3840]
-            }}
-            transition={{ 
-              duration: 60, 
-              repeat: Infinity, 
-              ease: "linear",
-            }}
-          >
-            {duplicatedTestimonials.map((testimonial, index) => (
-              <motion.div
-                key={`${testimonial.id}-${index}`}
-                className="flex-shrink-0 w-80 mx-3 bg-gray-900/50 border border-gray-700 rounded-2xl p-6 hover:border-purple-500/50 transition-all duration-300 backdrop-blur-sm"
-                whileHover={{ y: -5 }}
-              >
-                <div className="text-yellow-400 text-lg mb-4">★★★★★</div>
-                <p className="text-gray-300 mb-6 leading-relaxed italic">"{testimonial.content}"</p>
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-2xl flex items-center justify-center text-xl">
-                    {testimonial.avatar}
-                  </div>
-                  <div>
-                    <div className="font-bold text-white">{testimonial.name}</div>
-                    <div className="text-purple-400 text-sm font-semibold">{testimonial.role}</div>
-                    <div className="text-gray-400 text-xs">{testimonial.company}</div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
+//   return (
+//     <section id="testimonials" className="py-20 px-6 lg:px-12 bg-transparent relative overflow-hidden">
+//       <div className="max-w-7xl mx-auto">
+//         <motion.div 
+//           className="text-center mb-16"
+//           initial={{ opacity: 0, y: 30 }}
+//           whileInView={{ opacity: 1, y: 0 }}
+//           transition={{ duration: 0.6 }}
+//         >
+//           <span className="text-white text-sm font-semibold mb-4 block uppercase tracking-wider">Testimonials</span>
+//           <h2 className="text-purple-400 text-3xl lg:text-4xl font-black mb-4">
+//             What Clients Say
+//           </h2>
+//           <p className="text-gray-400 max-w-2xl mx-auto">
+//             Don't just take our word for it. Here's what our clients have to say about their experience.
+//           </p>
+//         </motion.div>
 
-          {/* Gradient Overlays - FIXED (transparent kar diya) */}
-          <div className="absolute left-0 top-0 w-32 h-full bg-gradient-to-r from-transparent to-transparent z-10"></div>
-          <div className="absolute right-0 top-0 w-32 h-full bg-gradient-to-l from-transparent to-transparent z-10"></div>
-        </div>
-      </div>
-    </section>
-  );
-};
+//         <div className="relative">
+//           <motion.div 
+//             className="flex"
+//             animate={{ 
+//               x: [0, -3840]
+//             }}
+//             transition={{ 
+//               duration: 60, 
+//               repeat: Infinity, 
+//               ease: "linear",
+//             }}
+//           >
+//             {duplicatedTestimonials.map((testimonial, index) => (
+//               <motion.div
+//                 key={`${testimonial.id}-${index}`}
+//                 className="flex-shrink-0 w-80 mx-3 bg-gray-900/50 border border-gray-700 rounded-2xl p-6 hover:border-purple-500/50 transition-all duration-300 backdrop-blur-sm"
+//                 whileHover={{ y: -5 }}
+//               >
+//                 <div className="text-yellow-400 text-lg mb-4">★★★★★</div>
+//                 <p className="text-gray-300 mb-6 leading-relaxed italic">"{testimonial.content}"</p>
+//                 <div className="flex items-center space-x-4">
+//                   <div className="w-12 h-12 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-2xl flex items-center justify-center text-xl">
+//                     {testimonial.avatar}
+//                   </div>
+//                   <div>
+//                     <div className="font-bold text-white">{testimonial.name}</div>
+//                     <div className="text-purple-400 text-sm font-semibold">{testimonial.role}</div>
+//                     <div className="text-gray-400 text-xs">{testimonial.company}</div>
+//                   </div>
+//                 </div>
+//               </motion.div>
+//             ))}
+//           </motion.div>
+
+//           {/* Gradient Overlays - FIXED (transparent kar diya) */}
+//           <div className="absolute left-0 top-0 w-32 h-full bg-gradient-to-r from-transparent to-transparent z-10"></div>
+//           <div className="absolute right-0 top-0 w-32 h-full bg-gradient-to-l from-transparent to-transparent z-10"></div>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// };
 // CTA Section with transparent background
 const CTASection = () => {
   return (
