@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import "./globals.css";
 
 // Interactive Background with improved particles
+// Interactive Background with improved particles - FIXED
 const InteractiveBackground = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isMouseMoving, setIsMouseMoving] = useState(false);
@@ -29,16 +30,16 @@ const InteractiveBackground = () => {
   }, []);
 
   return (
-    <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <div className="fixed inset-0 overflow-hidden z-0"> {/* pointer-events-none HATA DIYA */}
       {/* Animated Grid */}
-      <div className="absolute inset-0 grid-pattern opacity-20"></div>
+      <div className="absolute inset-0 grid-pattern opacity-20 pointer-events-none"></div>
       
       {/* Interactive Particles */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 pointer-events-none">
         {[...Array(25)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-2 h-2 bg-purple-400/30 rounded-full"
+            className="absolute w-2 h-2 bg-purple-400/30 rounded-full pointer-events-none"
             initial={{
               x: Math.random() * window.innerWidth,
               y: Math.random() * window.innerHeight,
@@ -60,7 +61,7 @@ const InteractiveBackground = () => {
 
       {/* Moving Code Elements */}
       <motion.div 
-        className="absolute top-20 left-5 text-xs text-pink-400/40 font-mono opacity-60"
+        className="absolute top-20 left-5 text-xs text-pink-400/40 font-mono opacity-60 pointer-events-none"
         animate={{ y: [0, -20, 0] }}
         transition={{ duration: 6, repeat: Infinity }}
       >
@@ -68,7 +69,7 @@ const InteractiveBackground = () => {
       </motion.div>
       
       <motion.div 
-        className="absolute top-40 right-10 text-xs text-purple-400/40 font-mono opacity-70"
+        className="absolute top-40 right-10 text-xs text-purple-400/40 font-mono opacity-70 pointer-events-none"
         animate={{ y: [0, 15, 0] }}
         transition={{ duration: 8, repeat: Infinity, delay: 2 }}
       >
@@ -77,13 +78,13 @@ const InteractiveBackground = () => {
       
       {/* Floating Tech Orbs */}
       <motion.div
-        className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-purple-500/5 via-transparent to-pink-500/5 rounded-full blur-3xl"
+        className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-purple-500/5 via-transparent to-pink-500/5 rounded-full blur-3xl pointer-events-none"
         animate={{ scale: [1, 1.2, 1] }}
         transition={{ duration: 8, repeat: Infinity }}
       />
       
       <motion.div
-        className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-purple-500/5 via-transparent to-pink-500/5 rounded-full blur-3xl"
+        className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-purple-500/5 via-transparent to-pink-500/5 rounded-full blur-3xl pointer-events-none"
         animate={{ scale: [1.2, 1, 1.2] }}
         transition={{ duration: 10, repeat: Infinity, delay: 3 }}
       />
@@ -352,7 +353,7 @@ const AboutSection = () => {
               {/* Background Gradient */}
               <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               
-              <div className="relative z-10">
+              <div className="relative z-10 " >
                 <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center text-2xl mb-6">
                   {item.icon}
                 </div>
@@ -678,31 +679,64 @@ const ProcessSection = () => {
 };
 
 // Services Section with transparent background
+// Enhanced Services Section with more details
 const ServicesSection = () => {
   const services = [
     {
       icon: "💻",
       title: "Web Development",
-      description: "Custom web applications with modern tech stacks",
-      features: ["React/Next.js", "Node.js", "Tailwind CSS", "MongoDB"]
+      description: "Custom web applications built with modern technologies for optimal performance and scalability",
+      features: ["React/Next.js", "Node.js", "Tailwind CSS", "MongoDB", "TypeScript", "AWS"],
+      details: "We create responsive, fast, and scalable web applications that provide exceptional user experiences across all devices.",
+      deliverables: ["Custom Web App", "Admin Dashboard", "API Integration", "Performance Optimization"],
+      timeline: "4-8 weeks"
     },
     {
       icon: "📱",
-      title: "Mobile Apps",
-      description: "Cross-platform mobile solutions",
-      features: ["React Native", "Flutter", "iOS & Android", "Firebase"]
+      title: "Mobile App Development",
+      description: "Cross-platform mobile solutions for iOS and Android with native-like performance",
+      features: ["React Native", "Flutter", "iOS & Android", "Firebase", "Redux", "Push Notifications"],
+      details: "Build powerful mobile applications that work seamlessly across both major platforms with single codebase efficiency.",
+      deliverables: ["iOS & Android App", "Backend Integration", "App Store Deployment", "Ongoing Maintenance"],
+      timeline: "6-12 weeks"
     },
     {
       icon: "🎨",
       title: "UI/UX Design",
-      description: "User-centered design systems",
-      features: ["Figma", "Prototyping", "User Testing", "Design Systems"]
+      description: "User-centered design systems that combine aesthetics with functionality",
+      features: ["Figma", "Prototyping", "User Testing", "Design Systems", "Wireframing", "User Research"],
+      details: "Transform your ideas into intuitive, beautiful interfaces that users love and engage with.",
+      deliverables: ["UI Design System", "Interactive Prototypes", "User Flows", "Design Assets"],
+      timeline: "2-4 weeks"
     },
     {
       icon: "🚀",
       title: "Digital Marketing",
-      description: "Data-driven growth strategies",
-      features: ["SEO", "PPC", "Social Media", "Analytics"]
+      description: "Data-driven growth strategies to boost your online presence and conversions",
+      features: ["SEO Optimization", "PPC Campaigns", "Social Media", "Analytics", "Content Strategy", "Conversion Rate Optimization"],
+      details: "Drive qualified traffic, increase brand awareness, and convert visitors into loyal customers.",
+      deliverables: ["SEO Audit", "Marketing Strategy", "Content Plan", "Performance Reports"],
+      timeline: "Ongoing",
+      price: "Custom Packages"
+    },
+    {
+      icon: "🛒",
+      title: "E-commerce Solutions",
+      description: "Complete online store development with secure payment integration",
+      features: ["Shopify", "WooCommerce", "Payment Gateways", "Inventory Management", "Order Tracking", "Security"],
+      details: "Launch your online store with all the features needed to sell products and grow your business.",
+      deliverables: ["Online Store", "Payment Integration", "Product Management", "Analytics Dashboard"],
+      timeline: "4-10 weeks"
+    },
+    {
+      icon: "🔧",
+      title: "Tech Consulting",
+      description: "Strategic technology guidance to optimize your digital infrastructure",
+      features: ["System Architecture", "Cloud Migration", "Performance Audit", "Security Assessment", "Tech Stack Selection", "Scalability Planning"],
+      details: "Get expert advice on technology decisions, architecture planning, and digital transformation.",
+      deliverables: ["Technical Audit", "Architecture Plan", "Implementation Roadmap", "Best Practices Guide"],
+      timeline: "1-2 weeks"
+      
     }
   ];
 
@@ -717,38 +751,124 @@ const ServicesSection = () => {
         >
           <span className="text-white text-sm font-semibold mb-4 block uppercase tracking-wider">Our Expertise</span>
           <h2 className="text-purple-400 text-3xl lg:text-4xl font-black mb-4">
-            Services We Offer
+            Comprehensive Digital Solutions
           </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
-            Comprehensive digital solutions tailored to your business needs
+          <p className="text-gray-400 max-w-2xl mx-auto text-lg">
+            End-to-end services to transform your digital presence and drive business growth
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
             <motion.div 
               key={index}
-              className="group bg-gray-900/50 border border-gray-700 rounded-2xl p-6 hover:border-purple-500/50 transition-all duration-300 cursor-pointer backdrop-blur-sm"
+              className="group bg-gray-900/50 border border-gray-700 rounded-2xl p-6 hover:border-purple-500/50 transition-all duration-300 cursor-pointer backdrop-blur-sm h-full flex flex-col"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              whileHover={{ y: -10 }}
+              whileHover={{ y: -5 }}
             >
-              <div className="w-14 h-14 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-2xl flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                {service.icon}
+              {/* Service Header */}
+              <div className="flex items-start justify-between mb-4">
+                <div className="w-16 h-16 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-2xl flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300">
+                  {service.icon}
+                </div>
+                <div className="text-right">
+                  <div className="text-xs text-purple-400 font-medium bg-purple-500/10 px-2 py-1 rounded-full">
+                    {service.timeline}
+                  </div>
+                  <div className="text-xs text-gray-400 mt-1">
+                    {service.price}
+                  </div>
+                </div>
               </div>
-              <h3 className="text-white font-bold text-lg mb-3">{service.title}</h3>
-              <p className="text-gray-400 text-sm mb-4">{service.description}</p>
-              <div className="flex flex-wrap gap-2">
-                {service.features.map((feature, idx) => (
-                  <span key={idx} className="px-2 py-1 bg-gray-800 text-gray-300 rounded text-xs">
-                    {feature}
-                  </span>
-                ))}
+
+              {/* Service Content */}
+              <div className="flex-1">
+                <h3 className="text-white font-bold text-xl mb-3">{service.title}</h3>
+                <p className="text-gray-300 text-sm mb-4 leading-relaxed">{service.description}</p>
+                
+                {/* Detailed Description */}
+                <p className="text-gray-400 text-xs mb-4 leading-relaxed">
+                  {service.details}
+                </p>
+
+                {/* Tech Stack */}
+                <div className="mb-4">
+                  <h4 className="text-white text-sm font-semibold mb-2">Technologies</h4>
+                  <div className="flex flex-wrap gap-1">
+                    {service.features.map((feature, idx) => (
+                      <span key={idx} className="px-2 py-1 bg-gray-800 text-gray-300 rounded text-xs border border-gray-700">
+                        {feature}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Deliverables */}
+                <div>
+                  <h4 className="text-white text-sm font-semibold mb-2">Deliverables</h4>
+                  <div className="space-y-1">
+                    {service.deliverables.map((deliverable, idx) => (
+                      <div key={idx} className="flex items-center space-x-2 text-xs text-gray-400">
+                        <div className="w-1.5 h-1.5 bg-purple-500 rounded-full flex-shrink-0"></div>
+                        <span>{deliverable}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
+
+              {/* CTA Button */}
+              <motion.button 
+                className="w-full mt-6 bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors text-sm flex items-center justify-center space-x-2"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <span>Get Started</span>
+                <span>→</span>
+              </motion.button>
             </motion.div>
           ))}
         </div>
+
+        {/* Services Summary */}
+        <motion.div 
+          className="mt-16 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-2xl p-8 border border-purple-500/20 backdrop-blur-sm"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            {[
+              {
+                icon: "⚡",
+                title: "Fast Delivery",
+                description: "Quick project turnaround without compromising quality"
+              },
+              {
+                icon: "💎", 
+                title: "Premium Quality",
+                description: "Industry best practices and cutting-edge technologies"
+              },
+              {
+                icon: "🛡️",
+                title: "Ongoing Support",
+                description: "Continuous maintenance and support after project completion"
+              }
+            ].map((item, index) => (
+              <motion.div
+                key={index}
+                className="text-center"
+                whileHover={{ scale: 1.05 }}
+              >
+                <div className="text-3xl mb-3">{item.icon}</div>
+                <h4 className="text-white font-semibold text-lg mb-2">{item.title}</h4>
+                <p className="text-gray-400 text-sm">{item.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -757,8 +877,21 @@ const ServicesSection = () => {
 // Rest of the components remain the same...
 
 // Portfolio Section with transparent background
+// Portfolio Section with enhanced visuals
 const PortfolioSection = () => {
   const portfolioProjects = [
+    {
+      emoji: "⚔️",
+      title: "The Frontline Fury",
+      description: "A dynamic gaming news platform with real-time updates, community features, and interactive content for gamers worldwide.",
+      tech: ["Next.js", "React", "Tailwind CSS", "MongoDB", "Node.js", "Cloudinary"],
+      status: "Live",
+      duration: "3 Months",
+      
+      image: "/thefrontlinefury.jpg", // Add your image path here
+      link: "https://thefrontlinefury.com",
+      features: ["Real-time News", "Community Forum", "User Profiles", "Content Management"]
+    },
     {
       emoji: "🛒",
       title: "E-Commerce Revolution",
@@ -766,7 +899,10 @@ const PortfolioSection = () => {
       tech: ["React", "Node.js", "MongoDB", "Stripe", "AWS", "Redis"],
       status: "Live",
       duration: "6 Months",
-      budget: "$85,000"
+      
+      image: "/ecommerce.jpg",
+      link: "#",
+      features: ["Payment Gateway", "Inventory Management", "Order Tracking", "Admin Dashboard"]
     },
     {
       emoji: "📊",
@@ -775,7 +911,10 @@ const PortfolioSection = () => {
       tech: ["Next.js", "D3.js", "Python", "PostgreSQL", "Docker", "Kubernetes"],
       status: "Live",
       duration: "8 Months",
-      budget: "$120,000"
+      
+      image: "/analytics.jpg",
+      link: "#",
+      features: ["Real-time Data", "Predictive Analytics", "Custom Reports", "Data Visualization"]
     }
   ];
 
@@ -797,7 +936,7 @@ const PortfolioSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
           {portfolioProjects.map((project, index) => (
             <motion.div 
               key={index}
@@ -807,59 +946,97 @@ const PortfolioSection = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               whileHover={{ y: -10 }}
             >
-              <div className="relative overflow-hidden rounded-xl mb-4">
-                <div className="w-full h-48 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-xl flex items-center justify-center text-4xl">
-                  {project.emoji}
-                </div>
-                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center space-x-4">
-                  <motion.button 
-                    className="bg-purple-500 text-white px-4 py-2 rounded-lg font-semibold"
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    View Case Study
-                  </motion.button>
-                  <motion.button 
-                    className="bg-white/20 text-white px-4 py-2 rounded-lg font-semibold backdrop-blur-sm"
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    Live Demo
-                  </motion.button>
-                </div>
-                <div className="absolute top-4 right-4">
-                  <span className="bg-green-500/20 text-green-400 text-xs px-2 py-1 rounded-full border border-green-500/30">
-                    {project.status}
-                  </span>
-                </div>
+              {/* Project Header with Emoji and Status */}
+              <div className="flex items-center justify-between mb-4">
+                <div className="text-4xl">{project.emoji}</div>
+                <span className="bg-green-500/20 text-green-400 text-xs px-3 py-1 rounded-full border border-green-500/30 font-medium">
+                  {project.status}
+                </span>
               </div>
+
+              {/* Project Title and Description */}
               <h3 className="text-white font-bold text-xl mb-3">{project.title}</h3>
               <p className="text-gray-400 text-sm mb-4 leading-relaxed">{project.description}</p>
+
+              {/* Project Visual - Placeholder with gradient */}
+              <div className="relative overflow-hidden rounded-xl mb-4 h-48 bg-gradient-to-br from-purple-500/20 via-pink-500/20 to-blue-500/20 flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
+                <div className="text-6xl opacity-60 group-hover:opacity-80 transition-opacity duration-300">
+                  {project.emoji}
+                </div>
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <motion.button 
+                    className="bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors"
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    Visit Website
+                  </motion.button>
+                </div>
+              </div>
+
+              {/* Project Features */}
+              <div className="grid grid-cols-2 gap-2 mb-4">
+                {project.features.map((feature, idx) => (
+                  <div key={idx} className="flex items-center space-x-2 text-xs text-gray-400">
+                    <div className="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                    <span>{feature}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Tech Stack */}
               <div className="flex flex-wrap gap-2 mb-4">
                 {project.tech.map((tech, idx) => (
-                  <span key={idx} className="px-3 py-1 bg-purple-500/10 text-purple-400 rounded-lg text-xs border border-purple-500/20">
+                  <span key={idx} className="px-3 py-1 bg-purple-500/10 text-purple-400 rounded-lg text-xs border border-purple-500/20 font-medium">
                     {tech}
                   </span>
                 ))}
               </div>
-              <div className="flex justify-between items-center text-xs text-gray-500">
-                <span>📅 {project.duration}</span>
-                <span>💰 {project.budget}</span>
+
+              {/* Project Meta */}
+              <div className="flex justify-between items-center text-xs text-gray-500 border-t border-gray-700/50 pt-4">
+                <div className="flex items-center space-x-4">
+                  <span className="flex items-center space-x-1">
+                    <span>📅</span>
+                    <span>{project.duration}</span>
+                  </span>
+                  <span className="flex items-center space-x-1">
+                    <span></span>
+                    <span>{project.budget}</span>
+                  </span>
+                </div>
+                <motion.a 
+                  href={project.link}
+                  className="text-purple-400 hover:text-purple-300 transition-colors flex items-center space-x-1"
+                  whileHover={{ x: 5 }}
+                >
+                  <span>View Live</span>
+                  <span>→</span>
+                </motion.a>
               </div>
             </motion.div>
           ))}
         </div>
 
+        {/* Call to Action */}
         <motion.div 
           className="text-center mt-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <motion.button 
-            className="border border-gray-600 text-white px-8 py-4 rounded-xl font-semibold hover:border-purple-500 hover:bg-purple-500/5 transition-all duration-300"
-            whileHover={{ scale: 1.05, y: -2 }}
-          >
-            View All Case Studies →
-          </motion.button>
+          <div className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-2xl p-8 border border-purple-500/20 backdrop-blur-sm">
+            <h3 className="text-white font-bold text-2xl mb-4">Have a Project in Mind?</h3>
+            <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
+              Let's discuss how we can bring your vision to life with cutting-edge technology and innovative design.
+            </p>
+            <motion.button 
+              className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-4 rounded-xl font-semibold hover:shadow-2xl hover:shadow-purple-500/25 transition-all duration-300"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Start Your Project Today
+            </motion.button>
+          </div>
         </motion.div>
       </div>
     </section>
@@ -867,6 +1044,7 @@ const PortfolioSection = () => {
 };
 
 // Testimonials with transparent background
+// Testimonials with transparent background - FIXED
 const TestimonialsCarousel = () => {
   const testimonials = [
     {
@@ -949,15 +1127,14 @@ const TestimonialsCarousel = () => {
             ))}
           </motion.div>
 
-          {/* Gradient Overlays */}
-          <div className="absolute left-0 top-0 w-32 h-full bg-gradient-to-r from-black to-transparent z-10"></div>
-          <div className="absolute right-0 top-0 w-32 h-full bg-gradient-to-l from-black to-transparent z-10"></div>
+          {/* Gradient Overlays - FIXED (transparent kar diya) */}
+          <div className="absolute left-0 top-0 w-32 h-full bg-gradient-to-r from-transparent to-transparent z-10"></div>
+          <div className="absolute right-0 top-0 w-32 h-full bg-gradient-to-l from-transparent to-transparent z-10"></div>
         </div>
       </div>
     </section>
   );
 };
-
 // CTA Section with transparent background
 const CTASection = () => {
   return (
@@ -1246,9 +1423,8 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen text-white w-full overflow-x-hidden bg-black cursor-none">
+    <main className="min-h-screen text-white w-full overflow-x-hidden bg-black">
       <InteractiveBackground />
-      <CustomCursor />
       
       <Header />
       <ModernHero />

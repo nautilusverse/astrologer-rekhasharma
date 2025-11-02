@@ -130,9 +130,6 @@ html {
 }
 
 /* Custom cursor styles */
-* {
-  cursor: none;
-}
 
 /* Ensure buttons and links are clickable with custom cursor */
 button, a, [role="button"] {
