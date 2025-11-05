@@ -4,24 +4,206 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import "./globals.css";
 
+// Contact Form Component
+const ContactForm = ({ isOpen, onClose }) => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    project: '',
+    budget: '',
+    timeline: ''
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    // WhatsApp message format
+    const message = `🌟 *New Project Inquiry - Nautilus Verse* 🌟%0A%0A` +
+                   `*Name:* ${formData.name}%0A` +
+                   `*Email:* ${formData.email}%0A` +
+                   `*Phone:* ${formData.phone}%0A` +
+                   `*Project Details:* ${formData.project}%0A` +
+                   `*Budget:* ${formData.budget}%0A` +
+                   `*Timeline:* ${formData.timeline}%0A%0A` +
+                   `🚀 *Let's Build Something Amazing!*`;
+    
+    // YOUR WHATSAPP NUMBER - YAHAN APNA NUMBER DALNA
+    const whatsappNumber = '916396464369'; // +91 format mein without +
+    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${message}`;
+    
+    window.open(whatsappURL, '_blank');
+    onClose();
+    
+    // Form reset
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      project: '',
+      budget: '',
+      timeline: ''
+    });
+  };
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  return (
+    <motion.div
+      className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={onClose}
+    >
+      <motion.div
+        className="bg-gray-900 rounded-2xl p-8 max-w-md w-full border border-purple-500/20"
+        initial={{ scale: 0.8, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.8, opacity: 0 }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex justify-between items-center mb-6">
+          <h3 className="text-white text-2xl font-bold">Start Your Project</h3>
+          <button 
+            onClick={onClose}
+            className="text-gray-400 hover:text-white text-2xl"
+          >
+            ×
+          </button>
+        </div>
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="text-white text-sm font-medium mb-2 block">Full Name *</label>
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+              className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all"
+              placeholder="Enter your full name"
+            />
+          </div>
+
+          <div>
+            <label className="text-white text-sm font-medium mb-2 block">Email Address *</label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all"
+              placeholder="Enter your email"
+            />
+          </div>
+
+          <div>
+            <label className="text-white text-sm font-medium mb-2 block">Phone Number *</label>
+            <input
+              type="tel"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              required
+              className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all"
+              placeholder="Enter your phone number"
+            />
+          </div>
+
+          <div>
+            <label className="text-white text-sm font-medium mb-2 block">Project Details *</label>
+            <textarea
+              name="project"
+              value={formData.project}
+              onChange={handleChange}
+              required
+              rows="3"
+              className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all resize-none"
+              placeholder="Tell us about your project requirements..."
+            />
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="text-white text-sm font-medium mb-2 block">Budget Range</label>
+              <select
+                name="budget"
+                value={formData.budget}
+                onChange={handleChange}
+                className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all"
+              >
+                <option value="">Select Budget</option>
+                <option value="Under ₹25k">Under ₹25k</option>
+                <option value="₹25k - ₹50k">₹25k - ₹50k</option>
+                <option value="₹50k - ₹1L">₹50k - ₹1L</option>
+                <option value="₹1L - ₹2L">₹1L - ₹2L</option>
+                <option value="₹2L+">₹2L+</option>
+                <option value="To be discussed">To be discussed</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="text-white text-sm font-medium mb-2 block">Timeline</label>
+              <select
+                name="timeline"
+                value={formData.timeline}
+                onChange={handleChange}
+                className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all"
+              >
+                <option value="">Select Timeline</option>
+                <option value="ASAP">ASAP</option>
+                <option value="1-2 weeks">1-2 weeks</option>
+                <option value="1 month">1 month</option>
+                <option value="2-3 months">2-3 months</option>
+                <option value="Flexible">Flexible</option>
+              </select>
+            </div>
+          </div>
+
+          <motion.button
+            type="submit"
+            className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-4 rounded-lg font-semibold hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 flex items-center justify-center space-x-2"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <span>Send via WhatsApp</span>
+            <span>📱</span>
+          </motion.button>
+
+          <p className="text-gray-400 text-xs text-center">
+            We'll contact you within 2 hours during business hours
+          </p>
+        </form>
+      </motion.div>
+    </motion.div>
+  );
+};
+
 // Interactive Background with improved particles
-// Interactive Background with improved particles - FIXED
 const InteractiveBackground = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isMouseMoving, setIsMouseMoving] = useState(false);
-  
+
   useEffect(() => {
     let mouseMoveTimer;
     const handleMouseMove = (e) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
       setIsMouseMoving(true);
-      
+
       clearTimeout(mouseMoveTimer);
       mouseMoveTimer = setTimeout(() => {
         setIsMouseMoving(false);
       }, 100);
     };
-    
+
     window.addEventListener('mousemove', handleMouseMove);
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
@@ -30,10 +212,10 @@ const InteractiveBackground = () => {
   }, []);
 
   return (
-    <div className="fixed inset-0 overflow-hidden z-0"> {/* pointer-events-none HATA DIYA */}
+    <div className="fixed inset-0 overflow-hidden z-0">
       {/* Animated Grid */}
       <div className="absolute inset-0 grid-pattern opacity-20 pointer-events-none"></div>
-      
+
       {/* Interactive Particles */}
       <div className="absolute inset-0 pointer-events-none">
         {[...Array(25)].map((_, i) => (
@@ -60,29 +242,29 @@ const InteractiveBackground = () => {
       </div>
 
       {/* Moving Code Elements */}
-      <motion.div 
+      <motion.div
         className="absolute top-20 left-5 text-xs text-pink-400/40 font-mono opacity-60 pointer-events-none"
         animate={{ y: [0, -20, 0] }}
         transition={{ duration: 6, repeat: Infinity }}
       >
         &lt;InnovativeCode /&gt;
       </motion.div>
-      
-      <motion.div 
+
+      <motion.div
         className="absolute top-40 right-10 text-xs text-purple-400/40 font-mono opacity-70 pointer-events-none"
         animate={{ y: [0, 15, 0] }}
         transition={{ duration: 8, repeat: Infinity, delay: 2 }}
       >
         function createMagic()
       </motion.div>
-      
+
       {/* Floating Tech Orbs */}
       <motion.div
         className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-purple-500/5 via-transparent to-pink-500/5 rounded-full blur-3xl pointer-events-none"
         animate={{ scale: [1, 1.2, 1] }}
         transition={{ duration: 8, repeat: Infinity }}
       />
-      
+
       <motion.div
         className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-purple-500/5 via-transparent to-pink-500/5 rounded-full blur-3xl pointer-events-none"
         animate={{ scale: [1.2, 1, 1.2] }}
@@ -93,11 +275,10 @@ const InteractiveBackground = () => {
 };
 
 // Modern Hero Section with Framer Motion
-
-const ModernHero = () => {
+const ModernHero = ({ setIsContactOpen }) => {
   const [currentWord, setCurrentWord] = useState(0);
   const words = ["Digital Experiences", "Web Applications", "Mobile Apps", "Brand Identities"];
-  
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentWord((prev) => (prev + 1) % words.length);
@@ -110,7 +291,7 @@ const ModernHero = () => {
       <div className="max-w-4xl mx-auto w-full text-center">
         <div className="space-y-12">
           {/* Enhanced Badge */}
-          <motion.div 
+          <motion.div
             className="inline-flex items-center space-x-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-6 py-3"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -118,16 +299,16 @@ const ModernHero = () => {
           >
             <div className="flex space-x-1">
               <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
-              <div className="w-2 h-2 bg-pink-500 rounded-full animate-pulse" style={{animationDelay: '0.2s'}}></div>
-              <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" style={{animationDelay: '0.4s'}}></div>
+              <div className="w-2 h-2 bg-pink-500 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
+              <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
             </div>
             <span className="text-purple-300 text-sm font-medium">Innovating Since 2024</span>
           </motion.div>
-          
+
           {/* Main Content */}
           <div className="space-y-8">
             {/* Heading with Enhanced Animation */}
-            <motion.div 
+            <motion.div
               className="space-y-6"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -140,25 +321,25 @@ const ModernHero = () => {
                   <AnimatePresence mode="wait">
                     <motion.span
                       key={currentWord}
-                      initial={{ 
-                        y: 50, 
+                      initial={{
+                        y: 50,
                         opacity: 0,
                         scale: 0.8,
                         filter: "blur(10px)"
                       }}
-                      animate={{ 
-                        y: 0, 
+                      animate={{
+                        y: 0,
                         opacity: 1,
                         scale: 1,
                         filter: "blur(0px)"
                       }}
-                      exit={{ 
-                        y: -50, 
+                      exit={{
+                        y: -50,
                         opacity: 0,
                         scale: 1.2,
                         filter: "blur(10px)"
                       }}
-                      transition={{ 
+                      transition={{
                         duration: 0.6,
                         ease: "easeInOut"
                       }}
@@ -170,15 +351,15 @@ const ModernHero = () => {
                 </div>
                 that drive impact
               </h1>
-              
+
               <p className="text-gray-300 text-xl leading-relaxed max-w-2xl mx-auto">
-                We transform your vision into powerful digital solutions that deliver 
+                We transform your vision into powerful digital solutions that deliver
                 measurable results and exceptional user experiences.
               </p>
             </motion.div>
 
             {/* Features Grid */}
-            <motion.div 
+            <motion.div
               className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-2xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -192,7 +373,7 @@ const ModernHero = () => {
                 },
                 {
                   icon: "💎",
-                  title: "Premium Quality", 
+                  title: "Premium Quality",
                   description: "Pixel-perfect designs and robust code"
                 },
                 {
@@ -201,8 +382,8 @@ const ModernHero = () => {
                   description: "Built to grow with your business"
                 }
               ].map((feature, index) => (
-                <motion.div 
-                  key={index} 
+                <motion.div
+                  key={index}
                   className="text-center p-6 bg-white/5 rounded-xl border border-white/10 hover:border-purple-500/30 transition-colors"
                   whileHover={{ y: -5, scale: 1.02 }}
                 >
@@ -214,7 +395,7 @@ const ModernHero = () => {
             </motion.div>
 
             {/* Stats */}
-            <motion.div 
+            <motion.div
               className="flex justify-center gap-12 max-w-md mx-auto"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -226,8 +407,8 @@ const ModernHero = () => {
                 { number: "24/7", label: "Support" },
                 { number: "1-4", label: "Weeks Delivery" }
               ].map((stat, index) => (
-                <motion.div 
-                  key={index} 
+                <motion.div
+                  key={index}
                   className="text-center"
                   whileHover={{ scale: 1.1 }}
                 >
@@ -239,17 +420,18 @@ const ModernHero = () => {
           </div>
 
           {/* Enhanced CTA Section */}
-          <motion.div 
+          <motion.div
             className="space-y-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.7 }}
           >
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <motion.button 
+              <motion.button
                 className="bg-purple-600 text-white px-10 py-4 rounded-lg font-semibold hover:bg-purple-700 transition-colors flex items-center justify-center space-x-2 relative overflow-hidden"
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
+                onClick={() => setIsContactOpen(true)}
               >
                 <span className="relative z-10">Start Your Project</span>
                 <motion.span
@@ -259,17 +441,18 @@ const ModernHero = () => {
                 >
                   🚀
                 </motion.span>
-                <motion.div 
+                <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 opacity-0 hover:opacity-100 transition-opacity duration-300"
                   whileHover={{ x: [0, 100, 0] }}
                   transition={{ duration: 1 }}
                 />
               </motion.button>
-              
-              <motion.button 
+
+              <motion.button
                 className="border border-gray-600 text-white px-10 py-4 rounded-lg font-semibold hover:border-purple-500 hover:bg-purple-500/5 transition-colors flex items-center justify-center space-x-2"
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
+                onClick={() => document.getElementById('work').scrollIntoView({ behavior: 'smooth' })}
               >
                 <span>View Our Work</span>
                 <motion.span
@@ -280,9 +463,9 @@ const ModernHero = () => {
                 </motion.span>
               </motion.button>
             </div>
-            
+
             {/* Trust Badge */}
-            <motion.div 
+            <motion.div
               className="text-gray-500 text-sm"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -298,15 +481,16 @@ const ModernHero = () => {
 };
 
 // Updated About Section with same background
+// Updated About Section with more content
 const AboutSection = () => {
   return (
     <section id="about" className="py-20 px-6 lg:px-12 bg-transparent relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-pink-500/10 rounded-full blur-3xl"></div>
-      
+
       <div className="max-w-7xl mx-auto relative z-10">
-        <motion.div 
+        <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -317,62 +501,185 @@ const AboutSection = () => {
             Why Choose Nautilus Verse?
           </h2>
           <p className="text-gray-400 max-w-3xl mx-auto text-lg">
-            We're not just developers - we're your strategic partners in digital transformation
+            We're not just developers - we're your strategic partners in digital transformation. 
+            Combining cutting-edge technology with creative excellence to deliver exceptional results.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {[
-            {
-              icon: "🚀",
-              title: "Innovation First",
-              description: "We stay ahead of the curve with cutting-edge technologies and modern development practices",
-              features: ["Latest Tech Stack", "Agile Methodology", "Continuous Innovation"]
-            },
-            {
-              icon: "💎",
-              title: "Quality Focused",
-              description: "Every project is crafted with precision, attention to detail, and commitment to excellence",
-              features: ["Pixel Perfect Design", "Robust Architecture", "Thorough Testing"]
-            },
-            {
-              icon: "⚡",
-              title: "Results Driven",
-              description: "We measure success by the tangible business results our solutions deliver",
-              features: ["Performance Metrics", "ROI Tracking", "Growth Analytics"]
-            }
-          ].map((item, index) => (
-            <motion.div
-              key={index}
-              className="bg-gray-900/50 border border-gray-700 rounded-2xl p-8 hover:border-purple-500/50 transition-all duration-300 group relative overflow-hidden backdrop-blur-sm"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              whileHover={{ y: -10 }}
-            >
-              {/* Background Gradient */}
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              
-              <div className="relative z-10 " >
-                <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center text-2xl mb-6">
-                  {item.icon}
-                </div>
-                <h3 className="text-white font-bold text-xl mb-4">{item.title}</h3>
-                <p className="text-gray-300 mb-6 leading-relaxed">{item.description}</p>
-                <div className="space-y-2">
-                  {item.features.map((feature, idx) => (
-                    <div key={idx} className="flex items-center space-x-2 text-sm text-gray-400">
-                      <div className="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
-                      <span>{feature}</span>
-                    </div>
-                  ))}
-                </div>
+        {/* Main Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+          {/* Left Side - Our Story */}
+          <motion.div
+            className="space-y-6"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <h3 className="text-white text-2xl font-bold">Our Story</h3>
+            <p className="text-gray-300 leading-relaxed">
+              Founded in 2024, Nautilus Verse emerged from a simple yet powerful vision: to bridge the gap 
+              between innovative ideas and their digital realization. We noticed that many businesses struggle 
+              to find partners who truly understand both technology and business strategy.
+            </p>
+            <p className="text-gray-300 leading-relaxed">
+              Our name "Nautilus" represents exploration and depth - we dive deep into your business needs 
+              to surface solutions that drive real impact. "Verse" symbolizes our comprehensive approach, 
+              creating complete digital ecosystems for our clients.
+            </p>
+            
+            {/* Mission & Vision */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+              <div className="bg-gray-900/50 rounded-2xl p-6 border border-gray-700">
+                <div className="text-purple-400 text-lg font-bold mb-3">🎯 Our Mission</div>
+                <p className="text-gray-300 text-sm">
+                  To empower businesses with transformative digital solutions that drive growth, 
+                  enhance user experiences, and create lasting competitive advantages.
+                </p>
               </div>
-            </motion.div>
-          ))}
+              <div className="bg-gray-900/50 rounded-2xl p-6 border border-gray-700">
+                <div className="text-purple-400 text-lg font-bold mb-3">🚀 Our Vision</div>
+                <p className="text-gray-300 text-sm">
+                  To be the most trusted digital innovation partner for businesses seeking 
+                  to thrive in the ever-evolving digital landscape.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Right Side - What Makes Us Different */}
+          <motion.div
+            className="space-y-6"
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <h3 className="text-white text-2xl font-bold">What Makes Us Different</h3>
+            
+            <div className="space-y-4">
+              {[
+                {
+                  icon: "💡",
+                  title: "Problem-First Approach",
+                  description: "We start by understanding your business challenges before proposing solutions."
+                },
+                {
+                  icon: "🔄",
+                  title: "Agile & Adaptive",
+                  description: "We adapt to your needs and market changes with flexible development methodologies."
+                },
+                {
+                  icon: "🔍",
+                  title: "Attention to Detail",
+                  description: "From code quality to user experience, we obsess over every detail."
+                },
+                {
+                  icon: "🤝",
+                  title: "Partnership Mindset",
+                  description: "We see ourselves as an extension of your team, invested in your success."
+                }
+              ].map((item, index) => (
+                <motion.div
+                  key={index}
+                  className="flex items-start space-x-4 p-4 bg-gray-900/30 rounded-xl border border-gray-700/50 hover:border-purple-500/30 transition-all duration-300"
+                  whileHover={{ scale: 1.02 }}
+                >
+                  <div className="text-2xl flex-shrink-0">{item.icon}</div>
+                  <div>
+                    <h4 className="text-white font-semibold mb-1">{item.title}</h4>
+                    <p className="text-gray-400 text-sm">{item.description}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
         </div>
 
-        {/* Company Stats */}
+        {/* Core Values */}
+        <motion.div
+          className="mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <h3 className="text-white text-2xl font-bold text-center mb-8">Our Core Values</h3>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            {[
+              {
+                icon: "⚡",
+                title: "Innovation",
+                description: "Constantly pushing boundaries with latest technologies"
+              },
+              {
+                icon: "💎", 
+                title: "Excellence",
+                description: "Never settling for anything less than exceptional"
+              },
+              {
+                icon: "🤝",
+                title: "Collaboration",
+                description: "Working together to achieve extraordinary results"
+              },
+              {
+                icon: "📈",
+                title: "Growth",
+                description: "Helping businesses scale and evolve continuously"
+              }
+            ].map((value, index) => (
+              <motion.div
+                key={index}
+                className="text-center p-6 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-2xl border border-purple-500/20 backdrop-blur-sm"
+                whileHover={{ y: -5, scale: 1.05 }}
+              >
+                <div className="text-3xl mb-3">{value.icon}</div>
+                <h4 className="text-white font-bold text-lg mb-2">{value.title}</h4>
+                <p className="text-gray-300 text-sm">{value.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Team Approach */}
+        <motion.div
+          className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-3xl p-8 border border-purple-500/20 backdrop-blur-lg"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <div>
+              <h3 className="text-white text-2xl font-bold mb-4">Our Team Approach</h3>
+              <p className="text-gray-300 mb-4">
+                We believe that great digital products are born from collaboration. Our cross-functional 
+                teams bring together diverse expertise in design, development, and strategy to create 
+                holistic solutions that work seamlessly across all touchpoints.
+              </p>
+              <p className="text-gray-300">
+                Every project is assigned a dedicated team that stays with you from discovery to launch 
+                and beyond, ensuring consistency, deep understanding, and continuous improvement.
+              </p>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              {[
+                { icon: "🎨", role: "UI/UX Designers", count: "3+" },
+                { icon: "💻", role: "Developers", count: "5+" },
+                { icon: "📱", role: "Mobile Experts", count: "2+" },
+                { icon: "🚀", role: "Project Managers", count: "2+" }
+              ].map((team, index) => (
+                <motion.div
+                  key={index}
+                  className="text-center p-4 bg-gray-900/50 rounded-xl border border-gray-700"
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <div className="text-2xl mb-2">{team.icon}</div>
+                  <div className="text-white font-semibold text-sm mb-1">{team.role}</div>
+                  <div className="text-purple-400 text-xs">{team.count} Experts</div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Company Stats - Updated */}
         <motion.div 
           className="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-16"
           initial={{ opacity: 0, y: 30 }}
@@ -380,19 +687,22 @@ const AboutSection = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
         >
           {[
-            { number: "2025", label: "Founded In", icon: "📅" },
-            { number: "15+", label: "Projects", icon: "🚀" },
-            { number: "100%", label: "Success Rate", icon: "🎯" },
-            { number: "24/7", label: "Support", icon: "⚡" }
+            { number: "2024", label: "Founded In", icon: "📅", description: "Started our journey with a vision to transform digital experiences" },
+            { number: "15+", label: "Projects", icon: "🚀", description: "Successful projects delivered across various industries" },
+            { number: "100%", label: "Client Satisfaction", icon: "⭐", description: "Consistently exceeding client expectations" },
+            { number: "10+", label: "Technologies", icon: "🛠️", description: "Mastered multiple modern tech stacks and frameworks" }
           ].map((stat, index) => (
             <motion.div 
               key={index}
-              className="text-center p-6 bg-gray-900/30 rounded-2xl border border-gray-700 backdrop-blur-sm"
-              whileHover={{ scale: 1.05 }}
+              className="text-center p-6 bg-gray-900/30 rounded-2xl border border-gray-700 backdrop-blur-sm group cursor-pointer"
+              whileHover={{ scale: 1.05, y: -5 }}
             >
               <div className="text-2xl mb-2">{stat.icon}</div>
-              <div className="text-2xl font-black text-purple-400">{stat.number}</div>
-              <div className="text-gray-400 text-sm">{stat.label}</div>
+              <div className="text-2xl font-black text-purple-400 mb-1">{stat.number}</div>
+              <div className="text-white font-semibold text-sm mb-2">{stat.label}</div>
+              <div className="text-gray-400 text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                {stat.description}
+              </div>
             </motion.div>
           ))}
         </motion.div>
@@ -459,7 +769,7 @@ const ProcessSection = () => {
   return (
     <section id="process" className="py-20 px-6 lg:px-12 bg-transparent relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        <motion.div 
+        <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -482,18 +792,16 @@ const ProcessSection = () => {
               {steps.map((step, index) => (
                 <motion.button
                   key={index}
-                  className={`flex flex-col items-center group cursor-pointer ${
-                    activeStep === index ? 'text-purple-400' : 'text-gray-500'
-                  }`}
+                  className={`flex flex-col items-center group cursor-pointer ${activeStep === index ? 'text-purple-400' : 'text-gray-500'
+                    }`}
                   onClick={() => setActiveStep(index)}
                   whileHover={{ scale: 1.05 }}
                 >
                   <motion.div
-                    className={`w-12 h-12 rounded-2xl flex items-center justify-center text-lg font-bold mb-2 ${
-                      activeStep === index 
-                        ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg' 
-                        : 'bg-gray-800 text-gray-400'
-                    }`}
+                    className={`w-12 h-12 rounded-2xl flex items-center justify-center text-lg font-bold mb-2 ${activeStep === index
+                      ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg'
+                      : 'bg-gray-800 text-gray-400'
+                      }`}
                     whileHover={{ scale: 1.1 }}
                   >
                     {step.number}
@@ -502,10 +810,10 @@ const ProcessSection = () => {
                 </motion.button>
               ))}
             </div>
-            
+
             {/* Progress Line */}
             <div className="absolute top-6 left-0 right-0 h-1 bg-gray-700 -z-10">
-              <motion.div 
+              <motion.div
                 className="h-1 bg-gradient-to-r from-purple-500 to-pink-500"
                 initial={{ width: '16.66%' }}
                 animate={{ width: `${(activeStep + 1) * 16.66}%` }}
@@ -515,7 +823,7 @@ const ProcessSection = () => {
           </div>
 
           {/* Active Step Display */}
-          <motion.div 
+          <motion.div
             key={activeStep}
             className="bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-xl rounded-3xl p-8 border border-white/10 shadow-2xl mb-8"
             initial={{ opacity: 0, y: 20 }}
@@ -561,7 +869,7 @@ const ProcessSection = () => {
               <div className="relative">
                 <motion.div
                   className="w-full h-64 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-2xl border border-white/10 flex items-center justify-center"
-                  animate={{ 
+                  animate={{
                     scale: [1, 1.02, 1],
                     opacity: [0.8, 1, 0.8]
                   }}
@@ -570,7 +878,7 @@ const ProcessSection = () => {
                   <div className="text-center">
                     <motion.div
                       className="text-6xl mb-4"
-                      animate={{ 
+                      animate={{
                         rotate: [0, 10, -10, 0],
                         scale: [1, 1.1, 1]
                       }}
@@ -582,11 +890,11 @@ const ProcessSection = () => {
                     <div className="text-purple-300 text-sm">In Progress</div>
                   </div>
                 </motion.div>
-                
+
                 {/* Floating Elements */}
                 <motion.div
                   className="absolute -top-3 -right-3 w-8 h-8 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-white text-xs shadow-lg"
-                  animate={{ 
+                  animate={{
                     y: [0, -8, 0],
                     rotate: [0, 180, 360]
                   }}
@@ -594,7 +902,7 @@ const ProcessSection = () => {
                 />
                 <motion.div
                   className="absolute -bottom-3 -left-3 w-6 h-6 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center text-white text-xs shadow-lg"
-                  animate={{ 
+                  animate={{
                     y: [0, 6, 0],
                     rotate: [0, -180, -360]
                   }}
@@ -620,9 +928,8 @@ const ProcessSection = () => {
               {steps.map((_, index) => (
                 <button
                   key={index}
-                  className={`w-3 h-3 rounded-full transition-all ${
-                    activeStep === index ? 'bg-purple-500' : 'bg-gray-600'
-                  }`}
+                  className={`w-3 h-3 rounded-full transition-all ${activeStep === index ? 'bg-purple-500' : 'bg-gray-600'
+                    }`}
                   onClick={() => setActiveStep(index)}
                 />
               ))}
@@ -641,7 +948,7 @@ const ProcessSection = () => {
         </div>
 
         {/* Process Summary */}
-        <motion.div 
+        <motion.div
           className="mt-16 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-3xl p-8 border border-purple-500/20 backdrop-blur-lg"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -650,10 +957,10 @@ const ProcessSection = () => {
           <div className="text-center">
             <h3 className="text-white font-bold text-2xl mb-4">Why Our Process Works</h3>
             <p className="text-gray-300 max-w-3xl mx-auto mb-8">
-              Our structured approach combines strategic thinking with technical excellence, 
+              Our structured approach combines strategic thinking with technical excellence,
               ensuring every project delivers measurable results and exceptional user experiences.
             </p>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
                 { icon: "⚡", title: "Efficient", desc: "Streamlined workflow for faster delivery" },
@@ -680,7 +987,7 @@ const ProcessSection = () => {
 
 // Services Section with transparent background
 // Enhanced Services Section with more details
-const ServicesSection = () => {
+const ServicesSection = ({ setIsContactOpen }) => {
   const services = [
     {
       icon: "💻",
@@ -730,20 +1037,19 @@ const ServicesSection = () => {
     },
     {
       icon: "🔧",
-      title: "Tech Consulting",
-      description: "Strategic technology guidance to optimize your digital infrastructure",
-      features: ["System Architecture", "Cloud Migration", "Performance Audit", "Security Assessment", "Tech Stack Selection", "Scalability Planning"],
-      details: "Get expert advice on technology decisions, architecture planning, and digital transformation.",
-      deliverables: ["Technical Audit", "Architecture Plan", "Implementation Roadmap", "Best Practices Guide"],
-      timeline: "1-2 weeks"
-      
+      title: "WordPress Development",
+      description: "Custom WordPress solutions with modern themes, plugins, and full customization",
+      features: ["Custom Themes", "Plugin Development", "WooCommerce", "WordPress Optimization", "Security Hardening", "Performance Tuning"],
+      details: "Build powerful, scalable WordPress websites with custom functionality and seamless user experiences.",
+      deliverables: ["Custom WordPress Site", "Theme Development", "Plugin Customization", "Maintenance Setup"],
+      timeline: "2-6 weeks"
     }
   ];
 
   return (
     <section id="services" className="py-20 px-6 lg:px-12 bg-transparent">
       <div className="max-w-7xl mx-auto">
-        <motion.div 
+        <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -760,7 +1066,7 @@ const ServicesSection = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <motion.div 
+            <motion.div
               key={index}
               className="group bg-gray-900/50 border border-gray-700 rounded-2xl p-6 hover:border-purple-500/50 transition-all duration-300 cursor-pointer backdrop-blur-sm h-full flex flex-col"
               initial={{ opacity: 0, y: 30 }}
@@ -787,7 +1093,7 @@ const ServicesSection = () => {
               <div className="flex-1">
                 <h3 className="text-white font-bold text-xl mb-3">{service.title}</h3>
                 <p className="text-gray-300 text-sm mb-4 leading-relaxed">{service.description}</p>
-                
+
                 {/* Detailed Description */}
                 <p className="text-gray-400 text-xs mb-4 leading-relaxed">
                   {service.details}
@@ -820,10 +1126,11 @@ const ServicesSection = () => {
               </div>
 
               {/* CTA Button */}
-              <motion.button 
+              <motion.button
                 className="w-full mt-6 bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors text-sm flex items-center justify-center space-x-2"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
+                onClick={() => setIsContactOpen(true)}
               >
                 <span>Get Started</span>
                 <span>→</span>
@@ -833,7 +1140,7 @@ const ServicesSection = () => {
         </div>
 
         {/* Services Summary */}
-        <motion.div 
+        <motion.div
           className="mt-16 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-2xl p-8 border border-purple-500/20 backdrop-blur-sm"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -847,7 +1154,7 @@ const ServicesSection = () => {
                 description: "Quick project turnaround without compromising quality"
               },
               {
-                icon: "💎", 
+                icon: "💎",
                 title: "Premium Quality",
                 description: "Industry best practices and cutting-edge technologies"
               },
@@ -874,11 +1181,9 @@ const ServicesSection = () => {
   );
 };
 
-// Rest of the components remain the same...
-
 // Portfolio Section with transparent background
 // Portfolio Section with enhanced visuals
-const PortfolioSection = () => {
+const PortfolioSection = ({ setIsContactOpen }) => {
   const portfolioProjects = [
     {
       emoji: "⚔️",
@@ -887,41 +1192,52 @@ const PortfolioSection = () => {
       tech: ["Next.js", "React", "Tailwind CSS", "MongoDB", "Node.js", "Cloudinary"],
       status: "Live",
       duration: "3 Months",
-      
-      image: "/thefrontlinefury.jpg", // Add your image path here
+      image: "/frontline.png",
       link: "https://thefrontlinefury.com",
       features: ["Real-time News", "Community Forum", "User Profiles", "Content Management"]
     },
     {
-      emoji: "🛒",
-      title: "E-Commerce Revolution",
-      description: "Built a scalable e-commerce platform processing 10,000+ daily orders with 99.9% uptime and seamless user experience.",
-      tech: ["React", "Node.js", "MongoDB", "Stripe", "AWS", "Redis"],
-      status: "Live",
-      duration: "6 Months",
-      
-      image: "/ecommerce.jpg",
-      link: "#",
-      features: ["Payment Gateway", "Inventory Management", "Order Tracking", "Admin Dashboard"]
+      emoji: "🏢",
+      title: "SGEPC Portal",
+      description: "A complete website redesign for Sports Goods Export Promotion Council (SGEPC) - transforming their outdated website into a modern, responsive portal.",
+      tech: ["React", "Netlify", "Responsive Design", "Modern UI/UX", "Performance Optimization"],
+      status: "Live/Under Development",
+      duration: "3 Days",
+      budget: "Government Project",
+      image: "/sgepc-inciterz.jpg",
+      link: "https://sgepc-inciterz.netlify.app",
+      features: ["Website Redesign", "Government Portal", "Responsive Layout", "Content Restructuring", "Modern UI/UX", "Fast Performance"]
     },
     {
-      emoji: "📊",
-      title: "Enterprise Analytics Dashboard",
-      description: "Real-time business intelligence platform for Fortune 500 company with predictive analytics and custom reporting.",
-      tech: ["Next.js", "D3.js", "Python", "PostgreSQL", "Docker", "Kubernetes"],
+      emoji: "🏠",
+      title: "PropertyMaps - Real Estate Platform",
+      description: "Advanced real estate platform with live interactive maps showing available properties, search filters, and property details with modern UI/UX design.",
+      tech: ["React", "Tailwind CSS", "Netlify", "Interactive Maps", "Real-time Search", "Responsive Design"],
+      status: "Live/Under Development",
+      duration: "1 Day",
+      budget: "Real Estate Tech",
+      image: "/propertymaps.jpg",
+      link: "https://propertymapsc.netlify.app",
+      features: ["Interactive Maps", "Property Search", "Live Listings", "Filter System", "Modern Dashboard"]
+    },
+    {
+      emoji: "🎪",
+      title: "Lowercase Events",
+      description: "A comprehensive event management platform for organizing and promoting events with ticket booking, schedules, and attendee management features.",
+      tech: ["React", "Tailwind CSS", "Netlify", "Event Management", "Responsive Design", "Modern UI"],
       status: "Live",
-      duration: "8 Months",
-      
-      image: "/analytics.jpg",
-      link: "#",
-      features: ["Real-time Data", "Predictive Analytics", "Custom Reports", "Data Visualization"]
+      duration: "2 weeks", 
+      budget: "Event Management Platform",
+      image: "/lowercase.jpg",
+      link: "https://lowercase.netlify.app",
+      features: ["Event Listings", "Ticket Booking", "Event Schedules", "Attendee Management", "Responsive Design"]
     }
   ];
 
   return (
     <section id="work" className="py-20 px-6 lg:px-12 bg-transparent">
       <div className="max-w-7xl mx-auto">
-        <motion.div 
+        <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -938,7 +1254,7 @@ const PortfolioSection = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
           {portfolioProjects.map((project, index) => (
-            <motion.div 
+            <motion.div
               key={index}
               className="bg-gray-900/50 border border-gray-700 rounded-2xl p-6 hover:border-purple-500/50 transition-all duration-300 group cursor-pointer backdrop-blur-sm"
               initial={{ opacity: 0, y: 30 }}
@@ -964,12 +1280,14 @@ const PortfolioSection = () => {
                   {project.emoji}
                 </div>
                 <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <motion.button 
-                    className="bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors"
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    Visit Website
-                  </motion.button>
+                  <a href={project.link} target="_blank" rel="noopener noreferrer">
+                    <motion.button
+                      className="bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors"
+                      whileHover={{ scale: 1.05 }}
+                    >
+                      Visit Website
+                    </motion.button>
+                  </a>
                 </div>
               </div>
 
@@ -1004,8 +1322,10 @@ const PortfolioSection = () => {
                     <span>{project.budget}</span>
                   </span>
                 </div>
-                <motion.a 
+                <motion.a
                   href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-purple-400 hover:text-purple-300 transition-colors flex items-center space-x-1"
                   whileHover={{ x: 5 }}
                 >
@@ -1018,7 +1338,7 @@ const PortfolioSection = () => {
         </div>
 
         {/* Call to Action */}
-        <motion.div 
+        <motion.div
           className="text-center mt-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -1029,10 +1349,11 @@ const PortfolioSection = () => {
             <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
               Let's discuss how we can bring your vision to life with cutting-edge technology and innovative design.
             </p>
-            <motion.button 
+            <motion.button
               className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-4 rounded-xl font-semibold hover:shadow-2xl hover:shadow-purple-500/25 transition-all duration-300"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => setIsContactOpen(true)}
             >
               Start Your Project Today
             </motion.button>
@@ -1043,99 +1364,8 @@ const PortfolioSection = () => {
   );
 };
 
-
-// const TestimonialsCarousel = () => {
-//   const testimonials = [
-//     {
-//       id: 1,
-//       name: "Sarah Chen",
-//       role: "CEO, TechInnovate Inc.",
-//       content: "Nautilus Verse transformed our digital presence completely. Our revenue grew by 250% in just 6 months!",
-//       avatar: "👩‍💼",
-//       company: "TechInnovate Inc."
-//     },
-//     {
-//       id: 2,
-//       name: "Marcus Rodriguez",
-//       role: "Marketing Director, Global Retail Co.",
-//       content: "The attention to detail and strategic approach exceeded our expectations. Best investment we've made.",
-//       avatar: "👨‍💼",
-//       company: "Global Retail Co."
-//     },
-//     {
-//       id: 3,
-//       name: "Emily Watson",
-//       role: "Founder, StartUp Ventures",
-//       content: "From concept to launch, the team was exceptional. They understood our vision perfectly.",
-//       avatar: "👩‍🎓",
-//       company: "StartUp Ventures"
-//     }
-//   ];
-
-//   const duplicatedTestimonials = [...testimonials, ...testimonials, ...testimonials, ...testimonials];
-
-//   return (
-//     <section id="testimonials" className="py-20 px-6 lg:px-12 bg-transparent relative overflow-hidden">
-//       <div className="max-w-7xl mx-auto">
-//         <motion.div 
-//           className="text-center mb-16"
-//           initial={{ opacity: 0, y: 30 }}
-//           whileInView={{ opacity: 1, y: 0 }}
-//           transition={{ duration: 0.6 }}
-//         >
-//           <span className="text-white text-sm font-semibold mb-4 block uppercase tracking-wider">Testimonials</span>
-//           <h2 className="text-purple-400 text-3xl lg:text-4xl font-black mb-4">
-//             What Clients Say
-//           </h2>
-//           <p className="text-gray-400 max-w-2xl mx-auto">
-//             Don't just take our word for it. Here's what our clients have to say about their experience.
-//           </p>
-//         </motion.div>
-
-//         <div className="relative">
-//           <motion.div 
-//             className="flex"
-//             animate={{ 
-//               x: [0, -3840]
-//             }}
-//             transition={{ 
-//               duration: 60, 
-//               repeat: Infinity, 
-//               ease: "linear",
-//             }}
-//           >
-//             {duplicatedTestimonials.map((testimonial, index) => (
-//               <motion.div
-//                 key={`${testimonial.id}-${index}`}
-//                 className="flex-shrink-0 w-80 mx-3 bg-gray-900/50 border border-gray-700 rounded-2xl p-6 hover:border-purple-500/50 transition-all duration-300 backdrop-blur-sm"
-//                 whileHover={{ y: -5 }}
-//               >
-//                 <div className="text-yellow-400 text-lg mb-4">★★★★★</div>
-//                 <p className="text-gray-300 mb-6 leading-relaxed italic">"{testimonial.content}"</p>
-//                 <div className="flex items-center space-x-4">
-//                   <div className="w-12 h-12 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-2xl flex items-center justify-center text-xl">
-//                     {testimonial.avatar}
-//                   </div>
-//                   <div>
-//                     <div className="font-bold text-white">{testimonial.name}</div>
-//                     <div className="text-purple-400 text-sm font-semibold">{testimonial.role}</div>
-//                     <div className="text-gray-400 text-xs">{testimonial.company}</div>
-//                   </div>
-//                 </div>
-//               </motion.div>
-//             ))}
-//           </motion.div>
-
-//           {/* Gradient Overlays - FIXED (transparent kar diya) */}
-//           <div className="absolute left-0 top-0 w-32 h-full bg-gradient-to-r from-transparent to-transparent z-10"></div>
-//           <div className="absolute right-0 top-0 w-32 h-full bg-gradient-to-l from-transparent to-transparent z-10"></div>
-//         </div>
-//       </div>
-//     </section>
-//   );
-// };
 // CTA Section with transparent background
-const CTASection = () => {
+const CTASection = ({ setIsContactOpen }) => {
   return (
     <section id="contact" className="py-20 px-6 lg:px-12 bg-transparent">
       <div className="max-w-4xl mx-auto text-center">
@@ -1151,24 +1381,26 @@ const CTASection = () => {
           <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
             Let's discuss your project and create something extraordinary together. We're here to turn your vision into reality.
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <motion.button 
+            <motion.button
               className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-4 rounded-xl font-semibold hover:shadow-2xl hover:shadow-purple-500/25 transition-all duration-300 text-lg"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => setIsContactOpen(true)}
             >
               Schedule Free Consultation
             </motion.button>
-            <motion.button 
+            <motion.button
               className="border border-gray-600 text-white px-8 py-4 rounded-xl font-semibold hover:border-purple-500 hover:bg-purple-500/5 transition-all duration-300 text-lg"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => setIsContactOpen(true)}
             >
               Contact Our Team
             </motion.button>
           </div>
-          
+
           <div className="mt-8 text-gray-500 text-sm">
             ⚡ Typically respond within 2 hours during business hours
           </div>
@@ -1178,14 +1410,12 @@ const CTASection = () => {
   );
 };
 
-// Rest of the components (Header, Footer, Loader, CustomCursor) remain the same...
-
 // Updated Header Component
-const Header = () => {
+const Header = ({ setIsContactOpen }) => {
   const [activeSection, setActiveSection] = useState('home');
 
   return (
-    <motion.header 
+    <motion.header
       className="fixed top-0 w-full z-50 glass-dark border-b border-gray-800/50"
       initial={{ y: -100 }}
       animate={{ y: 0 }}
@@ -1193,7 +1423,7 @@ const Header = () => {
     >
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
         <div className="flex items-center space-x-3">
-          <motion.div 
+          <motion.div
             className="text-2xl font-black text-white"
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.3 }}
@@ -1201,7 +1431,7 @@ const Header = () => {
             Nautilus<span className="text-purple-400">Verse</span>
           </motion.div>
         </div>
-        
+
         <nav className="hidden lg:flex space-x-8">
           {[
             { name: "Home", id: "home" },
@@ -1209,21 +1439,19 @@ const Header = () => {
             { name: "Services", id: "services" },
             { name: "Work", id: "work" },
             { name: "Process", id: "process" },
-            { name: "Testimonials", id: "testimonials" },
             { name: "Contact", id: "contact" }
           ].map((link) => (
             <motion.a
               key={link.id}
               href={`#${link.id}`}
-              className={`text-sm font-semibold transition-all duration-300 relative ${
-                activeSection === link.id ? 'text-purple-400' : 'text-gray-400 hover:text-white'
-              }`}
+              className={`text-sm font-semibold transition-all duration-300 relative ${activeSection === link.id ? 'text-purple-400' : 'text-gray-400 hover:text-white'
+                }`}
               whileHover={{ y: -2 }}
               onClick={() => setActiveSection(link.id)}
             >
               {link.name}
               {activeSection === link.id && (
-                <motion.div 
+                <motion.div
                   className="absolute -bottom-2 left-0 w-full h-0.5 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"
                   layoutId="activeSection"
                 />
@@ -1232,10 +1460,11 @@ const Header = () => {
           ))}
         </nav>
 
-        <motion.button 
+        <motion.button
           className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-2 rounded-lg text-sm font-semibold hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300"
           whileHover={{ scale: 1.05, y: -2 }}
           whileTap={{ scale: 0.95 }}
+          onClick={() => setIsContactOpen(true)}
         >
           Get Started
         </motion.button>
@@ -1257,23 +1486,16 @@ const Footer = () => {
             <p className="text-gray-400 leading-relaxed mb-6">
               We craft digital experiences that transform businesses and drive measurable growth through innovation and excellence.
             </p>
-            <div className="flex space-x-4">
-              {["🚀", "💎", "⚡", "🎯"].map((emoji, index) => (
-                <div key={index} className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center text-sm hover:bg-purple-500/20 transition-colors duration-300 cursor-pointer">
-                  {emoji}
-                </div>
-              ))}
-            </div>
           </div>
-          
+
           {[
             {
               title: "Our Services",
-              links: ["Web Development", "UI/UX Design", "Digital Marketing", "E-commerce Solutions", "SEO Optimization", "Tech Consulting"]
+              links: ["Web Development", "UI/UX Design", "Digital Marketing", "E-commerce Solutions", "SEO Optimization", "Wordpress Development"]
             },
             {
               title: "Company",
-              links: ["About Us", "Our Process",  "Careers", "Blog", "Contact"]
+              links: ["About Us", "Our Process", "Careers", "Blog", "Contact"]
             },
             {
               title: "Connect With Us",
@@ -1285,7 +1507,7 @@ const Footer = () => {
               <ul className="space-y-3">
                 {column.links.map((link, idx) => (
                   <li key={idx}>
-                    <a href="#" className="text-gray-400 hover:text-purple-400 transition-colors duration-300 text-sm">
+                    <a href={`#${link.toLowerCase().replace(' ', '-')}`} className="text-gray-400 hover:text-purple-400 transition-colors duration-300 text-sm">
                       {link}
                     </a>
                   </li>
@@ -1294,7 +1516,7 @@ const Footer = () => {
             </div>
           ))}
         </div>
-        
+
         <div className="border-t border-gray-800 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-500 text-sm mb-4 md:mb-0">
@@ -1316,7 +1538,7 @@ const Footer = () => {
 const CustomCursor = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isPointer, setIsPointer] = useState(false);
-  
+
   useEffect(() => {
     const mouseMove = (e) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
@@ -1334,20 +1556,18 @@ const CustomCursor = () => {
   }, []);
 
   return (
-    <motion.div 
-      className={`fixed pointer-events-none z-50 ${
-        isPointer ? 'scale-50' : 'scale-100'
-      }`}
+    <motion.div
+      className={`fixed pointer-events-none z-50 ${isPointer ? 'scale-50' : 'scale-100'
+        }`}
       animate={{
         x: mousePosition.x,
         y: mousePosition.y,
       }}
       transition={{ type: "spring", stiffness: 500, damping: 28 }}
     >
-      <motion.div 
-        className={`w-2 h-2 bg-white rounded-full ${
-          isPointer ? 'scale-150 bg-purple-500' : ''
-        }`}
+      <motion.div
+        className={`w-2 h-2 bg-white rounded-full ${isPointer ? 'scale-150 bg-purple-500' : ''
+          }`}
         animate={{
           scale: isPointer ? 1.5 : 1,
         }}
@@ -1359,13 +1579,13 @@ const CustomCursor = () => {
 // Updated Loader
 const Loader = () => {
   return (
-    <motion.div 
+    <motion.div
       className="fixed inset-0 bg-black flex items-center justify-center z-50"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <motion.div 
+      <motion.div
         className="text-center"
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
@@ -1411,6 +1631,7 @@ const Loader = () => {
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
+  const [isContactOpen, setIsContactOpen] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 3000);
@@ -1424,17 +1645,25 @@ export default function Home() {
   return (
     <main className="min-h-screen text-white w-full overflow-x-hidden bg-black">
       <InteractiveBackground />
-      
-      <Header />
-      <ModernHero />
+
+      <Header setIsContactOpen={setIsContactOpen} />
+      <ModernHero setIsContactOpen={setIsContactOpen} />
       <AboutSection />
-      <ServicesSection />
-      <PortfolioSection />
+      <ServicesSection setIsContactOpen={setIsContactOpen} />
+      <PortfolioSection setIsContactOpen={setIsContactOpen} />
       <ProcessSection />
-      {/* <TestimonialsCarousel /> */}
-      <CTASection />
+      <CTASection setIsContactOpen={setIsContactOpen} />
       <Footer />
 
+      {/* Contact Form Modal */}
+      <AnimatePresence>
+        {isContactOpen && (
+          <ContactForm 
+            isOpen={isContactOpen} 
+            onClose={() => setIsContactOpen(false)} 
+          />
+        )}
+      </AnimatePresence>
     </main>
   );
 }
