@@ -1,0 +1,4387 @@
+[00:00:01.508] Server  LOG      ✓ Ready in 977ms
+[00:00:46.474] Server  LOG      ○ Compiling / ...
+[00:00:48.282] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './BookingForm'
+  4 | import React, { useState, useEffect, useRef } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./BookingForm"; // Import the booking form
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import "./globals.css";
+  8 |
+  9 | // Interactive Background (same as before, but with cosmic theme)
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:00:49.413] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './BookingForm'
+  4 | import React, { useState, useEffect, useRef } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./BookingForm"; // Import the booking form
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import "./globals.css";
+  8 |
+  9 | // Interactive Background (same as before, but with cosmic theme)
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:00:49.656] Browser ERROR   uncaughtError: Error: ./src/app/page.js:6:1
+Module not found: Can't resolve './BookingForm'
+  4 | import React, { useState, useEffect, useRef } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./BookingForm"; // Import the booking form
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import "./globals.css";
+  8 |
+  9 | // Interactive Background (same as before, but with cosmic theme)
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:00:50.157] Browser ERROR   ./src/app/page.js:6:1
+Module not found: Can't resolve './BookingForm'
+  4 | import React, { useState, useEffect, useRef } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./BookingForm"; // Import the booking form
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import "./globals.css";
+  8 |
+  9 | // Interactive Background (same as before, but with cosmic theme)
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[00:00:51.157] Browser ERROR   ./src/app/page.js:6:1
+Module not found: Can't resolve './BookingForm'
+  4 | import React, { useState, useEffect, useRef } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./BookingForm"; // Import the booking form
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import "./globals.css";
+  8 |
+  9 | // Interactive Background (same as before, but with cosmic theme)
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[00:02:02.002] Server  LOG      ✓ Compiled in 1156ms
+[00:02:02.778] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:36:10.048] Server  LOG      ✓ Compiled in 340ms
+[00:36:23.917] Server  LOG      ✓ Compiled in 1771ms
+[00:40:52.980] Server  LOG      ✓ Compiled in 153ms
+[00:42:45.836] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:49:34.140] Server  LOG      ✓ Compiled in 413ms
+[01:01:43.253] Server  LOG      ✓ Compiled in 164ms
+[01:02:02.750] Server  LOG      ✓ Compiled in 180ms
+[01:02:23.677] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.690] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.693] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.703] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.709] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.713] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.717] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.728] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.731] Server  ERROR    ⨯ ./src/app/page.js:8:1
+Module not found: Can't resolve './components/ClientSuccessStories'
+   6 | import BookingForm from "./components/BookingForm";
+   7 | import BenefitsSection from "./components/BenefitsSection";
+>  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import "./globals.css";
+  10 |
+  11 | // Interactive Background Component (Fixed)
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.737] Server  ERROR    ⨯ ./src/app/page.js:8:1
+Module not found: Can't resolve './components/ClientSuccessStories'
+   6 | import BookingForm from "./components/BookingForm";
+   7 | import BenefitsSection from "./components/BenefitsSection";
+>  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import "./globals.css";
+  10 |
+  11 | // Interactive Background Component (Fixed)
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.744] Server  ERROR    ⨯ ./src/app/page.js:8:1
+Module not found: Can't resolve './components/ClientSuccessStories'
+   6 | import BookingForm from "./components/BookingForm";
+   7 | import BenefitsSection from "./components/BenefitsSection";
+>  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import "./globals.css";
+  10 |
+  11 | // Interactive Background Component (Fixed)
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.749] Server  ERROR    ⨯ ./src/app/page.js:8:1
+Module not found: Can't resolve './components/ClientSuccessStories'
+   6 | import BookingForm from "./components/BookingForm";
+   7 | import BenefitsSection from "./components/BenefitsSection";
+>  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import "./globals.css";
+  10 |
+  11 | // Interactive Background Component (Fixed)
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.775] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.779] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.784] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.788] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.793] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.797] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.808] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.812] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.817] Server  ERROR    ⨯ ./src/app/page.js:8:1
+Module not found: Can't resolve './components/ClientSuccessStories'
+   6 | import BookingForm from "./components/BookingForm";
+   7 | import BenefitsSection from "./components/BenefitsSection";
+>  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import "./globals.css";
+  10 |
+  11 | // Interactive Background Component (Fixed)
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.830] Server  ERROR    ⨯ ./src/app/page.js:8:1
+Module not found: Can't resolve './components/ClientSuccessStories'
+   6 | import BookingForm from "./components/BookingForm";
+   7 | import BenefitsSection from "./components/BenefitsSection";
+>  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import "./globals.css";
+  10 |
+  11 | // Interactive Background Component (Fixed)
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.836] Server  ERROR    ⨯ ./src/app/page.js:8:1
+Module not found: Can't resolve './components/ClientSuccessStories'
+   6 | import BookingForm from "./components/BookingForm";
+   7 | import BenefitsSection from "./components/BenefitsSection";
+>  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import "./globals.css";
+  10 |
+  11 | // Interactive Background Component (Fixed)
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.844] Server  ERROR    ⨯ ./src/app/page.js:8:1
+Module not found: Can't resolve './components/ClientSuccessStories'
+   6 | import BookingForm from "./components/BookingForm";
+   7 | import BenefitsSection from "./components/BenefitsSection";
+>  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import "./globals.css";
+  10 |
+  11 | // Interactive Background Component (Fixed)
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.853] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.860] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.867] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.874] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.880] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.889] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.905] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.911] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.921] Server  ERROR    ⨯ ./src/app/page.js:8:1
+Module not found: Can't resolve './components/ClientSuccessStories'
+   6 | import BookingForm from "./components/BookingForm";
+   7 | import BenefitsSection from "./components/BenefitsSection";
+>  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import "./globals.css";
+  10 |
+  11 | // Interactive Background Component (Fixed)
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.924] Server  ERROR    ⨯ ./src/app/page.js:8:1
+Module not found: Can't resolve './components/ClientSuccessStories'
+   6 | import BookingForm from "./components/BookingForm";
+   7 | import BenefitsSection from "./components/BenefitsSection";
+>  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import "./globals.css";
+  10 |
+  11 | // Interactive Background Component (Fixed)
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.931] Server  ERROR    ⨯ ./src/app/page.js:8:1
+Module not found: Can't resolve './components/ClientSuccessStories'
+   6 | import BookingForm from "./components/BookingForm";
+   7 | import BenefitsSection from "./components/BenefitsSection";
+>  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import "./globals.css";
+  10 |
+  11 | // Interactive Background Component (Fixed)
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.935] Server  ERROR    ⨯ ./src/app/page.js:8:1
+Module not found: Can't resolve './components/ClientSuccessStories'
+   6 | import BookingForm from "./components/BookingForm";
+   7 | import BenefitsSection from "./components/BenefitsSection";
+>  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import "./globals.css";
+  10 |
+  11 | // Interactive Background Component (Fixed)
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.942] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.948] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.951] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.956] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.959] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.966] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.969] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.974] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.981] Server  ERROR    ⨯ ./src/app/page.js:8:1
+Module not found: Can't resolve './components/ClientSuccessStories'
+   6 | import BookingForm from "./components/BookingForm";
+   7 | import BenefitsSection from "./components/BenefitsSection";
+>  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import "./globals.css";
+  10 |
+  11 | // Interactive Background Component (Fixed)
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.989] Server  ERROR    ⨯ ./src/app/page.js:8:1
+Module not found: Can't resolve './components/ClientSuccessStories'
+   6 | import BookingForm from "./components/BookingForm";
+   7 | import BenefitsSection from "./components/BenefitsSection";
+>  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import "./globals.css";
+  10 |
+  11 | // Interactive Background Component (Fixed)
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.994] Server  ERROR    ⨯ ./src/app/page.js:8:1
+Module not found: Can't resolve './components/ClientSuccessStories'
+   6 | import BookingForm from "./components/BookingForm";
+   7 | import BenefitsSection from "./components/BenefitsSection";
+>  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import "./globals.css";
+  10 |
+  11 | // Interactive Background Component (Fixed)
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:23.999] Server  ERROR    ⨯ ./src/app/page.js:8:1
+Module not found: Can't resolve './components/ClientSuccessStories'
+   6 | import BookingForm from "./components/BookingForm";
+   7 | import BenefitsSection from "./components/BenefitsSection";
+>  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import "./globals.css";
+  10 |
+  11 | // Interactive Background Component (Fixed)
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.007] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.010] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.014] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.019] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.022] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.025] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.029] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.033] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.035] Server  ERROR    ⨯ ./src/app/page.js:8:1
+Module not found: Can't resolve './components/ClientSuccessStories'
+   6 | import BookingForm from "./components/BookingForm";
+   7 | import BenefitsSection from "./components/BenefitsSection";
+>  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import "./globals.css";
+  10 |
+  11 | // Interactive Background Component (Fixed)
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.039] Server  ERROR    ⨯ ./src/app/page.js:8:1
+Module not found: Can't resolve './components/ClientSuccessStories'
+   6 | import BookingForm from "./components/BookingForm";
+   7 | import BenefitsSection from "./components/BenefitsSection";
+>  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import "./globals.css";
+  10 |
+  11 | // Interactive Background Component (Fixed)
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.043] Server  ERROR    ⨯ ./src/app/page.js:8:1
+Module not found: Can't resolve './components/ClientSuccessStories'
+   6 | import BookingForm from "./components/BookingForm";
+   7 | import BenefitsSection from "./components/BenefitsSection";
+>  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import "./globals.css";
+  10 |
+  11 | // Interactive Background Component (Fixed)
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.048] Server  ERROR    ⨯ ./src/app/page.js:8:1
+Module not found: Can't resolve './components/ClientSuccessStories'
+   6 | import BookingForm from "./components/BookingForm";
+   7 | import BenefitsSection from "./components/BenefitsSection";
+>  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import "./globals.css";
+  10 |
+  11 | // Interactive Background Component (Fixed)
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.054] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.057] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.112] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.115] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.131] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.135] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.141] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.144] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.148] Server  ERROR    ⨯ ./src/app/page.js:8:1
+Module not found: Can't resolve './components/ClientSuccessStories'
+   6 | import BookingForm from "./components/BookingForm";
+   7 | import BenefitsSection from "./components/BenefitsSection";
+>  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import "./globals.css";
+  10 |
+  11 | // Interactive Background Component (Fixed)
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.151] Server  ERROR    ⨯ ./src/app/page.js:8:1
+Module not found: Can't resolve './components/ClientSuccessStories'
+   6 | import BookingForm from "./components/BookingForm";
+   7 | import BenefitsSection from "./components/BenefitsSection";
+>  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import "./globals.css";
+  10 |
+  11 | // Interactive Background Component (Fixed)
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.155] Server  ERROR    ⨯ ./src/app/page.js:8:1
+Module not found: Can't resolve './components/ClientSuccessStories'
+   6 | import BookingForm from "./components/BookingForm";
+   7 | import BenefitsSection from "./components/BenefitsSection";
+>  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import "./globals.css";
+  10 |
+  11 | // Interactive Background Component (Fixed)
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.159] Server  ERROR    ⨯ ./src/app/page.js:8:1
+Module not found: Can't resolve './components/ClientSuccessStories'
+   6 | import BookingForm from "./components/BookingForm";
+   7 | import BenefitsSection from "./components/BenefitsSection";
+>  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import "./globals.css";
+  10 |
+  11 | // Interactive Background Component (Fixed)
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.166] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.168] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.172] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.177] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.181] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.184] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.187] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.191] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.194] Server  ERROR    ⨯ ./src/app/page.js:8:1
+Module not found: Can't resolve './components/ClientSuccessStories'
+   6 | import BookingForm from "./components/BookingForm";
+   7 | import BenefitsSection from "./components/BenefitsSection";
+>  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import "./globals.css";
+  10 |
+  11 | // Interactive Background Component (Fixed)
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.197] Server  ERROR    ⨯ ./src/app/page.js:8:1
+Module not found: Can't resolve './components/ClientSuccessStories'
+   6 | import BookingForm from "./components/BookingForm";
+   7 | import BenefitsSection from "./components/BenefitsSection";
+>  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import "./globals.css";
+  10 |
+  11 | // Interactive Background Component (Fixed)
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.200] Server  ERROR    ⨯ ./src/app/page.js:8:1
+Module not found: Can't resolve './components/ClientSuccessStories'
+   6 | import BookingForm from "./components/BookingForm";
+   7 | import BenefitsSection from "./components/BenefitsSection";
+>  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import "./globals.css";
+  10 |
+  11 | // Interactive Background Component (Fixed)
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.204] Server  ERROR    ⨯ ./src/app/page.js:8:1
+Module not found: Can't resolve './components/ClientSuccessStories'
+   6 | import BookingForm from "./components/BookingForm";
+   7 | import BenefitsSection from "./components/BenefitsSection";
+>  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import "./globals.css";
+  10 |
+  11 | // Interactive Background Component (Fixed)
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.209] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.212] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.216] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.219] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.223] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.226] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.229] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.232] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.236] Server  ERROR    ⨯ ./src/app/page.js:8:1
+Module not found: Can't resolve './components/ClientSuccessStories'
+   6 | import BookingForm from "./components/BookingForm";
+   7 | import BenefitsSection from "./components/BenefitsSection";
+>  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import "./globals.css";
+  10 |
+  11 | // Interactive Background Component (Fixed)
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.239] Server  ERROR    ⨯ ./src/app/page.js:8:1
+Module not found: Can't resolve './components/ClientSuccessStories'
+   6 | import BookingForm from "./components/BookingForm";
+   7 | import BenefitsSection from "./components/BenefitsSection";
+>  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import "./globals.css";
+  10 |
+  11 | // Interactive Background Component (Fixed)
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.242] Server  ERROR    ⨯ ./src/app/page.js:8:1
+Module not found: Can't resolve './components/ClientSuccessStories'
+   6 | import BookingForm from "./components/BookingForm";
+   7 | import BenefitsSection from "./components/BenefitsSection";
+>  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import "./globals.css";
+  10 |
+  11 | // Interactive Background Component (Fixed)
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.245] Server  ERROR    ⨯ ./src/app/page.js:8:1
+Module not found: Can't resolve './components/ClientSuccessStories'
+   6 | import BookingForm from "./components/BookingForm";
+   7 | import BenefitsSection from "./components/BenefitsSection";
+>  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import "./globals.css";
+  10 |
+  11 | // Interactive Background Component (Fixed)
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.251] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.254] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.258] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.261] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.266] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.268] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.273] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.281] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.286] Server  ERROR    ⨯ ./src/app/page.js:8:1
+Module not found: Can't resolve './components/ClientSuccessStories'
+   6 | import BookingForm from "./components/BookingForm";
+   7 | import BenefitsSection from "./components/BenefitsSection";
+>  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import "./globals.css";
+  10 |
+  11 | // Interactive Background Component (Fixed)
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.290] Server  ERROR    ⨯ ./src/app/page.js:8:1
+Module not found: Can't resolve './components/ClientSuccessStories'
+   6 | import BookingForm from "./components/BookingForm";
+   7 | import BenefitsSection from "./components/BenefitsSection";
+>  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import "./globals.css";
+  10 |
+  11 | // Interactive Background Component (Fixed)
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.296] Server  ERROR    ⨯ ./src/app/page.js:8:1
+Module not found: Can't resolve './components/ClientSuccessStories'
+   6 | import BookingForm from "./components/BookingForm";
+   7 | import BenefitsSection from "./components/BenefitsSection";
+>  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import "./globals.css";
+  10 |
+  11 | // Interactive Background Component (Fixed)
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.304] Server  ERROR    ⨯ ./src/app/page.js:8:1
+Module not found: Can't resolve './components/ClientSuccessStories'
+   6 | import BookingForm from "./components/BookingForm";
+   7 | import BenefitsSection from "./components/BenefitsSection";
+>  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import "./globals.css";
+  10 |
+  11 | // Interactive Background Component (Fixed)
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:24.307] Browser ERROR   ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[01:02:24.307] Browser ERROR   ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[01:02:24.307] Browser ERROR   ./src/app/page.js:8:1
+Module not found: Can't resolve './components/ClientSuccessStories'
+   6 | import BookingForm from "./components/BookingForm";
+   7 | import BenefitsSection from "./components/BenefitsSection";
+>  8 | import ClientSuccessStories from "./components/ClientSuccessStories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import "./globals.css";
+  10 |
+  11 | // Interactive Background Component (Fixed)
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[01:02:53.381] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.384] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.390] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.393] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.397] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.400] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.404] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.407] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.414] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.417] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.420] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.423] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.427] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.431] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.434] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.438] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.444] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.447] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.451] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.453] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.457] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.460] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.464] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.466] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.471] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.474] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.477] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.480] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.484] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.487] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.491] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.494] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.499] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.503] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.506] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.510] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.513] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.518] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.521] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.525] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.530] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.534] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.539] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.542] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.545] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.548] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.552] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.554] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.559] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.563] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.566] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.569] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.573] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.576] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.580] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.582] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.587] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.590] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.593] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.596] Server  ERROR    ⨯ ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.600] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.602] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.606] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.609] Server  ERROR    ⨯ ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:02:53.615] Server  LOG      ✓ Compiled in 659ms
+[01:02:54.159] Browser ERROR   ./src/app/page.js:7:1
+Module not found: Can't resolve './components/BenefitsSection'
+   5 | import { motion, AnimatePresence } from "framer-motion";
+   6 | import BookingForm from "./components/BookingForm";
+>  7 | import BenefitsSection from "./components/BenefitsSection";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+   9 | import "./globals.css";
+  10 |
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[01:02:54.159] Browser ERROR   ./src/app/page.js:6:1
+Module not found: Can't resolve './components/BookingForm'
+  4 | import React, { useState, useEffect } from "react";
+  5 | import { motion, AnimatePresence } from "framer-motion";
+> 6 | import BookingForm from "./components/BookingForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import BenefitsSection from "./components/BenefitsSection";
+  8 | import ClientSuccessStories from "../components/ClientSuccessStories";
+  9 | import "./globals.css";
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.js [Client Component SSR]
+    ./src/app/page.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[01:03:31.626] Server  LOG      ✓ Compiled in 4.1s
+[01:29:43.271] Server  LOG      ✓ Compiled in 396ms
+[01:49:14.315] Server  LOG      ✓ Compiled in 1564ms
+[06:04:54.921] Server  LOG      ✓ Compiled in 558ms
+[06:23:05.702] Server  LOG      ✓ Compiled in 4.5s
+[06:30:15.801] Server  LOG      ✓ Compiled in 2.2s
+[06:30:38.102] Server  LOG      ✓ Compiled in 270ms
+[06:32:24.928] Server  LOG      ✓ Compiled in 2.5s
+[07:33:24.040] Server  LOG      ✓ Compiled in 355ms
+[07:33:54.802] Server  LOG      ✓ Compiled in 250ms
+[07:33:54.916] Browser ERROR   ./src/app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: /Users/karan/Desktop/nautilus-verse/nautilus/src/app/globals.css:1:1: Unknown word x
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Parser.unknownWord (turbopack:///[project]/node_modules/postcss/lib/parser.js:595:22)]
+    [at Parser.other (turbopack:///[project]/node_modules/postcss/lib/parser.js:437:12)]
+    [at Parser.parse (turbopack:///[project]/node_modules/postcss/lib/parser.js:472:16)]
+    [at parse (turbopack:///[project]/node_modules/postcss/lib/parse.js:11:12)]
+    [at new LazyResult (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:165:16)]
+    [at Processor.process (turbopack:///[project]/node_modules/postcss/lib/processor.js:53:14)]
+    [at transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:51)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:29)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:115:11)]
+
+Import traces:
+  #1 [Client Component Browser]:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.js [Server Component]
+
+  #2 [Client Component Browser]:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/page.js [Client Component Browser]
+    ./src/app/page.js [Server Component]
+[07:33:58.664] Server  LOG      ✓ Compiled in 2.8s
+[07:34:53.463] Server  LOG      ✓ Compiled in 537ms

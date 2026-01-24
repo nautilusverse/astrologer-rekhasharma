@@ -1,16 +1,20 @@
-import "./globals.css";
+// src/app/layout.js
+import { Inter } from 'next/font/google'
+import './globals.css'
+
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: "Nautilus Verse",
-  description: "Tailwind Test Page",
-};
+  title: 'Cosmic Guidance - Professional Astrology Services',
+  description: 'Expert astrology consultations, Kundli readings, and divine guidance for life clarity. Book your appointment today.',
+}
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="bg-gray-900 text-white min-h-screen flex items-center justify-center">
+      <body className={inter.className}>
         {children}
       </body>
     </html>
-  );
+  )
 }
