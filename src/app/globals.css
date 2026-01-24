@@ -22,25 +22,27 @@ body {
   overflow-x: hidden;
 }
 
-/* Global fix for opacity issues */
-* {
+/* Fix for fading content - Ensure all content is visible */
+section, 
+div, 
+h1, h2, h3, h4, h5, h6, 
+p, 
+span, 
+button, 
+a,
+footer,
+header {
   opacity: 1 !important;
   visibility: visible !important;
 }
 
-section, div, h1, h2, h3, h4, h5, h6, p, span {
+/* Force all text to be fully visible */
+.text-white,
+.text-gray-300,
+.text-gray-400,
+.text-purple-300,
+.text-purple-400 {
   opacity: 1 !important;
-}
-
-/* Override any animation that changes opacity */
-[style*="opacity"] {
-  opacity: 1 !important;
-}
-
-/* Disable all fade animations */
-.fade-in, .fade-out, .animate-fade, .animate-opacity {
-  opacity: 1 !important;
-  animation: none !important;
 }
 
 /* Background fix */
@@ -86,7 +88,7 @@ section, div, h1, h2, h3, h4, h5, h6, p, span {
 }
 
 .glass-dark {
-  background: rgba(15, 15, 15, 0.8);
+  background: rgba(15, 15, 15, 0.95) !important; /* Increased opacity */
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -135,12 +137,16 @@ html {
   animation: float 3s ease-in-out infinite;
 }
 
-/* NEW ANIMATIONS - WITHOUT OPACITY CHANGES */
-
-/* Star Animation - FIXED */
+/* Star Animation */
 @keyframes twinkle {
-  0%, 100% { filter: brightness(0.8); }
-  50% { filter: brightness(1.2); }
+  0%, 100% { 
+    opacity: 0.8;
+    filter: brightness(0.8); 
+  }
+  50% { 
+    opacity: 1;
+    filter: brightness(1.2); 
+  }
 }
 
 @keyframes float-advanced {
@@ -160,8 +166,14 @@ html {
 }
 
 @keyframes fade-up {
-  from { transform: translateY(30px); }
-  to { transform: translateY(0); }
+  from { 
+    opacity: 0.8;
+    transform: translateY(30px); 
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0); 
+  }
 }
 
 @keyframes cosmic-sweep {
@@ -194,7 +206,7 @@ html {
   50% { transform: scale(1.1); }
 }
 
-/* New Animation Classes - WITHOUT OPACITY */
+/* Animation Classes */
 .animate-twinkle {
   animation: twinkle 3s ease-in-out infinite;
 }
@@ -309,7 +321,7 @@ button, a, [role="button"] {
   
   /* Form fixes for mobile */
   input, select, textarea {
-    font-size: 16px !important; /* Prevents zoom on iOS */
+    font-size: 16px !important;
   }
 }
 
@@ -321,7 +333,7 @@ input:focus, select:focus, textarea:focus {
 
 /* Modal backdrop fix */
 .modal-backdrop {
-  background: rgba(0, 0, 0, 0.8) !important;
+  background: rgba(0, 0, 0, 0.9) !important;
   backdrop-filter: blur(10px) !important;
 }
 
@@ -375,7 +387,7 @@ button, a, .transition-all {
 /* Backdrop blur support fallback */
 @supports not (backdrop-filter: blur(10px)) {
   .glass-dark {
-    background: rgba(15, 15, 15, 0.95);
+    background: rgba(15, 15, 15, 0.98) !important;
   }
 }
 
@@ -395,37 +407,46 @@ button, a, .transition-all {
   }
 }
 
-/* FIXES ADDED BELOW */
+/* FIXES FOR FADING CONTENT */
 
-/* Force all sections to be fully visible */
+/* Ensure all content sections have proper opacity */
 section {
   opacity: 1 !important;
   visibility: visible !important;
+  position: relative;
+  z-index: 1;
 }
 
-/* Remove any fade effects from motion components */
-.motion-div-fix {
+/* Fix footer fading */
+footer {
   opacity: 1 !important;
+  visibility: visible !important;
+  background: rgba(17, 17, 17, 0.98) !important;
+  position: relative;
+  z-index: 10;
 }
 
-/* Ensure all text is visible with good contrast */
+/* Force visibility on all text */
 .text-visibility-fix {
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  opacity: 1 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 /* Improve contrast for light text */
 .text-gray-300 {
   color: rgba(209, 213, 219, 1) !important;
+  opacity: 1 !important;
 }
 
 .text-gray-400 {
   color: rgba(156, 163, 175, 1) !important;
+  opacity: 1 !important;
 }
 
-/* Fix booking form overflow */
+/* Fix booking form */
 .booking-form-fix {
-  max-height: 85vh;
-  overflow-y: auto;
+  opacity: 1 !important;
+  background: rgba(17, 17, 17, 0.98) !important;
 }
 
 @media (max-width: 768px) {
@@ -451,8 +472,27 @@ body {
   width: 100%;
 }
 
-/* Remove opacity from all animations */
-@keyframes no-opacity {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(0); }
+/* Ensure all background elements don't interfere with content */
+.bg-transparent {
+  opacity: 1 !important;
+  background: transparent !important;
+}
+
+/* Specific fixes for testimonial cards */
+.bg-gray-900\/50 {
+  background-color: rgba(17, 17, 17, 0.8) !important;
+  opacity: 1 !important;
+}
+
+/* Fix for motion components */
+.motion-div-fix {
+  opacity: 1 !important;
+}
+
+/* Fix for glass effects */
+.backdrop-blur-sm,
+.backdrop-blur-md,
+.backdrop-blur-lg,
+.backdrop-blur-xl {
+  opacity: 1 !important;
 }
