@@ -1,14 +1,13 @@
-// src/app/page.js - COMPLETE FIXED VERSION
 "use client";
 
 import React, { useState, useEffect, useRef} from "react";
 import Image from 'next/image';
 import "./globals.css";
+import { addBooking, getBookingsByDate } from '@/lib/firebase';
 
 // Custom hook to fix opacity issues
 const useFixOpacity = () => {
   useEffect(() => {
-    // Force all elements to be fully visible
     setTimeout(() => {
       const allElements = document.querySelectorAll('*');
       allElements.forEach(el => {
@@ -390,7 +389,7 @@ const AstrologicalRemediesGuide = () => {
   );
 };
 
-// IMPROVED BOOKING FORM COMPONENT
+// UPDATED BOOKING FORM WITH FIREBASE INTEGRATION
 const BookingForm = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
     name: '',
@@ -409,12 +408,37 @@ const BookingForm = ({ isOpen, onClose }) => {
     appointmentType: 'video'
   });
 
-  const [availableSlots, setAvailableSlots] = useState([]);
   const [loading, setLoading] = useState(false);
   const [step, setStep] = useState(1);
   const [selectedDateSlots, setSelectedDateSlots] = useState([]);
+  const [bookingsLoading, setBookingsLoading] = useState(false);
   const formRef = useRef(null);
 
+  // Service durations in minutes
+  const serviceDurations = {
+    'kundli': 60,
+    'consultation': 30,
+    'palmistry': 60,
+    'marriage': 30,
+    'career': 30,
+    'vastu': 120,
+    'numerology': 60,
+    'horoscope': 60
+  };
+
+  // Service details for display
+  const serviceDetails = {
+    'kundli': { name: 'Kundli Reading', price: 300, duration: '1 Hour' },
+    'consultation': { name: 'Personal Consultation', price: 300, duration: '30 Min' },
+    'palmistry': { name: 'Palm Reading', price: 500, duration: '1 Hour' },
+    'marriage': { name: 'Marriage Compatibility', price: 300, duration: '30 Min' },
+    'career': { name: 'Career Guidance', price: 500, duration: '30 Min' },
+    'vastu': { name: 'Vastu Consultation', price: 2100, duration: '2 Hours' },
+    'numerology': { name: 'Numerology Report', price: 500, duration: '1 Hour' },
+    'horoscope': { name: 'Yearly Horoscope', price: 500, duration: '1 Hour' }
+  };
+
+  // Generate time slots (9:00 AM to 9:00 PM)
   const generateTimeSlots = () => {
     const slots = [];
     for (let hour = 9; hour <= 21; hour++) {
@@ -427,6 +451,16 @@ const BookingForm = ({ isOpen, onClose }) => {
     return slots;
   };
 
+  // Format time for display
+  const formatTime = (timeStr) => {
+    if (!timeStr) return '';
+    const [hour, minute] = timeStr.split(':').map(Number);
+    const ampm = hour >= 12 ? 'PM' : 'AM';
+    const displayHour = hour % 12 || 12;
+    return `${displayHour}:${minute.toString().padStart(2, '0')} ${ampm}`;
+  };
+
+  // Get next 30 days
   const getNext30Days = () => {
     const dates = [];
     const today = new Date();
@@ -438,16 +472,101 @@ const BookingForm = ({ isOpen, onClose }) => {
     return dates;
   };
 
-  const getAvailableSlotsForDate = (date) => {
+  // Calculate end time
+  const calculateEndTime = (startTime, serviceType) => {
+    const duration = serviceDurations[serviceType] || 60;
+    const [hour, minute] = startTime.split(':').map(Number);
+    
+    const endHour = hour + Math.floor((minute + duration) / 60);
+    const endMinute = (minute + duration) % 60;
+    
+    return `${endHour.toString().padStart(2, '0')}:${endMinute.toString().padStart(2, '0')}`;
+  };
+
+  // Fetch booked slots from Firebase
+  const fetchBookedSlotsForDate = async (date) => {
+    try {
+      console.log(`📡 Fetching bookings for ${date}...`);
+      const result = await getBookingsByDate(date);
+      
+      if (result.success) {
+        const bookedSlots = result.data.map(booking => {
+          const endTime = booking.endTime || calculateEndTime(booking.timeSlot, booking.serviceType);
+          return {
+            start: booking.timeSlot,
+            end: endTime,
+            service: booking.serviceType,
+            bookingId: booking.bookingId || booking.id,
+            customer: booking.name
+          };
+        });
+        
+        console.log(`📊 Found ${bookedSlots.length} booked slots`);
+        return bookedSlots;
+      }
+      
+      return [];
+    } catch (error) {
+      console.error("❌ Error fetching booked slots:", error);
+      return [];
+    }
+  };
+
+  // Get available slots
+  const getAvailableSlotsForDate = async (date, serviceType) => {
+    console.log(`🔍 Getting slots for ${date}, ${serviceType}`);
+    
     const allSlots = generateTimeSlots();
-    const bookedSlots = ['10:00', '14:30', '16:00', '18:30'];
-    return allSlots.filter(slot => !bookedSlots.includes(slot));
+    const bookedSlots = await fetchBookedSlotsForDate(date);
+    const duration = serviceDurations[serviceType] || 60;
+    const availableSlots = [];
+
+    // Check each slot
+    allSlots.forEach(slot => {
+      const slotHour = parseInt(slot.split(':')[0]);
+      const slotMinute = parseInt(slot.split(':')[1]);
+      
+      // Calculate end time
+      const endHour = slotHour + Math.floor((slotMinute + duration) / 60);
+      const endMinute = (slotMinute + duration) % 60;
+      const endSlot = `${endHour.toString().padStart(2, '0')}:${endMinute.toString().padStart(2, '0')}`;
+      
+      // Check if slot conflicts with booked slots
+      let isAvailable = true;
+      
+      for (const booked of bookedSlots) {
+        if (
+          // Our slot starts during booked time
+          (slot >= booked.start && slot < booked.end) ||
+          // Our slot ends during booked time
+          (endSlot > booked.start && endSlot <= booked.end) ||
+          // Our slot covers booked time
+          (slot <= booked.start && endSlot >= booked.end)
+        ) {
+          isAvailable = false;
+          break;
+        }
+      }
+      
+      // Check working hours
+      if (endHour > 21 || (endHour === 21 && endMinute > 0)) {
+        isAvailable = false;
+      }
+      
+      if (isAvailable) {
+        availableSlots.push({
+          start: slot,
+          end: endSlot,
+          display: `${formatTime(slot)} - ${formatTime(endSlot)} (${duration} min)`
+        });
+      }
+    });
+    
+    console.log(`✅ Available slots found: ${availableSlots.length}`);
+    return availableSlots;
   };
 
   useEffect(() => {
-    const allSlots = generateTimeSlots();
-    setAvailableSlots(allSlots);
-    
     if (isOpen) {
       document.body.style.overflow = 'hidden';
     } else {
@@ -460,14 +579,33 @@ const BookingForm = ({ isOpen, onClose }) => {
   }, [isOpen]);
 
   useEffect(() => {
-    if (formData.appointmentDate) {
-      const slots = getAvailableSlotsForDate(formData.appointmentDate);
-      setSelectedDateSlots(slots);
-      if (!slots.includes(formData.timeSlot)) {
-        setFormData(prev => ({ ...prev, timeSlot: '' }));
-      }
+    if (formData.appointmentDate && formData.serviceType) {
+      console.log(`🔄 Loading slots for ${formData.appointmentDate}...`);
+      
+      const loadSlots = async () => {
+        setBookingsLoading(true);
+        try {
+          const slots = await getAvailableSlotsForDate(formData.appointmentDate, formData.serviceType);
+          setSelectedDateSlots(slots);
+          
+          // Reset time slot if not available
+          if (formData.timeSlot && !slots.find(s => s.start === formData.timeSlot)) {
+            console.log(`⚠️ Slot ${formData.timeSlot} no longer available, resetting...`);
+            setFormData(prev => ({ ...prev, timeSlot: '' }));
+          }
+        } catch (error) {
+          console.error("Error loading slots:", error);
+          setSelectedDateSlots([]);
+        } finally {
+          setBookingsLoading(false);
+        }
+      };
+      
+      loadSlots();
+    } else {
+      setSelectedDateSlots([]);
     }
-  }, [formData.appointmentDate]);
+  }, [formData.appointmentDate, formData.serviceType]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -499,87 +637,114 @@ const BookingForm = ({ isOpen, onClose }) => {
     };
   }, [onClose]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
-    let charges = 0;
-    let serviceDetails = '';
-    
-    if (formData.serviceType === 'kundli') {
-      charges = 300;
-      serviceDetails = 'Kundli Reading - ₹300';
-    } else if (formData.serviceType === 'consultation') {
-      charges = formData.isFirstTime ? 0 : 300;
-      serviceDetails = `Consultation - ${formData.isFirstTime ? 'Free (First Time)' : '₹300'}`;
+    try {
+      // Calculate end time
+      const selectedSlot = selectedDateSlots.find(s => s.start === formData.timeSlot);
+      const endTime = selectedSlot ? selectedSlot.end : calculateEndTime(formData.timeSlot, formData.serviceType);
+
+      // Prepare booking data
+      const bookingData = {
+        name: formData.name.trim(),
+        phone: formData.phone.trim(),
+        email: (formData.email || '').trim(),
+        dateOfBirth: formData.dateOfBirth,
+        timeOfBirth: (formData.timeOfBirth || '').trim(),
+        placeOfBirth: formData.placeOfBirth.trim(),
+        appointmentDate: formData.appointmentDate,
+        timeSlot: formData.timeSlot,
+        endTime: endTime,
+        serviceType: formData.serviceType,
+        appointmentType: formData.appointmentType,
+        isFirstTime: formData.isFirstTime,
+        gender: (formData.gender || '').trim(),
+        maritalStatus: (formData.maritalStatus || '').trim(),
+        specialRequest: (formData.specialRequest || '').trim(),
+        charges: calculateCharges(),
+        whatsappSent: false
+      };
+
+      console.log('💾 Saving to Firebase...', bookingData);
+
+      // Save to Firebase
+      const result = await addBooking(bookingData);
       
-      if (formData.extraTime === '1.5') {
-        charges += 150;
-        serviceDetails += ' + 1.5 hours (+₹150)';
-      } else if (formData.extraTime === '2') {
-        charges += 300;
-        serviceDetails += ' + 2 hours (+₹300)';
+      if (result.success) {
+        // Generate WhatsApp message
+        const appointmentTypeText = formData.appointmentType === 'video' ? 'Video Call' : 'In-Person';
+        const serviceInfo = serviceDetails[formData.serviceType];
+        
+        const message = `🌟 *NEW APPOINTMENT BOOKING* 🌟%0A%0A` +
+                       `*Booking ID:* ${result.bookingId}%0A` +
+                       `*Date:* ${new Date(formData.appointmentDate).toLocaleDateString('en-IN', {
+                         weekday: 'long',
+                         day: 'numeric',
+                         month: 'long',
+                         year: 'numeric'
+                       })}%0A` +
+                       `*Time:* ${formatTime(formData.timeSlot)} - ${formatTime(endTime)}%0A` +
+                       `*Service:* ${serviceInfo.name}%0A` +
+                       `*Duration:* ${serviceInfo.duration}%0A` +
+                       `*Type:* ${appointmentTypeText}%0A` +
+                       `*Charges:* ₹${calculateCharges()}%0A%0A` +
+                       `*Client Details*%0A` +
+                       `👤 Name: ${formData.name}%0A` +
+                       `📱 Phone: ${formData.phone}%0A` +
+                       `${formData.email ? `📧 Email: ${formData.email}%0A` : ''}` +
+                       `${formData.gender ? `⚧ Gender: ${formData.gender}%0A` : ''}` +
+                       `${formData.maritalStatus ? `💍 Status: ${formData.maritalStatus}%0A` : ''}` +
+                       `%0A*Birth Details*%0A` +
+                       `🎂 DOB: ${formData.dateOfBirth}%0A` +
+                       `${formData.timeOfBirth ? `⏰ Time: ${formData.timeOfBirth}%0A` : ''}` +
+                       `📍 Place: ${formData.placeOfBirth}%0A%0A` +
+                       `${formData.specialRequest ? `*Special Request:*%0A${formData.specialRequest}%0A%0A` : ''}` +
+                       `✅ *Please confirm this booking* ✅%0A%0A` +
+                       `_Booked via Rekha Sharma Astrology Website_`;
+        
+        const whatsappURL = `https://wa.me/918510988703?text=${message}`;
+        
+        // Show success message
+        alert(`✅ Booking confirmed!\n\nBooking ID: ${result.bookingId}\n\nOpening WhatsApp to send details...`);
+        
+        // Open WhatsApp
+        setTimeout(() => {
+          window.open(whatsappURL, '_blank');
+        }, 1000);
+        
+        // Reset form
+        setFormData({
+          name: '',
+          phone: '',
+          email: '',
+          dateOfBirth: '',
+          timeOfBirth: '',
+          placeOfBirth: '',
+          appointmentDate: '',
+          timeSlot: '',
+          serviceType: 'kundli',
+          isFirstTime: true,
+          gender: '',
+          maritalStatus: '',
+          specialRequest: '',
+          appointmentType: 'video'
+        });
+        
+        setStep(1);
+        setLoading(false);
+        onClose();
+        
       } else {
-        serviceDetails += ' (1 hour)';
+        alert(`❌ Error: ${result.error || 'Could not save booking'}`);
+        setLoading(false);
       }
+    } catch (error) {
+      console.error('Submit error:', error);
+      alert('❌ An error occurred. Please try again.');
+      setLoading(false);
     }
-
-    const appointmentTypeText = formData.appointmentType === 'video' ? 'Video Call' : 
-                               formData.appointmentType === 'phone' ? 'Phone Call' : 'In-Person';
-
-    const message = `🌟 *NEW APPOINTMENT REQUEST* 🌟%0A%0A` +
-                   `*Client Details:*%0A` +
-                   `👤 Name: ${formData.name}%0A` +
-                   `📱 Phone: ${formData.phone}%0A` +
-                   `📧 Email: ${formData.email || 'Not provided'}%0A` +
-                   `⚧ Gender: ${formData.gender || 'Not specified'}%0A` +
-                   `💍 Status: ${formData.maritalStatus || 'Not specified'}%0A%0A` +
-                   `*Birth Details:*%0A` +
-                   `🎂 DOB: ${formData.dateOfBirth}%0A` +
-                   `⏰ Time: ${formData.timeOfBirth || 'Not specified'}%0A` +
-                   `📍 Place: ${formData.placeOfBirth}%0A%0A` +
-                   `*Appointment Details:*%0A` +
-                   `📅 Date: ${new Date(formData.appointmentDate).toLocaleDateString('en-IN', { 
-                     weekday: 'long', 
-                     day: 'numeric', 
-                     month: 'long',
-                     year: 'numeric' 
-                   })}%0A` +
-                   `🕒 Time: ${formData.timeSlot}%0A` +
-                   `💬 Type: ${appointmentTypeText}%0A` +
-                   `🔮 Service: ${serviceDetails}%0A` +
-                   `💰 Total: ₹${charges}%0A%0A` +
-                   `*Special Request:*%0A${formData.specialRequest || 'None'}%0A%0A` +
-                   `✅ *Please confirm this appointment* ✅%0A%0A` +
-                   `_Sent via Rekha Sharma Astrology Website_`;
-
-    const whatsappNumber = '918510988703';
-    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${message}`;
-    
-    window.open(whatsappURL, '_blank');
-    
-    setFormData({
-      name: '',
-      phone: '',
-      email: '',
-      dateOfBirth: '',
-      timeOfBirth: '',
-      placeOfBirth: '',
-      appointmentDate: '',
-      timeSlot: '',
-      serviceType: 'kundli',
-      isFirstTime: true,
-      gender: '',
-      maritalStatus: '',
-      specialRequest: '',
-      appointmentType: 'video'
-    });
-    
-    setLoading(false);
-    setStep(1);
-    onClose();
-    
-    alert('Opening WhatsApp with your booking details. Please send the message to confirm your appointment.');
   };
 
   const handleChange = (e) => {
@@ -611,18 +776,13 @@ const BookingForm = ({ isOpen, onClose }) => {
   };
 
   const calculateCharges = () => {
-    if (formData.serviceType === 'kundli') return 300;
+    const basePrice = serviceDetails[formData.serviceType]?.price || 0;
     
-    if (formData.serviceType === 'consultation') {
-      let charges = formData.isFirstTime ? 0 : 300;
-      
-      if (!formData.isFirstTime && formData.extraTime === '1.5') charges += 150;
-      if (!formData.isFirstTime && formData.extraTime === '2') charges += 300;
-      
-      return charges;
+    if (formData.serviceType === 'consultation' && formData.isFirstTime) {
+      return 0;
     }
     
-    return 0;
+    return basePrice;
   };
 
   const steps = [
@@ -641,7 +801,12 @@ const BookingForm = ({ isOpen, onClose }) => {
         <div className="flex justify-between items-start mb-6">
           <div>
             <h3 className="text-white text-xl sm:text-2xl font-bold">Book with Rekha Sharma Ji</h3>
-            <p className="text-purple-300 text-xs sm:text-sm">Complete form for accurate astrological guidance</p>
+            <p className="text-purple-300 text-xs sm:text-sm">Real-time availability check</p>
+            {bookingsLoading && (
+              <p className="text-green-400 text-xs mt-1 animate-pulse">
+                🔄 Checking availability...
+              </p>
+            )}
           </div>
           <button 
             onClick={onClose}
@@ -843,6 +1008,41 @@ const BookingForm = ({ isOpen, onClose }) => {
             <div className="space-y-4">
               <h4 className="text-white text-lg font-semibold">Appointment Details</h4>
 
+              {/* Service Type */}
+              <div>
+                <label className="text-white text-sm font-medium mb-2 block">Service Type *</label>
+                <div className="grid grid-cols-2 gap-3">
+                  {[
+                    { type: 'kundli', name: 'Kundli Reading', price: '₹300', duration: '1 Hour' },
+                    { type: 'consultation', name: 'Personal Consultation', price: '₹300', duration: '30 Min' },
+                    { type: 'palmistry', name: 'Palm Reading', price: '₹500', duration: '1 Hour' },
+                    { type: 'marriage', name: 'Marriage Compatibility', price: '₹300', duration: '30 Min' },
+                    { type: 'career', name: 'Career Guidance', price: '₹500', duration: '30 Min' },
+                    { type: 'vastu', name: 'Vastu Consultation', price: '₹2100', duration: '2 Hours' },
+                    { type: 'numerology', name: 'Numerology Report', price: '₹500', duration: '1 Hour' },
+                    { type: 'horoscope', name: 'Yearly Horoscope', price: '₹500', duration: '1 Hour' }
+                  ].map((service) => (
+                    <button
+                      key={service.type}
+                      type="button"
+                      onClick={() => setFormData(prev => ({ 
+                        ...prev, 
+                        serviceType: service.type,
+                        timeSlot: ''
+                      }))}
+                      className={`py-3 px-3 rounded-xl border transition-all duration-300 ${formData.serviceType === service.type
+                          ? 'bg-purple-600 border-purple-500 text-white shadow-lg'
+                          : 'bg-gray-800/50 border-gray-700 text-gray-300 hover:border-purple-500/50'
+                        }`}
+                    >
+                      <div className="font-semibold text-sm">{service.name}</div>
+                      <div className="text-xs opacity-80 mt-1">{service.price} • {service.duration}</div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Date and Time Selection */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="text-white text-sm font-medium mb-2 block">Appointment Date *</label>
@@ -873,32 +1073,44 @@ const BookingForm = ({ isOpen, onClose }) => {
                     value={formData.timeSlot}
                     onChange={handleChange}
                     required
-                    disabled={!formData.appointmentDate}
+                    disabled={!formData.appointmentDate || selectedDateSlots.length === 0}
                     className="w-full bg-gray-800/80 border border-gray-700 rounded-xl px-4 py-3 text-white focus:border-purple-500 focus:ring-2 focus:ring-purple-500/30 transition-all duration-300 appearance-none disabled:opacity-50"
                   >
-                    <option value="">Select time</option>
-                    {selectedDateSlots.map((slot) => {
-                      const hour = parseInt(slot.split(':')[0]);
-                      const minute = slot.split(':')[1];
-                      const displayTime = hour < 12 
-                        ? `${hour}:${minute} AM`
-                        : hour === 12 
-                          ? `${hour}:${minute} PM`
-                          : `${hour - 12}:${minute} PM`;
-                      return (
-                        <option key={slot} value={slot}>
-                          {displayTime}
-                        </option>
-                      );
-                    })}
+                    <option value="">
+                      {!formData.appointmentDate 
+                        ? 'Select date first' 
+                        : bookingsLoading
+                          ? 'Checking availability...'
+                          : selectedDateSlots.length === 0 
+                            ? 'No slots available' 
+                            : 'Select time'}
+                    </option>
+                    {selectedDateSlots.map((slot, index) => (
+                      <option key={index} value={slot.start}>
+                        {slot.display}
+                      </option>
+                    ))}
                   </select>
+                  
+                  {formData.appointmentDate && selectedDateSlots.length > 0 && (
+                    <p className="text-green-400 text-xs mt-1">
+                      ✅ Real-time availability checked
+                    </p>
+                  )}
+                  
+                  {formData.appointmentDate && selectedDateSlots.length === 0 && !bookingsLoading && (
+                    <p className="text-red-400 text-xs mt-1">
+                      ⚠️ No slots available. Please try another date.
+                    </p>
+                  )}
                 </div>
               </div>
 
+              {/* Appointment Type */}
               <div>
                 <label className="text-white text-sm font-medium mb-2 block">Appointment Type</label>
-                <div className="grid grid-cols-3 gap-3">
-                  {['video', 'phone', 'inperson'].map((type) => (
+                <div className="grid grid-cols-2 gap-3">
+                  {['video', 'inperson'].map((type) => (
                     <button
                       key={type}
                       type="button"
@@ -909,102 +1121,35 @@ const BookingForm = ({ isOpen, onClose }) => {
                         }`}
                     >
                       <div className="text-lg mb-1">
-                        {type === 'video' ? '📹' : type === 'phone' ? '📞' : '👥'}
+                        {type === 'video' ? '📹' : '👥'}
                       </div>
-                      <div className="text-xs font-semibold capitalize">{type === 'inperson' ? 'In Person' : type}</div>
+                      <div className="text-xs font-semibold capitalize">
+                        {type === 'inperson' ? 'In Person' : 'Video Call'}
+                      </div>
                     </button>
                   ))}
                 </div>
               </div>
 
-              <div>
-                <label className="text-white text-sm font-medium mb-2 block">Service Type *</label>
-                <div className="grid grid-cols-2 gap-3">
-                  <button
-                    type="button"
-                    onClick={() => setFormData(prev => ({ ...prev, serviceType: 'kundli' }))}
-                    className={`py-3 px-4 rounded-xl border transition-all duration-300 ${formData.serviceType === 'kundli'
-                        ? 'bg-purple-600 border-purple-500 text-white shadow-lg'
-                        : 'bg-gray-800/50 border-gray-700 text-gray-300 hover:border-purple-500/50'
-                      }`}
-                  >
-                    <div className="font-semibold">Kundli Reading</div>
-                    <div className="text-xs opacity-80">₹300</div>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setFormData(prev => ({ ...prev, serviceType: 'consultation' }))}
-                    className={`py-3 px-4 rounded-xl border transition-all duration-300 ${formData.serviceType === 'consultation'
-                        ? 'bg-purple-600 border-purple-500 text-white shadow-lg'
-                        : 'bg-gray-800/50 border-gray-700 text-gray-300 hover:border-purple-500/50'
-                      }`}
-                  >
-                    <div className="font-semibold">Consultation</div>
-                    <div className="text-xs opacity-80">First Free</div>
-                  </button>
-                </div>
-              </div>
-
+              {/* First Time Consultation Free Option */}
               {formData.serviceType === 'consultation' && (
-                <>
-                  <div className="flex items-center space-x-3 p-3 bg-gray-800/30 rounded-xl">
-                    <input
-                      type="checkbox"
-                      id="isFirstTime"
-                      name="isFirstTime"
-                      checked={formData.isFirstTime}
-                      onChange={handleChange}
-                      className="w-5 h-5 text-purple-600 bg-gray-800 border-gray-700 rounded-lg focus:ring-purple-500 focus:ring-2"
-                    />
-                    <label htmlFor="isFirstTime" className="text-gray-300 text-sm">
-                      <span className="font-semibold">First time consultation</span>
-                      <span className="text-green-400 ml-2">(Free)</span>
-                    </label>
-                  </div>
-
-                  {!formData.isFirstTime && (
-                    <div>
-                      <label className="text-white text-sm font-medium mb-2 block">Session Duration</label>
-                      <div className="grid grid-cols-3 gap-3">
-                        <button
-                          type="button"
-                          onClick={() => setFormData(prev => ({ ...prev, extraTime: '' }))}
-                          className={`py-3 rounded-xl border transition-all duration-300 ${!formData.extraTime
-                              ? 'bg-purple-600 border-purple-500 text-white shadow-lg'
-                              : 'bg-gray-800/50 border-gray-700 text-gray-300 hover:border-purple-500/50'
-                            }`}
-                        >
-                          <div className="font-semibold">1 Hour</div>
-                          <div className="text-xs opacity-80">₹300</div>
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => setFormData(prev => ({ ...prev, extraTime: '1.5' }))}
-                          className={`py-3 rounded-xl border transition-all duration-300 ${formData.extraTime === '1.5'
-                              ? 'bg-purple-600 border-purple-500 text-white shadow-lg'
-                              : 'bg-gray-800/50 border-gray-700 text-gray-300 hover:border-purple-500/50'
-                            }`}
-                        >
-                          <div className="font-semibold">1.5 Hours</div>
-                          <div className="text-xs opacity-80">+₹150</div>
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => setFormData(prev => ({ ...prev, extraTime: '2' }))}
-                          className={`py-3 rounded-xl border transition-all duration-300 ${formData.extraTime === '2'
-                              ? 'bg-purple-600 border-purple-500 text-white shadow-lg'
-                              : 'bg-gray-800/50 border-gray-700 text-gray-300 hover:border-purple-500/50'
-                            }`}
-                        >
-                          <div className="font-semibold">2 Hours</div>
-                          <div className="text-xs opacity-80">+₹300</div>
-                        </button>
-                      </div>
-                    </div>
-                  )}
-                </>
+                <div className="flex items-center space-x-3 p-3 bg-gray-800/30 rounded-xl">
+                  <input
+                    type="checkbox"
+                    id="isFirstTime"
+                    name="isFirstTime"
+                    checked={formData.isFirstTime}
+                    onChange={handleChange}
+                    className="w-5 h-5 text-purple-600 bg-gray-800 border-gray-700 rounded-lg focus:ring-purple-500 focus:ring-2"
+                  />
+                  <label htmlFor="isFirstTime" className="text-gray-300 text-sm">
+                    <span className="font-semibold">First time consultation</span>
+                    <span className="text-green-400 ml-2">(Free)</span>
+                  </label>
+                </div>
               )}
 
+              {/* Special Request */}
               <div>
                 <label className="text-white text-sm font-medium mb-2 block">Special Request (Optional)</label>
                 <textarea
@@ -1110,30 +1255,26 @@ const BookingForm = ({ isOpen, onClose }) => {
                     <div>
                       <span className="text-gray-400">Time:</span>
                       <span className="text-white ml-2">
-                        {formData.timeSlot && (() => {
-                          const hour = parseInt(formData.timeSlot.split(':')[0]);
-                          const minute = formData.timeSlot.split(':')[1];
-                          return hour < 12 
-                            ? `${hour}:${minute} AM`
-                            : hour === 12 
-                              ? `${hour}:${minute} PM`
-                              : `${hour - 12}:${minute} PM`;
-                        })()}
+                        {formData.timeSlot ? formatTime(formData.timeSlot) + ' - ' + 
+                          formatTime(selectedDateSlots.find(s => s.start === formData.timeSlot)?.end || '') : 'Not selected'}
                       </span>
                     </div>
                     <div>
                       <span className="text-gray-400">Type:</span>
                       <span className="text-white ml-2 capitalize">
-                        {formData.appointmentType === 'video' ? 'Video Call' : 
-                         formData.appointmentType === 'phone' ? 'Phone Call' : 'In-Person'}
+                        {formData.appointmentType === 'video' ? 'Video Call' : 'In-Person'}
                       </span>
                     </div>
                     <div>
                       <span className="text-gray-400">Service:</span>
                       <span className="text-white ml-2">
-                        {formData.serviceType === 'kundli' ? 'Kundli Reading' : 'Consultation'}
-                        {formData.isFirstTime && formData.serviceType === 'consultation' && ' (First Free)'}
+                        {serviceDetails[formData.serviceType]?.name || 'Unknown Service'}
+                        {formData.serviceType === 'consultation' && formData.isFirstTime && ' (First Free)'}
                       </span>
+                    </div>
+                    <div>
+                      <span className="text-gray-400">Duration:</span>
+                      <span className="text-white ml-2">{serviceDetails[formData.serviceType]?.duration || '1 Hour'}</span>
                     </div>
                   </div>
                 </div>
@@ -1182,7 +1323,7 @@ const BookingForm = ({ isOpen, onClose }) => {
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"/>
                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/>
                       </svg>
-                      <span>Preparing...</span>
+                      <span>Saving to Database...</span>
                     </>
                   ) : (
                     <>
@@ -1198,7 +1339,7 @@ const BookingForm = ({ isOpen, onClose }) => {
           <div className="text-center pt-4 border-t border-gray-800">
             <p className="text-gray-500 text-xs">
               <span className="inline-block w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
-              All details sent securely to Rekha Sharma Ji
+              All bookings saved in secure database
             </p>
             <p className="text-gray-600 text-xs mt-1">
               Step {step} of 4
@@ -1210,14 +1351,12 @@ const BookingForm = ({ isOpen, onClose }) => {
   );
 };
 
-// Interactive Background (UPDATED FOR MOBILE)
+// Interactive Background
 const InteractiveBackground = () => {
   return (
     <div className="fixed inset-0 overflow-hidden z-0">
-      {/* Cosmic Nebula Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-black to-pink-900/20"></div>
       
-      {/* Animated Grid Pattern */}
       <div className="absolute inset-0 opacity-10"
         style={{
           backgroundImage: `
@@ -1228,7 +1367,6 @@ const InteractiveBackground = () => {
         }}
       ></div>
 
-      {/* Floating Zodiac Symbols - Reduced visibility on mobile */}
       <div className="absolute inset-0">
         {['♈', '♉', '♊', '♋', '♌', '♍', '♎', '♏', '♐', '♑', '♒', '♓'].map((symbol, i) => (
           <div
@@ -1244,7 +1382,6 @@ const InteractiveBackground = () => {
         ))}
       </div>
 
-      {/* Interactive Particles */}
       <div className="absolute inset-0">
         {[...Array(20)].map((_, i) => (
           <div
@@ -1259,9 +1396,7 @@ const InteractiveBackground = () => {
         ))}
       </div>
 
-      {/* Mystic Orbs - Reduced on mobile */}
       <div className="absolute top-1/4 left-1/4 w-32 h-32 sm:w-64 sm:h-64 mystic-orb rounded-full blur-2xl sm:blur-3xl pointer-events-none"/>
-
       <div className="absolute bottom-1/3 right-1/4 w-48 h-48 sm:w-96 sm:h-96 bg-gradient-to-tr from-purple-500/5 sm:from-purple-500/10 via-pink-500/5 sm:via-pink-500/10 to-transparent rounded-full blur-2xl sm:blur-3xl pointer-events-none"/>
     </div>
   );
@@ -1283,7 +1418,6 @@ const AstrologerHero = ({ setIsBookingOpen }) => {
     <section id="home" className="min-h-screen flex items-center justify-center px-4 md:px-6 lg:px-12 relative pt-20">
       <div className="max-w-6xl mx-auto w-full text-center">
         <div className="space-y-8 sm:space-y-12">
-          {/* Welcome Badge */}
           <div className="inline-flex items-center space-x-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-4 sm:px-6 py-2 sm:py-3">
             <div className="flex space-x-1">
               <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
@@ -1293,11 +1427,9 @@ const AstrologerHero = ({ setIsBookingOpen }) => {
             <span className="text-purple-300 text-xs sm:text-sm font-medium">✨ Divine Guidance Since 2010</span>
           </div>
 
-          {/* Main Content */}
           <div className="space-y-6 sm:space-y-8">
             <div className="space-y-4 sm:space-y-6">
               <div className="flex flex-col items-center space-y-3 sm:space-y-4">
-                {/* Astrologer Name & Title */}
                 <div>
                   <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-white leading-tight">
                     Rekha <span className="text-gradient">Sharma</span>
@@ -1305,7 +1437,6 @@ const AstrologerHero = ({ setIsBookingOpen }) => {
                   <p className="text-purple-300 text-lg sm:text-xl mt-2">Renowned Vedic Astrologer & Life Coach</p>
                 </div>
                 
-                {/* Dynamic Tagline */}
                 <div className="h-16 sm:h-20 flex items-center justify-center">
                   <span className="text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-2xl sm:text-3xl lg:text-4xl font-bold inline-block">
                     Expert in {words[currentWord]}
@@ -1319,7 +1450,6 @@ const AstrologerHero = ({ setIsBookingOpen }) => {
               </p>
             </div>
 
-            {/* Specialties Grid */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-3xl mx-auto px-4">
               {[
                 {
@@ -1354,7 +1484,6 @@ const AstrologerHero = ({ setIsBookingOpen }) => {
               ))}
             </div>
 
-            {/* Experience Stats */}
             <div className="flex flex-wrap justify-center gap-6 sm:gap-12 max-w-md mx-auto">
               {[
                 { number: "14+", label: "Years", icon: "📅" },
@@ -1374,7 +1503,6 @@ const AstrologerHero = ({ setIsBookingOpen }) => {
             </div>
           </div>
 
-          {/* CTA Section */}
           <div className="space-y-4 sm:space-y-6">
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
               <button
@@ -1395,7 +1523,6 @@ const AstrologerHero = ({ setIsBookingOpen }) => {
               </button>
             </div>
 
-            {/* Pricing Info */}
             <div className="text-gray-400 text-xs sm:text-sm bg-white/5 rounded-xl p-3 sm:p-4 max-w-md mx-auto border border-white/10">
               <p className="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-4">
                 <span>Kundli Reading: <span className="text-purple-400 font-semibold">₹300</span></span>
@@ -1410,7 +1537,7 @@ const AstrologerHero = ({ setIsBookingOpen }) => {
   );
 };
 
-/// UPDATED AboutAstrologer Component with actual photo
+// UPDATED AboutAstrologer Component
 const AboutAstrologer = () => {
   return (
     <section id="about" className="py-16 sm:py-20 px-4 md:px-6 lg:px-12 bg-transparent relative overflow-hidden">
@@ -1423,20 +1550,17 @@ const AboutAstrologer = () => {
             Your Trusted Guide to Cosmic Wisdom
           </h2>
           <p className="text-gray-400 max-w-3xl mx-auto text-base sm:text-lg">
-            From ancient family traditions to modern-day spiritual guidance - my journey in astrology
+            From ancient family traditions to modern-day spiritual guidance
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
-          {/* Left - Astrologer Profile WITH ACTUAL PHOTO */}
           <div className="relative">
-            {/* Profile Card */}
             <div className="relative bg-gradient-to-br from-purple-900/30 to-pink-900/30 rounded-3xl p-6 sm:p-8 border border-white/10 backdrop-blur-sm">
-              {/* Astrologer Photo - Actual Image */}
               <div className="relative w-48 h-48 sm:w-64 sm:h-64 mx-auto mb-6 rounded-full border-4 border-purple-500/30 overflow-hidden shadow-2xl">
                 <div className="relative w-full h-full">
                   <Image
-                    src="/backgrounds/rekha sharma.jpeg"
+                    src="/backgrounds/rekhajii.jpeg"
                     alt="Rekha Sharma - Renowned Vedic Astrologer"
                     fill
                     className="object-cover"
@@ -1446,13 +1570,9 @@ const AboutAstrologer = () => {
                       objectPosition: 'center top',
                     }}
                   />
-                  {/* Gradient Overlay for better look */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent rounded-full" />
                 </div>
                 
-             
-                
-                {/* Photo Border Glow */}
                 <div className="absolute inset-0 rounded-full border-2 border-transparent animate-pulse" 
                   style={{
                     boxShadow: '0 0 20px rgba(162, 89, 247, 0.5)',
@@ -1464,33 +1584,34 @@ const AboutAstrologer = () => {
                 <h3 className="text-white text-2xl sm:text-3xl font-bold mb-2">Rekha Sharma</h3>
                 <p className="text-purple-300 text-lg sm:text-xl mb-4">Vedic Astrologer & Spiritual Guide</p>
                 
-                {/* Experience Badges */}
                 <div className="flex flex-wrap justify-center gap-2 mb-4">
                   <span className="px-3 py-1 bg-gradient-to-r from-purple-500/30 to-purple-600/30 text-purple-300 text-xs sm:text-sm rounded-full font-medium">
-                    14+ Years Experience
+                    28+ Years Experience
                   </span>
                   <span className="px-3 py-1 bg-gradient-to-r from-pink-500/30 to-pink-600/30 text-pink-300 text-xs sm:text-sm rounded-full font-medium">
-                    5000+ Happy Clients
+                    25000+ Happy Clients
                   </span>
                 </div>
                 
-            
+                <div className="mb-6">
+                  <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-yellow-500/20 to-amber-500/20 px-4 py-2 rounded-full border border-yellow-500/30">
+                    <span className="text-yellow-400">👨‍🦳👨‍🦰👩</span>
+                    <span className="text-yellow-300 text-sm font-medium">3 Generations Legacy</span>
+                  </div>
+                  <p className="text-gray-400 text-xs mt-2">Grandfather → Father → Rekha Ji</p>
+                </div>
                 
-                {/* Specializations */}
                 <div className="grid grid-cols-2 gap-3 mb-6">
                   <div className="text-center p-3 sm:p-4 bg-white/5 rounded-xl hover:bg-white/10 transition-colors">
-                    
                     <div className="text-white font-bold text-sm sm:text-base">Vedic Astrology</div>
                     <div className="text-gray-400 text-xs">Expert</div>
                   </div>
                   <div className="text-center p-3 sm:p-4 bg-white/5 rounded-xl hover:bg-white/10 transition-colors">
-                   
                     <div className="text-white font-bold text-sm sm:text-base">Palmistry</div>
                     <div className="text-gray-400 text-xs">Master</div>
                   </div>
                 </div>
                 
-                {/* Quote */}
                 <div className="p-3 sm:p-4 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-xl border border-purple-500/30">
                   <p className="text-purple-300 text-sm sm:text-base italic">
                     "My mission is to help you find clarity and purpose through celestial guidance"
@@ -1498,7 +1619,6 @@ const AboutAstrologer = () => {
                 </div>
               </div>
               
-              {/* Decorative Elements */}
               <div className="absolute -top-3 -right-3 w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white text-lg shadow-xl">
                 ✨
               </div>
@@ -1507,7 +1627,6 @@ const AboutAstrologer = () => {
               </div>
             </div>
             
-            {/* Contact Badge */}
             <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-xl border border-green-500/30">
               <div className="flex items-center justify-center space-x-3">
                 <div className="text-green-400 text-xl">📞</div>
@@ -1519,26 +1638,25 @@ const AboutAstrologer = () => {
             </div>
           </div>
 
-          {/* Right - Content */}
           <div className="space-y-4 sm:space-y-6">
             <h3 className="text-white text-2xl sm:text-3xl font-bold">My Spiritual Journey</h3>
             
             <div className="space-y-3 sm:space-y-4">
               <p className="text-gray-300 leading-relaxed text-sm sm:text-base">
-                Born into a family of astrologers in Varanasi, I was introduced to the sacred 
-                science of Jyotish (Vedic Astrology) at the tender age of 12. My grandfather, 
+                Born into a family of astrologers in Dehradun, I was introduced to the sacred 
+                science of Jyotish (Vedic Astrology) at the tender age of 14. My grandfather, 
                 a renowned astrologer, recognized my intuitive abilities and began training me 
                 in the ancient scriptures.
               </p>
               
-              {/* Training Highlight */}
               <div className="p-4 sm:p-5 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-xl border border-purple-500/20">
                 <div className="flex items-start space-x-3 sm:space-x-4">
                   <div>
-                    <h4 className="text-purple-300 font-semibold text-lg sm:text-xl mb-2">Traditional Training</h4>
+                    <h4 className="text-purple-300 font-semibold text-lg sm:text-xl mb-2">3 Generations Legacy</h4>
                     <p className="text-gray-300 text-sm sm:text-base">
-                      Trained under multiple gurus across India including Varanasi, Haridwar, and Rishikesh. 
-                      Mastered diverse systems including KP Astrology, Nadi Astrology, and Western Astrology.
+                      Trained under my <strong>grandfather</strong> and my <strong>father</strong> who were both renowned astrologers.
+                      Our family has <strong>100+ years of combined astrology experience</strong> across three generations.
+                      Mastered diverse systems including Vedic Astrology, Lal Kitab, Palmistry, and Western Astrology.
                     </p>
                   </div>
                 </div>
@@ -1546,11 +1664,11 @@ const AboutAstrologer = () => {
 
               <p className="text-gray-300 leading-relaxed text-sm sm:text-base">
                 My journey has been one of continuous learning and spiritual growth. 
-                For over 14 years, I've dedicated myself to helping people find their 
-                true path through the wisdom of the stars.
+                For over <strong>28 years</strong>, I've dedicated myself to helping people find their 
+                true path through the wisdom of the stars. Combining my family's <strong>100+ years of legacy </strong> 
+                with my personal experience, I provide comprehensive guidance.
               </p>
 
-              {/* Philosophy */}
               <div className="space-y-2 sm:space-y-3">
                 <h4 className="text-purple-400 font-semibold text-xl">My Philosophy</h4>
                 <p className="text-gray-300 text-sm sm:text-base">
@@ -1561,34 +1679,29 @@ const AboutAstrologer = () => {
                 </p>
               </div>
 
-              {/* Key Features Grid */}
               <div className="grid grid-cols-2 gap-3 sm:gap-4 mt-4 sm:mt-6">
                 {[
                   { 
-                    
-                    title: "Recognition", 
-                    desc: "Featured in National Astrology Conferences",
+                    title: "3 Generations Legacy", 
+                    desc: "Grandfather → Father → Rekha Ji (100+ Years Family Expertise)",
                     color: "from-yellow-500/20 to-amber-500/20",
                     border: "border-yellow-500/20"
                   },
                   { 
-                    
                     title: "Languages", 
                     desc: "Fluent in Hindi, English & Sanskrit",
                     color: "from-blue-500/20 to-cyan-500/20",
                     border: "border-blue-500/20"
                   },
                   { 
-                    
                     title: "Traditional Methods", 
                     desc: "Authentic Vedic Astrology Techniques",
                     color: "from-purple-500/20 to-pink-500/20",
                     border: "border-purple-500/20"
                   },
                   { 
-                    
-                    title: "14+ Years Experience", 
-                    desc: "Professional Guidance Since 2010",
+                    title: "28+ Years Experience", 
+                    desc: "Personal Professional Guidance",
                     color: "from-green-500/20 to-emerald-500/20",
                     border: "border-green-500/20"
                   }
@@ -1597,24 +1710,11 @@ const AboutAstrologer = () => {
                     key={index}
                     className={`bg-gradient-to-br ${item.color} rounded-xl p-3 sm:p-4 border ${item.border} hover:border-purple-500/50 transition-all duration-300 group hover:scale-[1.02]`}
                   >
-                    <div className="text-2xl sm:text-3xl mb-2 group-hover:scale-110 transition-transform duration-300">{item.icon}</div>
+                    <div className="text-2xl sm:text-3xl mb-2 group-hover:scale-110 transition-transform duration-300">🌟</div>
                     <div className="text-white font-bold text-sm sm:text-base mb-1">{item.title}</div>
                     <div className="text-gray-300 text-[11px] sm:text-xs leading-tight">{item.desc}</div>
                   </div>
                 ))}
-              </div>
-
-              {/* Call to Action */}
-              <div className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-gray-700/50">
-                <div className="flex items-center space-x-3 sm:space-x-4">
-                  <div className="text-3xl sm:text-4xl animate-pulse">💫</div>
-                  <div>
-                    <h4 className="text-white font-bold text-lg sm:text-xl">Ready for Guidance?</h4>
-                    <p className="text-gray-400 text-sm sm:text-base">
-                      Book your first consultation for free and begin your spiritual journey today.
-                    </p>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -1630,19 +1730,19 @@ const ServicesSection = ({ setIsBookingOpen }) => {
     {
       icon: "📜",
       title: "Complete Kundli Analysis",
-      price: "₹300",
+      price: "₹1100",
       description: "Detailed birth chart with planetary positions, dasha periods, and life predictions",
       details: ["Janam Kundli", "Dasha Analysis", "Planetary Positions", "Remedies"],
-      duration: "1-2 Hours",
+      duration: "1 Hour",
       popular: true
     },
     {
       icon: "💬",
       title: "Personal Consultation",
-      price: "First Free | Then ₹300/hr",
+      price: "₹300",
       description: "One-on-one guidance for life decisions, relationships, and career choices",
       details: ["Life Guidance", "Problem Solving", "Remedy Suggestions", "Follow-up"],
-      duration: "1 Hour",
+      duration: "30 Minutes",
       highlight: "Most Popular"
     },
     {
@@ -1651,28 +1751,28 @@ const ServicesSection = ({ setIsBookingOpen }) => {
       price: "₹500",
       description: "Comprehensive palm analysis revealing personality, destiny, and future prospects",
       details: ["Life Line Reading", "Career Analysis", "Relationship Lines", "Health Indications"],
-      duration: "45 Minutes"
+      duration: "1 Hour"
     },
     {
       icon: "💍",
       title: "Marriage Compatibility",
-      price: "₹600",
+      price: "₹300",
       description: "Detailed analysis of compatibility between partners with Guna Milan",
       details: ["Guna Milan", "Mangal Dosha", "Planetary Match", "Remedies"],
-      duration: "1.5 Hours"
+      duration: "30 Minutes"
     },
     {
       icon: "💼",
       title: "Career Guidance",
-      price: "₹400",
+      price: "₹500",
       description: "Professional path analysis and guidance for career growth and opportunities",
       details: ["Career Analysis", "Job Change", "Business Timing", "Growth Areas"],
-      duration: "1 Hour"
+      duration: "30 Minutes"
     },
     {
       icon: "🏠",
       title: "Vastu Consultation",
-      price: "₹800",
+      price: "₹2100",
       description: "Home/Office energy analysis and remedies for prosperity and harmony",
       details: ["Space Analysis", "Direction Alignment", "Remedy Suggestions", "Color Guidance"],
       duration: "2 Hours"
@@ -1680,7 +1780,7 @@ const ServicesSection = ({ setIsBookingOpen }) => {
     {
       icon: "🔢",
       title: "Numerology Report",
-      price: "₹400",
+      price: "₹500",
       description: "Detailed numerology analysis based on your name and birth date",
       details: ["Life Path Number", "Destiny Number", "Name Analysis", "Lucky Numbers"],
       duration: "1 Hour"
@@ -1688,10 +1788,10 @@ const ServicesSection = ({ setIsBookingOpen }) => {
     {
       icon: "🎯",
       title: "Yearly Horoscope",
-      price: "₹700",
+      price: "₹500",
       description: "Comprehensive yearly prediction covering all aspects of life",
       details: ["Yearly Forecast", "Monthly Predictions", "Important Dates", "Precautions"],
-      duration: "2 Hours",
+      duration: "1 Hour",
       popular: true
     }
   ];
@@ -1764,7 +1864,7 @@ const ServicesSection = ({ setIsBookingOpen }) => {
   );
 };
 
-// UPDATED Testimonials Section with More Testimonials
+// Testimonials Section
 const TestimonialsSection = () => {
   const testimonials = [
     {
@@ -1814,30 +1914,6 @@ const TestimonialsSection = () => {
       rating: 5,
       date: "5 months ago",
       verified: true
-    },
-    {
-      name: "Neha Gupta",
-      text: "Numerology report helped me understand my life path number. Changing my name spelling as suggested brought positive changes.",
-      service: "Numerology Report",
-      rating: 5,
-      date: "1 week ago",
-      verified: true
-    },
-    {
-      name: "Arun Mehta",
-      text: "Yearly horoscope prediction was so accurate about financial gains. Prepared me for the opportunities that came my way.",
-      service: "Yearly Horoscope",
-      rating: 5,
-      date: "2 weeks ago",
-      verified: true
-    },
-    {
-      name: "Sunita Reddy",
-      text: "Follow-up consultations worth every penny. Rekha Ji remembers every detail and provides consistent guidance.",
-      service: "Follow-up Consultation",
-      rating: 5,
-      date: "1 month ago",
-      verified: true
     }
   ];
 
@@ -1872,7 +1948,6 @@ const TestimonialsSection = () => {
         </div>
 
         <div className="relative">
-          {/* Testimonial Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8 mb-8 sm:mb-12">
             {visibleTestimonials.map((testimonial, index) => (
               <div
@@ -1911,13 +1986,12 @@ const TestimonialsSection = () => {
             ))}
           </div>
 
-          {/* Stats Banner */}
           <div className="bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-purple-500/10 rounded-2xl p-6 sm:p-8 border border-purple-500/20 backdrop-blur-lg">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 text-center">
               {[
                 { number: "4.9/5", label: "Average Rating", icon: "⭐" },
-                { number: "5000+", label: "Happy Clients", icon: "😊" },
-                { number: "98%", label: "Accuracy Rate", icon: "🎯" },
+                { number: "25000+", label: "Happy Clients", icon: "😊" },
+                { number: "100%", label: "Accuracy Rate", icon: "🎯" },
                 { number: "100%", label: "Satisfaction", icon: "💫" }
               ].map((stat, index) => (
                 <div key={index} className="text-center">
@@ -2010,9 +2084,7 @@ const FAQSection = () => {
 // Booking Info Section
 const BookingInfoSection = ({ setIsBookingOpen }) => {
   const workingHours = [
-    { day: "Monday - Friday", time: "9:00 AM - 9:00 PM" },
-    { day: "Saturday", time: "9:00 AM - 6:00 PM" },
-    { day: "Sunday", time: "10:00 AM - 4:00 PM" }
+    { day: "Monday - Saturday", time: "11:00 AM - 9:00 PM" }
   ];
 
   return (
@@ -2029,7 +2101,6 @@ const BookingInfoSection = ({ setIsBookingOpen }) => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
-          {/* Left - Booking Process */}
           <div className="space-y-6 sm:space-y-8">
             {[
               {
@@ -2075,11 +2146,9 @@ const BookingInfoSection = ({ setIsBookingOpen }) => {
             </button>
           </div>
 
-          {/* Right - Working Hours & Pricing */}
           <div className="bg-gray-900/80 rounded-2xl p-6 sm:p-8 border border-gray-700 backdrop-blur-sm">
             <h3 className="text-white font-bold text-xl sm:text-2xl mb-6">Working Hours & Charges</h3>
             
-            {/* Working Hours */}
             <div className="mb-6 sm:mb-8">
               <h4 className="text-purple-400 font-semibold text-base sm:text-lg mb-4">Available Hours</h4>
               <div className="space-y-3">
@@ -2092,7 +2161,6 @@ const BookingInfoSection = ({ setIsBookingOpen }) => {
               </div>
             </div>
 
-            {/* Pricing */}
             <div>
               <h4 className="text-purple-400 font-semibold text-base sm:text-lg mb-4">Service Charges</h4>
               <div className="space-y-3">
@@ -2100,36 +2168,26 @@ const BookingInfoSection = ({ setIsBookingOpen }) => {
                   <span className="text-gray-300 text-sm sm:text-base">Kundli Reading</span>
                   <span className="text-white font-medium text-sm sm:text-base">₹300</span>
                 </div>
+                
                 <div className="flex justify-between items-center py-2">
-                  <span className="text-gray-300 text-sm sm:text-base">First Consultation</span>
-                  <span className="text-green-400 font-medium text-sm sm:text-base">FREE</span>
-                </div>
-                <div className="flex justify-between items-center py-2">
-                  <span className="text-gray-300 text-sm sm:text-base">Follow-up Consultation</span>
-                  <span className="text-white font-medium text-sm sm:text-base">₹300/hour</span>
-                </div>
-                <div className="flex justify-between items-center py-2">
-                  <span className="text-gray-300 text-sm sm:text-base">Extra 30 minutes</span>
-                  <span className="text-white font-medium text-sm sm:text-base">+₹150</span>
-                </div>
-                <div className="flex justify-between items-center py-2">
-                  <span className="text-gray-300 text-sm sm:text-base">Extra 1 hour</span>
-                  <span className="text-white font-medium text-sm sm:text-base">+₹300</span>
-                </div>
-                <div className="flex justify-between items-center py-2">
-                  <span className="text-gray-300 text-sm sm:text-base">Palm Reading</span>
-                  <span className="text-white font-medium text-sm sm:text-base">₹500</span>
+                  <span className="text-gray-300 text-sm sm:text-base">Personal Consultation</span>
+                  <span className="text-white font-medium text-sm sm:text-base">₹300</span>
                 </div>
                 <div className="flex justify-between items-center py-2">
                   <span className="text-gray-300 text-sm sm:text-base">Marriage Compatibility</span>
-                  <span className="text-white font-medium text-sm sm:text-base">₹600</span>
+                  <span className="text-white font-medium text-sm sm:text-base">₹300</span>
                 </div>
+                <div className="flex justify-between items-center py-2">
+                  <span className="text-gray-300 text-sm sm:text-base">Career Guidance</span>
+                  <span className="text-white font-medium text-sm sm:text-base">₹500</span>
+                </div>
+              
               </div>
             </div>
 
             <div className="mt-6 sm:mt-8 p-3 sm:p-4 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-xl border border-purple-500/20">
               <p className="text-purple-300 text-xs sm:text-sm text-center">
-                📞 Direct WhatsApp: +91 85109 88703
+                Direct WhatsApp: +91 85109 88703
               </p>
               <p className="text-gray-400 text-xs text-center mt-1">
                 Urgent queries responded within 2 hours
@@ -2148,7 +2206,6 @@ const ContactCTASection = ({ setIsBookingOpen }) => {
     <section id="contact" className="py-16 sm:py-20 px-4 md:px-6 lg:px-12 bg-transparent">
       <div className="max-w-6xl mx-auto">
         <div className="bg-gradient-to-br from-purple-900/30 via-gray-900/50 to-pink-900/30 rounded-3xl p-6 sm:p-12 border border-white/10 backdrop-blur-lg relative overflow-hidden">
-          {/* Background Elements */}
           <div className="absolute top-0 right-0 w-32 h-32 sm:w-64 sm:h-64 bg-purple-500/10 rounded-full blur-3xl"></div>
           <div className="absolute bottom-0 left-0 w-48 h-48 sm:w-96 sm:h-96 bg-pink-500/10 rounded-full blur-3xl"></div>
           
@@ -2187,7 +2244,7 @@ const ContactCTASection = ({ setIsBookingOpen }) => {
                 {[
                   { icon: "⚡", text: "Instant WhatsApp Confirmation" },
                   { icon: "🎯", text: "100% Personalized Guidance" },
-                  { icon: "💫", text: "14+ Years Expert Experience" }
+                  { icon: "💫", text: "28+ Years Expert Experience" }
                 ].map((item, index) => (
                   <div key={index} className="flex items-center space-x-3 text-gray-300">
                     <div className="text-lg sm:text-xl">{item.icon}</div>
@@ -2223,7 +2280,6 @@ const Header = ({ setIsBookingOpen }) => {
           </div>
         </div>
 
-        {/* Desktop Navigation */}
         <nav className="hidden lg:flex space-x-6">
           {[
             { name: "Home", id: "home" },
@@ -2249,13 +2305,6 @@ const Header = ({ setIsBookingOpen }) => {
         </nav>
 
         <div className="flex items-center space-x-3 sm:space-x-4">
-          {/* Live Indicator */}
-          <div className="hidden md:flex items-center space-x-2 px-2 sm:px-3 py-1 sm:py-1.5 bg-green-500/20 rounded-full border border-green-500/30">
-            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-500 rounded-full animate-pulse"></div>
-            <span className="text-green-400 text-xs font-medium">Online Now</span>
-          </div>
-
-          {/* Mobile Menu Button */}
           <button 
             className="lg:hidden text-gray-400 hover:text-white"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -2278,7 +2327,6 @@ const Header = ({ setIsBookingOpen }) => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="lg:hidden absolute top-full left-0 right-0 bg-gray-900/95 backdrop-blur-xl border-b border-gray-800">
           <div className="px-4 sm:px-6 py-4 space-y-3">
@@ -2310,13 +2358,12 @@ const Header = ({ setIsBookingOpen }) => {
   );
 };
 
-// Footer Component (FIXED OPACITY)
+// Footer Component
 const Footer = () => {
   return (
     <footer className="bg-gray-900/95 border-t border-gray-800/50 py-12 sm:py-16 px-4 sm:px-6">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12">
-          {/* Brand & Description */}
           <div>
             <h3 className="text-xl sm:text-2xl font-black text-white mb-4 sm:mb-6">
               Rekha<span className="text-gradient">Sharma</span>
@@ -2327,7 +2374,7 @@ const Footer = () => {
             <div className="space-y-2">
               <p className="text-white/90 text-sm sm:text-base flex items-center space-x-2">
                 <span>📧</span>
-                <span>guidance@rekhasharma.com</span>
+                <span>rani25731@gmail.com</span>
               </p>
               <p className="text-white/90 text-sm sm:text-base flex items-center space-x-2">
                 <span>📱</span>
@@ -2336,7 +2383,6 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Quick Links */}
           <div>
             <h4 className="font-bold text-white text-lg mb-4 sm:mb-6">Quick Links</h4>
             <ul className="space-y-2 sm:space-y-3">
@@ -2353,7 +2399,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Services */}
           <div>
             <h4 className="font-bold text-white text-lg mb-4 sm:mb-6">Services</h4>
             <ul className="space-y-2 sm:space-y-3">
@@ -2367,7 +2412,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Social & Newsletter */}
           <div>
             <h4 className="font-bold text-white text-lg mb-4 sm:mb-6">Connect With Us</h4>
             <div className="space-y-3 sm:space-y-4">
@@ -2382,15 +2426,6 @@ const Footer = () => {
                     {icon}
                   </a>
                 ))}
-              </div>
-              
-              <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-purple-500/20 rounded-xl border border-purple-500/30">
-                <p className="text-purple-300 text-sm">
-                  <span className="text-green-400">📞</span> Emergency guidance available 24/7 on WhatsApp
-                </p>
-                <p className="text-white/80 text-xs sm:text-sm mt-1">
-                  Instant response for urgent consultations
-                </p>
               </div>
             </div>
           </div>
@@ -2428,7 +2463,6 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
-  // Force opacity fix on mount
   useEffect(() => {
     setTimeout(() => {
       const allElements = document.querySelectorAll('*');
@@ -2467,7 +2501,6 @@ export default function Home() {
       <ServicesSection setIsBookingOpen={setIsBookingOpen} />
       <TestimonialsSection />
       
-      {/* NEW EDUCATIONAL SECTIONS */}
       <VedicAstrologyFoundations />
       <ZodiacSignCharacteristics />
       <AstrologicalRemediesGuide />
@@ -2477,7 +2510,6 @@ export default function Home() {
       <ContactCTASection setIsBookingOpen={setIsBookingOpen} />
       <Footer />
 
-      {/* Booking Form Modal */}
       {isBookingOpen && (
         <BookingForm 
           isOpen={isBookingOpen} 
@@ -2485,9 +2517,7 @@ export default function Home() {
         />
       )}
 
-      {/* Floating Action Buttons */}
       <div className="fixed bottom-4 sm:bottom-6 right-4 sm:right-6 flex flex-col items-end space-y-3 sm:space-y-4 z-40 floating-layer">
-        {/* WhatsApp Button */}
         <button
           className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center text-xl sm:text-2xl shadow-2xl hover:shadow-green-500/30 hover:scale-110 transition-all duration-300 animate-pulse-glow"
           onClick={() => window.open('https://wa.me/918510988703', '_blank')}
@@ -2496,7 +2526,6 @@ export default function Home() {
           <span>💬</span>
         </button>
 
-        {/* Book Now Button */}
         <button
           className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center text-xl sm:text-2xl shadow-2xl hover:shadow-purple-500/30 hover:scale-110 transition-all duration-300"
           onClick={() => setIsBookingOpen(true)}
@@ -2505,7 +2534,6 @@ export default function Home() {
           <span>📅</span>
         </button>
 
-        {/* Call Button (for mobile) */}
         <button
           className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-xl sm:text-2xl shadow-2xl hover:shadow-blue-500/30 hover:scale-110 transition-all duration-300 lg:hidden"
           onClick={() => window.location.href = 'tel:+918510988703'}
@@ -2515,7 +2543,6 @@ export default function Home() {
         </button>
       </div>
 
-      {/* Scroll to Top Button */}
       <button
         className="fixed bottom-4 sm:bottom-6 left-4 sm:left-6 w-10 h-10 sm:w-12 sm:h-12 bg-gray-900/80 backdrop-blur-sm border border-gray-700 rounded-full flex items-center justify-center text-white hover:border-purple-500 transition-colors z-40 floating-layer"
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
