@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef} from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from 'next/image';
 import "./globals.css";
 import { addBooking, getBookingsByDate } from '@/lib/firebase';
@@ -468,15 +468,50 @@ const BookingForm = ({ isOpen, onClose }) => {
     return `${displayHour}:${minute.toString().padStart(2, '0')} ${ampm}`;
   };
 
-  // Get next 30 days
+  // Get next 30 available dates (skip Sundays and manually closed dates)
   const getNext30Days = () => {
     const dates = [];
     const today = new Date();
-    for (let i = 0; i < 30; i++) {
+    
+    // Load closed dates from localStorage
+    let manualClosedDates = [];
+    if (typeof window !== 'undefined') {
+      const storedDates = localStorage.getItem('rekhaClosedDates');
+      if (storedDates) {
+        manualClosedDates = JSON.parse(storedDates);
+      }
+    }
+    
+    for (let i = 0; i < 60; i++) { // Check next 60 days to get 30 available dates
       const date = new Date(today);
       date.setDate(today.getDate() + i);
-      dates.push(date.toISOString().split('T')[0]);
+      
+      // Skip if it's Sunday (day 0)
+      if (date.getDay() === 0) {
+        continue;
+      }
+      
+      const dateStr = date.toISOString().split('T')[0];
+      
+      // Skip manually closed dates
+      if (manualClosedDates.includes(dateStr)) {
+        continue;
+      }
+      
+      // Skip dates in the past
+      const todayStr = today.toISOString().split('T')[0];
+      if (dateStr < todayStr) {
+        continue;
+      }
+      
+      dates.push(dateStr);
+      
+      // Stop when we have 30 available dates
+      if (dates.length >= 30) {
+        break;
+      }
     }
+    
     return dates;
   };
 
@@ -505,11 +540,12 @@ const BookingForm = ({ isOpen, onClose }) => {
             end: endTime,
             service: booking.serviceType,
             bookingId: booking.bookingId || booking.id,
-            customer: booking.name
+            customer: booking.name,
+            cancelled: booking.cancelled || false
           };
-        });
+        }).filter(booking => !booking.cancelled); // Filter out cancelled bookings
         
-        console.log(`📊 Found ${bookedSlots.length} booked slots`);
+        console.log(`📊 Found ${bookedSlots.length} active booked slots`);
         return bookedSlots;
       }
       
@@ -531,16 +567,22 @@ const BookingForm = ({ isOpen, onClose }) => {
   // Check if slot is in the past
   const isSlotInPast = (slotTime, selectedDate) => {
     const today = new Date();
+    const todayStr = today.toISOString().split('T')[0];
     const selectedDateObj = new Date(selectedDate);
+    const selectedDateStr = selectedDateObj.toISOString().split('T')[0];
+    
+    // If selected date is in the past
+    if (selectedDateStr < todayStr) {
+      return true;
+    }
     
     // If selected date is today
-    if (selectedDateObj.toDateString() === today.toDateString()) {
+    if (selectedDateStr === todayStr) {
       const currentTime = getCurrentTime();
       return slotTime < currentTime;
     }
     
-    // If selected date is in the past (shouldn't happen with getNext30Days)
-    return selectedDateObj < today;
+    return false;
   };
 
   // Get available slots
@@ -551,9 +593,15 @@ const BookingForm = ({ isOpen, onClose }) => {
     const bookedSlots = await fetchBookedSlotsForDate(date);
     const duration = serviceDurations[serviceType] || 60;
     const availableSlots = [];
-    const currentTime = getCurrentTime();
     const selectedDate = new Date(date);
     const today = new Date();
+    const todayStr = today.toISOString().split('T')[0];
+    const selectedDateStr = selectedDate.toISOString().split('T')[0];
+
+    // Skip if date is in the past
+    if (selectedDateStr < todayStr) {
+      return [];
+    }
 
     // Check each slot
     allSlots.forEach(slot => {
@@ -566,7 +614,7 @@ const BookingForm = ({ isOpen, onClose }) => {
       const endSlot = `${endHour.toString().padStart(2, '0')}:${endMinute.toString().padStart(2, '0')}`;
       
       // Check if slot is in the past for today
-      if (selectedDate.toDateString() === today.toDateString()) {
+      if (selectedDateStr === todayStr) {
         if (isSlotInPast(slot, date)) {
           return; // Skip past slots for today
         }
@@ -605,6 +653,74 @@ const BookingForm = ({ isOpen, onClose }) => {
     
     console.log(`✅ Available slots found: ${availableSlots.length}`);
     return availableSlots;
+  };
+
+  // Send WhatsApp message with cancellation links
+  const sendBookingConfirmation = async (bookingData, bookingId) => {
+    const serviceInfo = serviceDetails[bookingData.serviceType];
+    const appointmentTypeText = bookingData.appointmentType === 'video' ? 'Video Call' : 'In-Person';
+    const baseUrl = window.location.origin;
+    
+    // Generate WhatsApp message with cancellation option
+    const message = `🌟 *NEW APPOINTMENT BOOKING* 🌟%0A%0A` +
+                   `*Booking ID:* ${bookingId}%0A` +
+                   `*Date:* ${new Date(bookingData.appointmentDate).toLocaleDateString('en-IN', {
+                     weekday: 'long',
+                     day: 'numeric',
+                     month: 'long',
+                     year: 'numeric'
+                   })}%0A` +
+                   `*Time:* ${formatTime(bookingData.timeSlot)} - ${formatTime(bookingData.endTime)}%0A` +
+                   `*Service:* ${serviceInfo.name}%0A` +
+                   `*Duration:* ${serviceInfo.duration}%0A` +
+                   `*Type:* ${appointmentTypeText}%0A` +
+                   `*Charges:* ₹${calculateCharges()}%0A%0A` +
+                   `*Client Details*%0A` +
+                   `👤 Name: ${bookingData.name}%0A` +
+                   `📱 Phone: ${bookingData.phone}%0A` +
+                   `${bookingData.email ? `📧 Email: ${bookingData.email}%0A` : ''}` +
+                   `${bookingData.gender ? `⚧ Gender: ${bookingData.gender}%0A` : ''}` +
+                   `${bookingData.maritalStatus ? `💍 Status: ${bookingData.maritalStatus}%0A` : ''}` +
+                   `%0A*Birth Details*%0A` +
+                   `🎂 DOB: ${bookingData.dateOfBirth}%0A` +
+                   `${bookingData.timeOfBirth ? `⏰ Time: ${bookingData.timeOfBirth}%0A` : ''}` +
+                   `📍 Place: ${bookingData.placeOfBirth}%0A%0A` +
+                   `${bookingData.specialRequest ? `*Special Request:*%0A${bookingData.specialRequest}%0A%0A` : ''}` +
+                   `---%0A` +
+                   `*🔄 CANCELLATION LINKS:*%0A` +
+                   `1. *User Cancel:* ${baseUrl}/cancel/${bookingId}%0A` +
+                   `2. *Rekha Ji Cancel:* ${baseUrl}/admin/cancel/${bookingId}%0A` +
+                   `3. *Slot reopen if cancelled 1+ hours before appointment*%0A` +
+                   `---%0A` +
+                   `✅ *Please confirm this booking* ✅%0A%0A` +
+                   `_Booked via Rekha Sharma Astrology Website_`;
+    
+    // Send to Rekha Ji's WhatsApp
+    const rekhaWhatsappURL = `https://wa.me/918510988703?text=${message}`;
+    
+    // Also send to user if they have WhatsApp
+    const userMessage = `✅ *Booking Confirmed!* ✅%0A%0A` +
+                       `*Booking ID:* ${bookingId}%0A` +
+                       `*Date:* ${new Date(bookingData.appointmentDate).toLocaleDateString('en-IN', {
+                         weekday: 'short',
+                         day: 'numeric',
+                         month: 'short'
+                       })}%0A` +
+                       `*Time:* ${formatTime(bookingData.timeSlot)} - ${formatTime(bookingData.endTime)}%0A` +
+                       `*Service:* ${serviceInfo.name}%0A` +
+                       `*Type:* ${appointmentTypeText}%0A` +
+                       `*Charges:* ₹${calculateCharges()}%0A%0A` +
+                       `📝 *Need to cancel?*%0A` +
+                       `Click: ${baseUrl}/cancel/${bookingId}%0A` +
+                       `%0A_Cancellation available until 1 hour before appointment_`;
+    
+    const userWhatsappURL = `https://wa.me/91${bookingData.phone}?text=${userMessage}`;
+    
+    // Open both in new tabs
+    window.open(rekhaWhatsappURL, '_blank');
+    setTimeout(() => {
+      window.open(userWhatsappURL, '_blank');
+    }, 1000);
   };
 
   useEffect(() => {
@@ -705,7 +821,9 @@ const BookingForm = ({ isOpen, onClose }) => {
         maritalStatus: (formData.maritalStatus || '').trim(),
         specialRequest: (formData.specialRequest || '').trim(),
         charges: calculateCharges(),
-        whatsappSent: false
+        whatsappSent: false,
+        cancelled: false,
+        status: 'confirmed'
       };
 
       console.log('💾 Saving to Firebase...', bookingData);
@@ -714,46 +832,11 @@ const BookingForm = ({ isOpen, onClose }) => {
       const result = await addBooking(bookingData);
       
       if (result.success) {
-        // Generate WhatsApp message
-        const appointmentTypeText = formData.appointmentType === 'video' ? 'Video Call' : 'In-Person';
-        const serviceInfo = serviceDetails[formData.serviceType];
-        
-        const message = `🌟 *NEW APPOINTMENT BOOKING* 🌟%0A%0A` +
-                       `*Booking ID:* ${result.bookingId}%0A` +
-                       `*Date:* ${new Date(formData.appointmentDate).toLocaleDateString('en-IN', {
-                         weekday: 'long',
-                         day: 'numeric',
-                         month: 'long',
-                         year: 'numeric'
-                       })}%0A` +
-                       `*Time:* ${formatTime(formData.timeSlot)} - ${formatTime(endTime)}%0A` +
-                       `*Service:* ${serviceInfo.name}%0A` +
-                       `*Duration:* ${serviceInfo.duration}%0A` +
-                       `*Type:* ${appointmentTypeText}%0A` +
-                       `*Charges:* ₹${calculateCharges()}%0A%0A` +
-                       `*Client Details*%0A` +
-                       `👤 Name: ${formData.name}%0A` +
-                       `📱 Phone: ${formData.phone}%0A` +
-                       `${formData.email ? `📧 Email: ${formData.email}%0A` : ''}` +
-                       `${formData.gender ? `⚧ Gender: ${formData.gender}%0A` : ''}` +
-                       `${formData.maritalStatus ? `💍 Status: ${formData.maritalStatus}%0A` : ''}` +
-                       `%0A*Birth Details*%0A` +
-                       `🎂 DOB: ${formData.dateOfBirth}%0A` +
-                       `${formData.timeOfBirth ? `⏰ Time: ${formData.timeOfBirth}%0A` : ''}` +
-                       `📍 Place: ${formData.placeOfBirth}%0A%0A` +
-                       `${formData.specialRequest ? `*Special Request:*%0A${formData.specialRequest}%0A%0A` : ''}` +
-                       `✅ *Please confirm this booking* ✅%0A%0A` +
-                       `_Booked via Rekha Sharma Astrology Website_`;
-        
-        const whatsappURL = `https://wa.me/918510988703?text=${message}`;
+        // Send WhatsApp messages with cancellation links
+        await sendBookingConfirmation(bookingData, result.bookingId);
         
         // Show success message
-        alert(`✅ Booking confirmed!\n\nBooking ID: ${result.bookingId}\n\nOpening WhatsApp to send details...`);
-        
-        // Open WhatsApp
-        setTimeout(() => {
-          window.open(whatsappURL, '_blank');
-        }, 1000);
+        alert(`✅ Booking confirmed!\n\nBooking ID: ${result.bookingId}\n\nWhatsApp messages opened for confirmation...`);
         
         // Reset form
         setFormData({
@@ -1105,6 +1188,9 @@ const BookingForm = ({ isOpen, onClose }) => {
                       </option>
                     ))}
                   </select>
+                  <p className="text-gray-400 text-xs mt-1">
+                    Sundays automatically excluded
+                  </p>
                 </div>
 
                 <div>
@@ -1328,6 +1414,9 @@ const BookingForm = ({ isOpen, onClose }) => {
                   </div>
                   <p className="text-gray-300 text-xs">
                     Payment to be made directly to Rekha Sharma Ji after service completion
+                  </p>
+                  <p className="text-yellow-400 text-xs mt-1">
+                    ⚠️ Cancellation available until 1 hour before appointment
                   </p>
                 </div>
 

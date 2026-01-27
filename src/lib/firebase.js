@@ -1,5 +1,18 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, addDoc, getDocs, query, where, Timestamp } from "firebase/firestore";
+import { 
+  getFirestore, 
+  collection, 
+  addDoc, 
+  getDocs, 
+  query, 
+  where, 
+  Timestamp,
+  deleteDoc,
+  doc,
+  getDoc,
+  setDoc,
+  updateDoc 
+} from "firebase/firestore";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -42,7 +55,10 @@ export const addBooking = async (bookingData) => {
       updatedAt: Timestamp.now(),
       status: 'confirmed',
       whatsappSent: false,
-      paymentStatus: 'pending'
+      paymentStatus: 'pending',
+      cancelled: false,
+      cancelledBy: null,
+      cancelledAt: null
     });
     
     console.log("✅ Booking saved with ID:", docRef.id, "Booking ID:", bookingId);
@@ -69,7 +85,7 @@ export const getBookingsByDate = async (date) => {
     const q = query(
       bookingsCollection, 
       where("appointmentDate", "==", date),
-      where("status", "==", "confirmed")
+      where("cancelled", "==", false)  // Only non-cancelled bookings
     );
     
     const querySnapshot = await getDocs(q);
@@ -86,7 +102,7 @@ export const getBookingsByDate = async (date) => {
       });
     });
     
-    console.log(`📊 Found ${bookings.length} bookings for ${date}`);
+    console.log(`📊 Found ${bookings.length} active bookings for ${date}`);
     return { success: true, data: bookings };
   } catch (error) {
     console.error("❌ Error fetching bookings:", error);
@@ -98,7 +114,92 @@ export const getBookingsByDate = async (date) => {
   }
 };
 
-// Function to get all bookings
+// Function to get booking by ID
+export const getBookingById = async (bookingId) => {
+  try {
+    const q = query(bookingsCollection, where("bookingId", "==", bookingId));
+    const querySnapshot = await getDocs(q);
+    
+    if (!querySnapshot.empty) {
+      const doc = querySnapshot.docs[0];
+      const data = doc.data();
+      return {
+        success: true,
+        data: {
+          id: doc.id,
+          ...data,
+          createdAt: data.createdAt?.toDate()?.toISOString(),
+          updatedAt: data.updatedAt?.toDate()?.toISOString()
+        }
+      };
+    }
+    
+    return { success: false, error: "Booking not found" };
+  } catch (error) {
+    console.error("Error fetching booking:", error);
+    return { success: false, error: error.message };
+  }
+};
+
+// Function to cancel booking
+export const cancelBooking = async (bookingId, cancelledBy = "user") => {
+  try {
+    console.log(`🔴 Cancelling booking: ${bookingId} by ${cancelledBy}`);
+    
+    // First find the booking by bookingId
+    const q = query(bookingsCollection, where("bookingId", "==", bookingId));
+    const querySnapshot = await getDocs(q);
+    
+    if (querySnapshot.empty) {
+      return { success: false, error: "Booking not found" };
+    }
+    
+    const docRef = querySnapshot.docs[0].ref;
+    const bookingData = querySnapshot.docs[0].data();
+    
+    // Check if booking is already cancelled
+    if (bookingData.cancelled) {
+      return { success: false, error: "Booking already cancelled" };
+    }
+    
+    // Check if cancellation is allowed (minimum 1 hour before appointment)
+    const appointmentDate = new Date(bookingData.appointmentDate);
+    const appointmentTime = bookingData.timeSlot.split(':');
+    appointmentDate.setHours(parseInt(appointmentTime[0]), parseInt(appointmentTime[1]), 0);
+    
+    const now = new Date();
+    const hoursDifference = (appointmentDate - now) / (1000 * 60 * 60);
+    
+    console.log(`⏰ Time difference: ${hoursDifference.toFixed(2)} hours`);
+    
+    // If less than 1 hour, slot won't reopen
+    const slotReopen = hoursDifference >= 1;
+    
+    // Update booking status to cancelled
+    await updateDoc(docRef, {
+      status: 'cancelled',
+      cancelled: true,
+      cancelledBy: cancelledBy,
+      cancelledAt: Timestamp.now(),
+      updatedAt: Timestamp.now(),
+      slotReopen: slotReopen
+    });
+    
+    console.log("✅ Booking cancelled:", bookingId);
+    return { 
+      success: true, 
+      message: "Booking cancelled successfully",
+      slotReopen: slotReopen,
+      appointmentDate: bookingData.appointmentDate,
+      appointmentTime: bookingData.timeSlot
+    };
+  } catch (error) {
+    console.error("❌ Error cancelling booking:", error);
+    return { success: false, error: error.message };
+  }
+};
+
+// Get all bookings (for admin use)
 export const getAllBookings = async () => {
   try {
     const querySnapshot = await getDocs(bookingsCollection);
