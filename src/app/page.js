@@ -438,16 +438,24 @@ const BookingForm = ({ isOpen, onClose }) => {
     'horoscope': { name: 'Yearly Horoscope', price: 500, duration: '1 Hour' }
   };
 
-  // Generate time slots (9:00 AM to 9:00 PM)
+  // Generate time slots (11:00 AM to 9:00 PM) - UPDATED WORKING HOURS
   const generateTimeSlots = () => {
     const slots = [];
-    for (let hour = 9; hour <= 21; hour++) {
+    
+    // Client working hours: 11:00 AM to 9:00 PM (21:00)
+    const startHour = 11; // 11 AM
+    const endHour = 21; // 9 PM
+    
+    for (let hour = startHour; hour <= endHour; hour++) {
       for (let minute = 0; minute < 60; minute += 30) {
+        // Stop if we reach 9:00 PM
         if (hour === 21 && minute > 0) break;
+        
         const time = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
         slots.push(time);
       }
     }
+    
     return slots;
   };
 
@@ -512,6 +520,29 @@ const BookingForm = ({ isOpen, onClose }) => {
     }
   };
 
+  // Get current time in HH:MM format
+  const getCurrentTime = () => {
+    const now = new Date();
+    const hours = now.getHours().toString().padStart(2, '0');
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    return `${hours}:${minutes}`;
+  };
+
+  // Check if slot is in the past
+  const isSlotInPast = (slotTime, selectedDate) => {
+    const today = new Date();
+    const selectedDateObj = new Date(selectedDate);
+    
+    // If selected date is today
+    if (selectedDateObj.toDateString() === today.toDateString()) {
+      const currentTime = getCurrentTime();
+      return slotTime < currentTime;
+    }
+    
+    // If selected date is in the past (shouldn't happen with getNext30Days)
+    return selectedDateObj < today;
+  };
+
   // Get available slots
   const getAvailableSlotsForDate = async (date, serviceType) => {
     console.log(`🔍 Getting slots for ${date}, ${serviceType}`);
@@ -520,6 +551,9 @@ const BookingForm = ({ isOpen, onClose }) => {
     const bookedSlots = await fetchBookedSlotsForDate(date);
     const duration = serviceDurations[serviceType] || 60;
     const availableSlots = [];
+    const currentTime = getCurrentTime();
+    const selectedDate = new Date(date);
+    const today = new Date();
 
     // Check each slot
     allSlots.forEach(slot => {
@@ -530,6 +564,18 @@ const BookingForm = ({ isOpen, onClose }) => {
       const endHour = slotHour + Math.floor((slotMinute + duration) / 60);
       const endMinute = (slotMinute + duration) % 60;
       const endSlot = `${endHour.toString().padStart(2, '0')}:${endMinute.toString().padStart(2, '0')}`;
+      
+      // Check if slot is in the past for today
+      if (selectedDate.toDateString() === today.toDateString()) {
+        if (isSlotInPast(slot, date)) {
+          return; // Skip past slots for today
+        }
+      }
+      
+      // Check working hours (end time should not exceed 9:00 PM)
+      if (endHour > 21 || (endHour === 21 && endMinute > 0)) {
+        return;
+      }
       
       // Check if slot conflicts with booked slots
       let isAvailable = true;
@@ -546,11 +592,6 @@ const BookingForm = ({ isOpen, onClose }) => {
           isAvailable = false;
           break;
         }
-      }
-      
-      // Check working hours
-      if (endHour > 21 || (endHour === 21 && endMinute > 0)) {
-        isAvailable = false;
       }
       
       if (isAvailable) {
@@ -1094,7 +1135,7 @@ const BookingForm = ({ isOpen, onClose }) => {
                   
                   {formData.appointmentDate && selectedDateSlots.length > 0 && (
                     <p className="text-green-400 text-xs mt-1">
-                      ✅ Real-time availability checked
+                      ✅ Showing available slots from current time
                     </p>
                   )}
                   
@@ -1405,7 +1446,7 @@ const InteractiveBackground = () => {
 // Astrologer Hero Section
 const AstrologerHero = ({ setIsBookingOpen }) => {
   const [currentWord, setCurrentWord] = useState(0);
-  const words = ["Rekha Sharma Ji", "Vedic Astrology", "Kundli", "Palmistry", "Numerology"];
+  const words = ["Career Guidance", "Vedic Astrology", "Kundli", "Palmistry", "Numerology", "Lal Kitab", "Marriage Matching", "Vastu Shastra"];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -1445,7 +1486,7 @@ const AstrologerHero = ({ setIsBookingOpen }) => {
               </div>
 
               <p className="text-gray-300 text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto px-4">
-                With 14+ years of experience in Vedic astrology, I've guided thousands towards 
+                With 28+ years of experience in Vedic astrology, I've guided thousands towards 
                 clarity, purpose, and success through celestial wisdom.
               </p>
             </div>
@@ -1486,9 +1527,9 @@ const AstrologerHero = ({ setIsBookingOpen }) => {
 
             <div className="flex flex-wrap justify-center gap-6 sm:gap-12 max-w-md mx-auto">
               {[
-                { number: "14+", label: "Years", icon: "📅" },
-                { number: "5000+", label: "Clients", icon: "👥" },
-                { number: "98%", label: "Accuracy", icon: "🎯" },
+                { number: "28+", label: "Years", icon: "📅" },
+                { number: "25000+", label: "Clients", icon: "👥" },
+                { number: "100%", label: "Accuracy", icon: "🎯" },
                 { number: "24/7", label: "Support", icon: "💬" }
               ].map((stat, index) => (
                 <div
@@ -1525,9 +1566,8 @@ const AstrologerHero = ({ setIsBookingOpen }) => {
 
             <div className="text-gray-400 text-xs sm:text-sm bg-white/5 rounded-xl p-3 sm:p-4 max-w-md mx-auto border border-white/10">
               <p className="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-4">
-                <span>Kundli Reading: <span className="text-purple-400 font-semibold">₹300</span></span>
-                <span className="hidden sm:inline">•</span>
-                <span>Consultation: <span className="text-green-400 font-semibold">First Free</span>, then <span className="text-purple-400 font-semibold">₹300/hr</span></span>
+                
+                <span>Consultation: <span className="text-green-400 font-semibold"></span><span className="text-purple-400 font-semibold">₹300/hr</span></span>
               </p>
             </div>
           </div>
@@ -1593,13 +1633,7 @@ const AboutAstrologer = () => {
                   </span>
                 </div>
                 
-                <div className="mb-6">
-                  <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-yellow-500/20 to-amber-500/20 px-4 py-2 rounded-full border border-yellow-500/30">
-                    <span className="text-yellow-400">👨‍🦳👨‍🦰👩</span>
-                    <span className="text-yellow-300 text-sm font-medium">3 Generations Legacy</span>
-                  </div>
-                  <p className="text-gray-400 text-xs mt-2">Grandfather → Father → Rekha Ji</p>
-                </div>
+               
                 
                 <div className="grid grid-cols-2 gap-3 mb-6">
                   <div className="text-center p-3 sm:p-4 bg-white/5 rounded-xl hover:bg-white/10 transition-colors">
@@ -1710,7 +1744,6 @@ const AboutAstrologer = () => {
                     key={index}
                     className={`bg-gradient-to-br ${item.color} rounded-xl p-3 sm:p-4 border ${item.border} hover:border-purple-500/50 transition-all duration-300 group hover:scale-[1.02]`}
                   >
-                    <div className="text-2xl sm:text-3xl mb-2 group-hover:scale-110 transition-transform duration-300">🌟</div>
                     <div className="text-white font-bold text-sm sm:text-base mb-1">{item.title}</div>
                     <div className="text-gray-300 text-[11px] sm:text-xs leading-tight">{item.desc}</div>
                   </div>
@@ -1913,6 +1946,30 @@ const TestimonialsSection = () => {
       service: "Vastu Consultation",
       rating: 5,
       date: "5 months ago",
+      verified: true
+    },
+    {
+      name: "bablu Bisht",
+      text: "Marriage Compatiblity session was enlightening. It helped me understand my partner better and strengthened our bond.",
+      service: "Marriage Compatibility",
+      rating: 5,
+      date: "4 months ago",
+      verified: true
+    },
+    {
+      name: "Karan Negi",
+      text: "Career guidance transformed my life. My startup is now profitable thanks to her timing advice.",
+      service: "Career Guidance",
+      rating: 5,
+      date: "1 month ago",
+      verified: true
+    },
+    {
+      name: "Anju Rawat",
+      text: "Vastu consultation transformed my home energy. Family disputes reduced and positive atmosphere increased within weeks.",
+      service: "Vastu Consultation",
+      rating: 5,
+      date: "8 months ago",
       verified: true
     }
   ];
@@ -2438,7 +2495,7 @@ const Footer = () => {
                 © {new Date().getFullYear()} Rekha Sharma Astrology Services. All divine wisdom reserved.
               </p>
               <p className="text-white/60 text-xs">
-                Trusted by 5000+ clients across India
+                Trusted by 25000+ clients across Worldwide for 28+ years.
               </p>
             </div>
             <div className="flex space-x-4 sm:space-x-6 mt-4 md:mt-0">
