@@ -659,7 +659,7 @@ const BookingForm = ({ isOpen, onClose }) => {
   const sendBookingConfirmation = async (bookingData, bookingId) => {
     const serviceInfo = serviceDetails[bookingData.serviceType];
     const appointmentTypeText = bookingData.appointmentType === 'video' ? 'Video Call' : 'In-Person';
-    const baseUrl = window.location.origin;
+    const baseUrl = "https://astrologer-rekhasharma.netlify.app";
     
     // Generate WhatsApp message with cancellation option
     const message = `🌟 *NEW APPOINTMENT BOOKING* 🌟%0A%0A` +
