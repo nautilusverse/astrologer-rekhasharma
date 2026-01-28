@@ -468,7 +468,7 @@ const BookingForm = ({ isOpen, onClose }) => {
     return `${displayHour}:${minute.toString().padStart(2, '0')} ${ampm}`;
   };
 
-  // Get next 30 available dates (skip Sundays and manually closed dates)
+  // Get next 30 available dates (skip Sundays and manually closed dates) - UPDATED: CURRENT DATE SE SHURU
   const getNext30Days = () => {
     const dates = [];
     const today = new Date();
@@ -482,6 +482,7 @@ const BookingForm = ({ isOpen, onClose }) => {
       }
     }
     
+    // Start from today (not tomorrow)
     for (let i = 0; i < 60; i++) { // Check next 60 days to get 30 available dates
       const date = new Date(today);
       date.setDate(today.getDate() + i);
@@ -492,19 +493,34 @@ const BookingForm = ({ isOpen, onClose }) => {
       }
       
       const dateStr = date.toISOString().split('T')[0];
+      const todayStr = today.toISOString().split('T')[0];
       
       // Skip manually closed dates
       if (manualClosedDates.includes(dateStr)) {
         continue;
       }
       
-      // Skip dates in the past
-      const todayStr = today.toISOString().split('T')[0];
-      if (dateStr < todayStr) {
-        continue;
+      // If date is today, check if current time is past working hours
+      if (dateStr === todayStr) {
+        const currentHour = today.getHours();
+        const currentMinute = today.getMinutes();
+        const currentTime = currentHour * 60 + currentMinute;
+        
+        // If current time is after 9 PM (21:00), skip today
+        if (currentTime >= 21 * 60) {
+          continue;
+        }
+        
+        // If current time is after 8:30 PM, skip today (last slot starts at 8:30 PM)
+        if (currentTime >= (20 * 60 + 30)) {
+          continue;
+        }
       }
       
-      dates.push(dateStr);
+      // Only add dates from today onwards
+      if (dateStr >= todayStr) {
+        dates.push(dateStr);
+      }
       
       // Stop when we have 30 available dates
       if (dates.length >= 30) {
@@ -512,6 +528,7 @@ const BookingForm = ({ isOpen, onClose }) => {
       }
     }
     
+    console.log("📅 Available dates:", dates);
     return dates;
   };
 
@@ -556,36 +573,13 @@ const BookingForm = ({ isOpen, onClose }) => {
     }
   };
 
-  // Get current time in HH:MM format
-  const getCurrentTime = () => {
+  // Get current time in minutes from midnight
+  const getCurrentTimeInMinutes = () => {
     const now = new Date();
-    const hours = now.getHours().toString().padStart(2, '0');
-    const minutes = now.getMinutes().toString().padStart(2, '0');
-    return `${hours}:${minutes}`;
+    return now.getHours() * 60 + now.getMinutes();
   };
 
-  // Check if slot is in the past
-  const isSlotInPast = (slotTime, selectedDate) => {
-    const today = new Date();
-    const todayStr = today.toISOString().split('T')[0];
-    const selectedDateObj = new Date(selectedDate);
-    const selectedDateStr = selectedDateObj.toISOString().split('T')[0];
-    
-    // If selected date is in the past
-    if (selectedDateStr < todayStr) {
-      return true;
-    }
-    
-    // If selected date is today
-    if (selectedDateStr === todayStr) {
-      const currentTime = getCurrentTime();
-      return slotTime < currentTime;
-    }
-    
-    return false;
-  };
-
-  // Get available slots
+  // Get available slots - IMPROVED TIME FILTERING (CURRENT TIME KE HISAB SE)
   const getAvailableSlotsForDate = async (date, serviceType) => {
     console.log(`🔍 Getting slots for ${date}, ${serviceType}`);
     
@@ -598,25 +592,29 @@ const BookingForm = ({ isOpen, onClose }) => {
     const todayStr = today.toISOString().split('T')[0];
     const selectedDateStr = selectedDate.toISOString().split('T')[0];
 
-    // Skip if date is in the past
-    if (selectedDateStr < todayStr) {
-      return [];
-    }
+    // Get current time in minutes
+    const currentTimeMinutes = getCurrentTimeInMinutes();
 
     // Check each slot
     allSlots.forEach(slot => {
       const slotHour = parseInt(slot.split(':')[0]);
       const slotMinute = parseInt(slot.split(':')[1]);
+      const slotTimeMinutes = slotHour * 60 + slotMinute;
       
       // Calculate end time
       const endHour = slotHour + Math.floor((slotMinute + duration) / 60);
       const endMinute = (slotMinute + duration) % 60;
       const endSlot = `${endHour.toString().padStart(2, '0')}:${endMinute.toString().padStart(2, '0')}`;
       
-      // Check if slot is in the past for today
+      // Skip if selected date is today and slot is in the past
       if (selectedDateStr === todayStr) {
-        if (isSlotInPast(slot, date)) {
+        if (slotTimeMinutes < currentTimeMinutes) {
           return; // Skip past slots for today
+        }
+        
+        // Also skip if slot ends after 9 PM but starts before current time
+        if (endHour > 21 || (endHour === 21 && endMinute > 0)) {
+          return;
         }
       }
       
@@ -655,50 +653,62 @@ const BookingForm = ({ isOpen, onClose }) => {
     return availableSlots;
   };
 
-  // Send WhatsApp message with cancellation links
+  // Send WhatsApp message with cancellation links - UPDATED 3 HOURS RULE
   const sendBookingConfirmation = async (bookingData, bookingId) => {
     const serviceInfo = serviceDetails[bookingData.serviceType];
     const appointmentTypeText = bookingData.appointmentType === 'video' ? 'Video Call' : 'In-Person';
+    
+    // NETLIFY URL
     const baseUrl = "https://astrologer-rekhasharma.netlify.app";
     
-    // Generate WhatsApp message with cancellation option
-    const message = `🌟 *NEW APPOINTMENT BOOKING* 🌟%0A%0A` +
-                   `*Booking ID:* ${bookingId}%0A` +
-                   `*Date:* ${new Date(bookingData.appointmentDate).toLocaleDateString('en-IN', {
-                     weekday: 'long',
-                     day: 'numeric',
-                     month: 'long',
-                     year: 'numeric'
-                   })}%0A` +
-                   `*Time:* ${formatTime(bookingData.timeSlot)} - ${formatTime(bookingData.endTime)}%0A` +
-                   `*Service:* ${serviceInfo.name}%0A` +
-                   `*Duration:* ${serviceInfo.duration}%0A` +
-                   `*Type:* ${appointmentTypeText}%0A` +
-                   `*Charges:* ₹${calculateCharges()}%0A%0A` +
-                   `*Client Details*%0A` +
-                   `👤 Name: ${bookingData.name}%0A` +
-                   `📱 Phone: ${bookingData.phone}%0A` +
-                   `${bookingData.email ? `📧 Email: ${bookingData.email}%0A` : ''}` +
-                   `${bookingData.gender ? `⚧ Gender: ${bookingData.gender}%0A` : ''}` +
-                   `${bookingData.maritalStatus ? `💍 Status: ${bookingData.maritalStatus}%0A` : ''}` +
-                   `%0A*Birth Details*%0A` +
-                   `🎂 DOB: ${bookingData.dateOfBirth}%0A` +
-                   `${bookingData.timeOfBirth ? `⏰ Time: ${bookingData.timeOfBirth}%0A` : ''}` +
-                   `📍 Place: ${bookingData.placeOfBirth}%0A%0A` +
-                   `${bookingData.specialRequest ? `*Special Request:*%0A${bookingData.specialRequest}%0A%0A` : ''}` +
-                   `---%0A` +
-                   `*🔄 CANCELLATION LINKS:*%0A` +
-                   `1. *User Cancel:* ${baseUrl}/cancel/${bookingId}%0A` +
-                   `2. *Rekha Ji Cancel:* ${baseUrl}/admin/cancel/${bookingId}%0A` +
-                   `3. *Slot reopen if cancelled 1+ hours before appointment*%0A` +
-                   `---%0A` +
-                   `✅ *Please confirm this booking* ✅%0A%0A` +
-                   `_Booked via Rekha Sharma Astrology Website_`;
+    // Calculate appointment time for cancellation deadline
+    const appointmentDate = new Date(bookingData.appointmentDate);
+    const [hour, minute] = bookingData.timeSlot.split(':');
+    appointmentDate.setHours(parseInt(hour), parseInt(minute), 0);
+    
+    const deadlineTime = new Date(appointmentDate);
+    deadlineTime.setHours(appointmentDate.getHours() - 3); // 3 hours before
+    
+    // Generate WhatsApp message for Rekha Ji
+    const rekhaMessage = `🌟 *NEW APPOINTMENT BOOKING* 🌟%0A%0A` +
+                       `*Booking ID:* ${bookingId}%0A` +
+                       `*Date:* ${new Date(bookingData.appointmentDate).toLocaleDateString('en-IN', {
+                         weekday: 'long',
+                         day: 'numeric',
+                         month: 'long',
+                         year: 'numeric'
+                       })}%0A` +
+                       `*Time:* ${formatTime(bookingData.timeSlot)} - ${formatTime(bookingData.endTime)}%0A` +
+                       `*Service:* ${serviceInfo.name}%0A` +
+                       `*Duration:* ${serviceInfo.duration}%0A` +
+                       `*Type:* ${appointmentTypeText}%0A` +
+                       `*Charges:* ₹${calculateCharges()}%0A%0A` +
+                       `*Client Details*%0A` +
+                       `👤 Name: ${bookingData.name}%0A` +
+                       `📱 Phone: ${bookingData.phone}%0A` +
+                       `${bookingData.email ? `📧 Email: ${bookingData.email}%0A` : ''}` +
+                       `${bookingData.gender ? `⚧ Gender: ${bookingData.gender}%0A` : ''}` +
+                       `${bookingData.maritalStatus ? `💍 Status: ${bookingData.maritalStatus}%0A` : ''}` +
+                       `%0A*Birth Details*%0A` +
+                       `🎂 DOB: ${bookingData.dateOfBirth}%0A` +
+                       `${bookingData.timeOfBirth ? `⏰ Time: ${bookingData.timeOfBirth}%0A` : ''}` +
+                       `📍 Place: ${bookingData.placeOfBirth}%0A%0A` +
+                       `${bookingData.specialRequest ? `*Special Request:*%0A${bookingData.specialRequest}%0A%0A` : ''}` +
+                       `---%0A` +
+                       `*📋 CANCELLATION POLICY:*%0A` +
+                       `• User must cancel minimum 3 hours before appointment%0A` +
+                       `• Cancellation link: ${baseUrl}/cancel/${bookingId}%0A` +
+                       `• After 3 hours, contact Rekha Ji directly%0A` +
+                       `• Late cancellations may be charged 50%%0A` +
+                       `---%0A` +
+                       `*For Admin:* Go to ${baseUrl}/admin%0A` +
+                       `✅ *Please confirm this booking* ✅%0A%0A` +
+                       `_Booked via Rekha Sharma Astrology Website_`;
     
     // Send to Rekha Ji's WhatsApp
-    const rekhaWhatsappURL = `https://wa.me/918510988703?text=${message}`;
+    const rekhaWhatsappURL = `https://wa.me/918510988703?text=${rekhaMessage}`;
     
-    // Also send to user if they have WhatsApp
+    // Also send to user if they have WhatsApp (USER KO SIRF CANCEL LINK)
     const userMessage = `✅ *Booking Confirmed!* ✅%0A%0A` +
                        `*Booking ID:* ${bookingId}%0A` +
                        `*Date:* ${new Date(bookingData.appointmentDate).toLocaleDateString('en-IN', {
@@ -710,9 +720,17 @@ const BookingForm = ({ isOpen, onClose }) => {
                        `*Service:* ${serviceInfo.name}%0A` +
                        `*Type:* ${appointmentTypeText}%0A` +
                        `*Charges:* ₹${calculateCharges()}%0A%0A` +
-                       `📝 *Need to cancel?*%0A` +
-                       `Click: ${baseUrl}/cancel/${bookingId}%0A` +
-                       `%0A_Cancellation available until 1 hour before appointment_`;
+                       `📝 *Need to cancel or reschedule?*%0A` +
+                       `Cancel here: ${baseUrl}/cancel/${bookingId}%0A` +
+                       `%0A` +
+                       `⚠️ *IMPORTANT CANCELLATION POLICY* ⚠️%0A` +
+                       `• Cancellation must be done minimum *3 HOURS* before appointment%0A` +
+                       `• Late cancellations (within 3 hours) will be charged 50%%0A` +
+                       `• After cancellation deadline, contact Rekha Ji directly: +91 85109 88703%0A` +
+                       `• Your slot will reopen for others if cancelled 3+ hours before%0A` +
+                       `%0A` +
+                       `*Cancellation Deadline:* ${deadlineTime.toLocaleTimeString('en-IN', {hour: '2-digit', minute:'2-digit'})} (${deadlineTime.toLocaleDateString('en-IN')})%0A` +
+                       `%0A_Thank you for choosing Rekha Sharma Astrology Services_`;
     
     const userWhatsappURL = `https://wa.me/91${bookingData.phone}?text=${userMessage}`;
     
@@ -1185,11 +1203,12 @@ const BookingForm = ({ isOpen, onClose }) => {
                           day: 'numeric', 
                           month: 'short'
                         })}
+                        {new Date(date).toDateString() === new Date().toDateString() ? ' (Today)' : ''}
                       </option>
                     ))}
                   </select>
                   <p className="text-gray-400 text-xs mt-1">
-                    Sundays automatically excluded
+                    Sundays automatically excluded • Showing dates from today
                   </p>
                 </div>
 
@@ -1415,9 +1434,16 @@ const BookingForm = ({ isOpen, onClose }) => {
                   <p className="text-gray-300 text-xs">
                     Payment to be made directly to Rekha Sharma Ji after service completion
                   </p>
-                  <p className="text-yellow-400 text-xs mt-1">
-                    ⚠️ Cancellation available until 1 hour before appointment
-                  </p>
+                  <div className="mt-2 p-2 bg-yellow-900/30 rounded-lg border border-yellow-700/50">
+                    <p className="text-yellow-400 text-xs font-semibold flex items-center">
+                      <span className="mr-1">⚠️</span> Cancellation Policy
+                    </p>
+                    <p className="text-yellow-300 text-xs mt-1">
+                      • Minimum 3 hours notice required for cancellation<br/>
+                      • Late cancellations charged 50%<br/>
+                      • Cancellation link will be sent via WhatsApp
+                    </p>
+                  </div>
                 </div>
 
                 {/* Special Request */}

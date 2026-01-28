@@ -58,7 +58,8 @@ export const addBooking = async (bookingData) => {
       paymentStatus: 'pending',
       cancelled: false,
       cancelledBy: null,
-      cancelledAt: null
+      cancelledAt: null,
+      hoursBeforeCancellation: null
     });
     
     console.log("✅ Booking saved with ID:", docRef.id, "Booking ID:", bookingId);
@@ -141,7 +142,7 @@ export const getBookingById = async (bookingId) => {
   }
 };
 
-// Function to cancel booking
+// Function to cancel booking - UPDATED 3 HOURS RULE
 export const cancelBooking = async (bookingId, cancelledBy = "user") => {
   try {
     console.log(`🔴 Cancelling booking: ${bookingId} by ${cancelledBy}`);
@@ -162,7 +163,7 @@ export const cancelBooking = async (bookingId, cancelledBy = "user") => {
       return { success: false, error: "Booking already cancelled" };
     }
     
-    // Check if cancellation is allowed (minimum 1 hour before appointment)
+    // Check if cancellation is allowed (minimum 3 hours before appointment)
     const appointmentDate = new Date(bookingData.appointmentDate);
     const appointmentTime = bookingData.timeSlot.split(':');
     appointmentDate.setHours(parseInt(appointmentTime[0]), parseInt(appointmentTime[1]), 0);
@@ -172,8 +173,16 @@ export const cancelBooking = async (bookingId, cancelledBy = "user") => {
     
     console.log(`⏰ Time difference: ${hoursDifference.toFixed(2)} hours`);
     
-    // If less than 1 hour, slot won't reopen
-    const slotReopen = hoursDifference >= 1;
+    // If user is cancelling and less than 3 hours, not allowed
+    if (cancelledBy === "user" && hoursDifference < 3) {
+      return { 
+        success: false, 
+        error: "Cannot cancel within 3 hours of appointment. Please contact Rekha Ji directly at +91 85109 88703"
+      };
+    }
+    
+    // For Rekha Ji, always allow cancellation
+    const slotReopen = cancelledBy === "rekha" ? true : hoursDifference >= 3;
     
     // Update booking status to cancelled
     await updateDoc(docRef, {
@@ -182,7 +191,8 @@ export const cancelBooking = async (bookingId, cancelledBy = "user") => {
       cancelledBy: cancelledBy,
       cancelledAt: Timestamp.now(),
       updatedAt: Timestamp.now(),
-      slotReopen: slotReopen
+      slotReopen: slotReopen,
+      hoursBeforeCancellation: hoursDifference
     });
     
     console.log("✅ Booking cancelled:", bookingId);
@@ -191,7 +201,8 @@ export const cancelBooking = async (bookingId, cancelledBy = "user") => {
       message: "Booking cancelled successfully",
       slotReopen: slotReopen,
       appointmentDate: bookingData.appointmentDate,
-      appointmentTime: bookingData.timeSlot
+      appointmentTime: bookingData.timeSlot,
+      hoursDifference: hoursDifference
     };
   } catch (error) {
     console.error("❌ Error cancelling booking:", error);
