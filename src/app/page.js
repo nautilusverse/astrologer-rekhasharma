@@ -706,7 +706,7 @@ const BookingForm = ({ isOpen, onClose }) => {
                        `_Booked via Rekha Sharma Astrology Website_`;
     
     // Send to Rekha Ji's WhatsApp
-    const rekhaWhatsappURL = `https://wa.me/918510988703?text=${rekhaMessage}`;
+    const rekhaWhatsappURL = `https://wa.me/9181300 75378?text=${rekhaMessage}`;
     
     // Also send to user if they have WhatsApp (USER KO SIRF CANCEL LINK)
     const userMessage = `✅ *Booking Confirmed!* ✅%0A%0A` +
@@ -1155,7 +1155,7 @@ const BookingForm = ({ isOpen, onClose }) => {
                 <label className="text-white text-sm font-medium mb-2 block">Service Type *</label>
                 <div className="grid grid-cols-2 gap-3">
                   {[
-                    { type: 'kundli', name: 'Kundli Reading', price: '₹300', duration: '1 Hour' },
+                    { type: 'kundli', name: 'Kundli Reading', price: '₹1100', duration: '1 Hour' },
                     { type: 'consultation', name: 'Personal Consultation', price: '₹300', duration: '30 Min' },
                     { type: 'palmistry', name: 'Palm Reading', price: '₹500', duration: '1 Hour' },
                     { type: 'marriage', name: 'Marriage Compatibility', price: '₹300', duration: '30 Min' },
@@ -2403,7 +2403,7 @@ const ContactCTASection = ({ setIsBookingOpen }) => {
 
                 <button
                   className="border-2 border-purple-500 text-white px-6 sm:px-12 py-3 sm:py-5 rounded-xl font-semibold hover:bg-purple-500/10 transition-all duration-300 text-base sm:text-lg"
-                  onClick={() => window.open('https://wa.me/918510988703', '_blank')}
+                  onClick={() => window.open('https://wa.me/9181300 75378', '_blank')}
                 >
                   <span className="flex items-center space-x-2">
                     <span>Chat on WhatsApp</span>
@@ -2692,7 +2692,7 @@ export default function Home() {
       <div className="fixed bottom-4 sm:bottom-6 right-4 sm:right-6 flex flex-col items-end space-y-3 sm:space-y-4 z-40 floating-layer">
         <button
           className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center text-xl sm:text-2xl shadow-2xl hover:shadow-green-500/30 hover:scale-110 transition-all duration-300 animate-pulse-glow"
-          onClick={() => window.open('https://wa.me/918510988703', '_blank')}
+          onClick={() => window.open('https://wa.me/9181300 75378', '_blank')}
           aria-label="Chat on WhatsApp"
         >
           <span>💬</span>
@@ -2708,7 +2708,7 @@ export default function Home() {
 
         <button
           className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-xl sm:text-2xl shadow-2xl hover:shadow-blue-500/30 hover:scale-110 transition-all duration-300 lg:hidden"
-          onClick={() => window.location.href = 'tel:+918510988703'}
+          onClick={() => window.location.href = 'tel:+9181300 75378'}
           aria-label="Call Now"
         >
           📞

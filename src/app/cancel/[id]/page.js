@@ -93,7 +93,7 @@ function CancelBookingContent() {
           `_User followed cancellation policy_`;
         
         // Open WhatsApp
-        window.open(`https://wa.me/918510988703?text=${encodeURIComponent(whatsappMsg)}`, '_blank');
+        window.open(`https://wa.me/9181300 75378?text=${encodeURIComponent(whatsappMsg)}`, '_blank');
         
         // Also notify user
         const userMsg = `✅ *Your booking has been cancelled* ✅%0A%0A` +
@@ -203,7 +203,7 @@ function CancelBookingContent() {
           
           {hoursDifference < 3 && hoursDifference > 0 && (
             <button
-              onClick={() => window.open('https://wa.me/918510988703', '_blank')}
+              onClick={() => window.open('https://wa.me/9181300 75378', '_blank')}
               className="w-full py-3 rounded-lg font-bold bg-green-600 hover:bg-green-700 transition-all duration-300 flex items-center justify-center gap-2"
             >
               <span>📱</span> Contact Rekha Ji on WhatsApp
