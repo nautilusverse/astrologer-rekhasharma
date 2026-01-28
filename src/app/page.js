@@ -430,7 +430,7 @@ const BookingForm = ({ isOpen, onClose }) => {
   const serviceDetails = {
     'kundli': { name: 'Kundli Reading', price: 300, duration: '1 Hour' },
     'consultation': { name: 'Personal Consultation', price: 300, duration: '30 Min' },
-    'palmistry': { name: 'Palm Reading', price: 500, duration: '1 Hour' },
+    'palmistry': { name: 'Palm Reading', price: 500, duration: '30 Min' },
     'marriage': { name: 'Marriage Compatibility', price: 300, duration: '30 Min' },
     'career': { name: 'Career Guidance', price: 500, duration: '30 Min' },
     'vastu': { name: 'Vastu Consultation', price: 2100, duration: '2 Hours' },
@@ -726,7 +726,7 @@ const BookingForm = ({ isOpen, onClose }) => {
                        `⚠️ *IMPORTANT CANCELLATION POLICY* ⚠️%0A` +
                        `• Cancellation must be done minimum *3 HOURS* before appointment%0A` +
                        `• Late cancellations (within 3 hours) will be charged 50%%0A` +
-                       `• After cancellation deadline, contact Rekha Ji directly: +91 85109 88703%0A` +
+                       `• After cancellation deadline, contact Rekha Ji directly: +91 8130075378%0A` +
                        `• Your slot will reopen for others if cancelled 3+ hours before%0A` +
                        `%0A` +
                        `*Cancellation Deadline:* ${deadlineTime.toLocaleTimeString('en-IN', {hour: '2-digit', minute:'2-digit'})} (${deadlineTime.toLocaleDateString('en-IN')})%0A` +
@@ -1157,7 +1157,7 @@ const BookingForm = ({ isOpen, onClose }) => {
                   {[
                     { type: 'kundli', name: 'Kundli Reading', price: '₹1100', duration: '1 Hour' },
                     { type: 'consultation', name: 'Personal Consultation', price: '₹300', duration: '30 Min' },
-                    { type: 'palmistry', name: 'Palm Reading', price: '₹500', duration: '1 Hour' },
+                    { type: 'palmistry', name: 'Palm Reading', price: '₹500', duration: '30 Min' },
                     { type: 'marriage', name: 'Marriage Compatibility', price: '₹300', duration: '30 Min' },
                     { type: 'career', name: 'Career Guidance', price: '₹500', duration: '30 Min' },
                     { type: 'vastu', name: 'Vastu Consultation', price: '₹2100', duration: '2 Hours' },
@@ -1781,7 +1781,7 @@ const AboutAstrologer = () => {
                 <div className="text-green-400 text-xl">📞</div>
                 <div>
                   <p className="text-white font-semibold text-sm sm:text-base">Direct WhatsApp</p>
-                  <p className="text-green-300 text-xs sm:text-sm">+91 85109 88703</p>
+                  <p className="text-green-300 text-xs sm:text-sm">+91 8130075378</p>
                 </div>
               </div>
             </div>
@@ -1899,7 +1899,7 @@ const ServicesSection = ({ setIsBookingOpen }) => {
       price: "₹500",
       description: "Comprehensive palm analysis revealing personality, destiny, and future prospects",
       details: ["Life Line Reading", "Career Analysis", "Relationship Lines", "Health Indications"],
-      duration: "1 Hour"
+      duration: "30 Minutes"
     },
     {
       icon: "💍",
@@ -2359,7 +2359,7 @@ const BookingInfoSection = ({ setIsBookingOpen }) => {
 
             <div className="mt-6 sm:mt-8 p-3 sm:p-4 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-xl border border-purple-500/20">
               <p className="text-purple-300 text-xs sm:text-sm text-center">
-                Direct WhatsApp: +91 85109 88703
+                Direct WhatsApp: +91 8130075378
               </p>
               <p className="text-gray-400 text-xs text-center mt-1">
                 Urgent queries responded within 2 hours
@@ -2550,7 +2550,7 @@ const Footer = () => {
               </p>
               <p className="text-white/90 text-sm sm:text-base flex items-center space-x-2">
                 <span>📱</span>
-                <span>+91 85109 88703 (WhatsApp)</span>
+                <span>+91 8130075378 (WhatsApp)</span>
               </p>
             </div>
           </div>
