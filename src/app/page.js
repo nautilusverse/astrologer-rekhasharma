@@ -701,7 +701,7 @@ const BookingForm = ({ isOpen, onClose }) => {
                        `• After 3 hours, contact Rekha Ji directly%0A` +
                        `• Late cancellations may be charged 50%%0A` +
                        `---%0A` +
-                       `*For Admin:* Go to ${baseUrl}/admin%0A` +
+                       
                        `✅ *Please confirm this booking* ✅%0A%0A` +
                        `_Booked via Rekha Sharma Astrology Website_`;
     
