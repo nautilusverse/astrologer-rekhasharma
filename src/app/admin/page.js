@@ -12,7 +12,7 @@ export default function AdminPanel() {
   const [newClosedDate, setNewClosedDate] = useState('');
 
   // Simple password protection
-  const ADMIN_PASSWORD = "rekha123";
+  const ADMIN_PASSWORD = "rekha2415";
 
   useEffect(() => {
     // Load closed dates from localStorage
