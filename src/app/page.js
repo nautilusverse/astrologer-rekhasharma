@@ -659,7 +659,7 @@ const BookingForm = ({ isOpen, onClose }) => {
     const appointmentTypeText = bookingData.appointmentType === 'video' ? 'Video Call' : 'In-Person';
     
     // NETLIFY URL
-    const baseUrl = "https://astrologer-rekhasharma.netlify.app";
+    const baseUrl = "https://rekhasharma.in";
     
     // Calculate appointment time for cancellation deadline
     const appointmentDate = new Date(bookingData.appointmentDate);
