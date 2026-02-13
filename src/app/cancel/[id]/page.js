@@ -164,7 +164,7 @@ function CancelBookingContent() {
               <>
                 <li>• ❌ Cannot cancel within 3 hours of appointment</li>
                 <li>• ⏰ Only {hoursDifference.toFixed(1)} hours remaining</li>
-                <li>• 📞 Contact Rekha Ji directly: +91 85109 88703</li>
+                <li>• 📞 Contact Rekha Ji directly: +91 8130075378</li>
                 <li>• 💰 50% cancellation charge applies</li>
               </>
             ) : (
@@ -213,7 +213,7 @@ function CancelBookingContent() {
         
         <div className="mt-6 pt-4 border-t border-gray-800 text-center">
           <p className="text-xs text-gray-500">
-            📞 Direct Contact: +91 85109 88703
+            📞 Direct Contact: +91 8130075378
           </p>
           <p className="text-xs text-gray-400 mt-1">
             ⚠️ Cancellation Policy: Minimum 3 hours notice required
