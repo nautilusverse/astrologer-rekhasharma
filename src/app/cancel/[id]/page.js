@@ -89,7 +89,7 @@ function CancelBookingContent() {
           `*Cancelled by:* User (via website)%0A` +
           `*Hours before appointment:* ${hoursDifference.toFixed(1)} hours%0A` +
           `*Slot Status:* ${result.slotReopen ? '🟢 OPEN for new bookings' : '🔴 CLOSED'}%0A` +
-          `*Cancellation URL:* https://astrologer-rekhasharma.netlify.app/cancel/${params.id}%0A%0A` +
+          `*Cancellation URL:* https://rekhasharma.in/cancel/${params.id}%0A%0A` +
           `_User followed cancellation policy_`;
         
         // Open WhatsApp
